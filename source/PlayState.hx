@@ -365,7 +365,7 @@ class PlayState extends MusicBeatState
 		var rating:Rating = new Rating('sick');
 		rating.ratingMod = 1;
 		rating.score = 350;
-		rating.noteSplash = false;
+		rating.noteSplash = true;
 		ratingsData.push(rating);
 
 		var rating:Rating = new Rating('good');

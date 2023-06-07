@@ -139,7 +139,7 @@ class ClientPrefs {
 		FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
 
 		FlxG.save.data.ratingOffset = ratingOffset;
-		FlxG.save.data.marvelousWindow = marvelousWindow
+		FlxG.save.data.marvelousWindow = marvelousWindow;
 		FlxG.save.data.sickWindow = sickWindow;
 		FlxG.save.data.goodWindow = goodWindow;
 		FlxG.save.data.badWindow = badWindow;
