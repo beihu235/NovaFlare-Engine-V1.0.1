@@ -193,6 +193,7 @@ class PlayState extends MusicBeatState
 	public var timeBar:FlxBar;
 
 	public var ratingsData:Array<Rating> = [];
+	public var marvelous:Int = 0;
 	public var sicks:Int = 0;
 	public var goods:Int = 0;
 	public var bads:Int = 0;
@@ -359,7 +360,13 @@ class PlayState extends MusicBeatState
 		];
 
 		//Ratings
-		ratingsData.push(new Rating('sick')); //default rating
+		ratingsData.push(new Rating('marvelous')); //default rating
+		
+		var rating:Rating = new Rating('sick');
+		rating.ratingMod = 1;
+		rating.score = 350;
+		rating.noteSplash = false;
+		ratingsData.push(rating);
 
 		var rating:Rating = new Rating('good');
 		rating.ratingMod = 0.7;
@@ -5276,7 +5283,7 @@ class PlayState extends MusicBeatState
 
 			// Rating FC
 			ratingFC = "";
-			if (sicks > 0) ratingFC = "SFC";
+			if (sicks > 0 || marvelous > 0) ratingFC = "SFC";
 			if (goods > 0) ratingFC = "GFC";
 			if (bads > 0 || shits > 0) ratingFC = "FC";
 			if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
