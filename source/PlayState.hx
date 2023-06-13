@@ -418,6 +418,8 @@ class PlayState extends MusicBeatState
 		camHUD = new FlxCamera();
 		camNote = new FlxCamera();
 		camOther = new FlxCamera();
+		camShadow.bgColor.alpha = 0;		
+		camNote.bgColor.alpha = 0;
 		camHUD.bgColor.alpha = 0;
 		camOther.bgColor.alpha = 0;
 
