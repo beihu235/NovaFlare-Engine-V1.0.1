@@ -166,11 +166,16 @@ class PlayState extends MusicBeatState
 	private var strumLine:FlxSprite;
 
 	//Handles the new epic mega sexy cam code that i've done
+	
+	public var camFollow:FlxObject;
+	private static var prevCamFollow:FlxObject;
+	/*
 	public var camFollow:FlxPoint;
-	//public var camFollowPos:FlxObject;
+	public var camFollowPos:FlxObject;
 	private static var prevCamFollow:FlxPoint;
-	//private static var prevCamFollowPos:FlxObject;
-
+	private static var prevCamFollowPos:FlxObject;
+    */
+    
 	public var strumLineNotes:FlxTypedGroup<StrumNote>;
 	public var opponentStrums:FlxTypedGroup<StrumNote>;
 	public var playerStrums:FlxTypedGroup<StrumNote>;
