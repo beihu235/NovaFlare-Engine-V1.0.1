@@ -1164,7 +1164,7 @@ class PlayState extends MusicBeatState
 		FlxG.camera.follow(camFollow, LOCKON, 0);
 		// FlxG.camera.setScrollBounds(0, FlxG.width, 0, FlxG.height);
 		FlxG.camera.zoom = defaultCamZoom;
-		FlxG.camera.focusOn(camFollow);
+		// FlxG.camera.focusOn(camFollow);
 
 		FlxG.worldBounds.set(0, 0, FlxG.width, FlxG.height);
 
@@ -1340,7 +1340,7 @@ class PlayState extends MusicBeatState
 					});
 					FlxG.sound.play(Paths.sound('Lights_Turn_On'));
 					snapCamFollowToPos(400, -2050);
-					FlxG.camera.focusOn(camFollow);
+					// FlxG.camera.focusOn(camFollow);
 					FlxG.camera.zoom = 1.5;
 
 					new FlxTimer().start(0.8, function(tmr:FlxTimer)
@@ -3875,7 +3875,7 @@ class PlayState extends MusicBeatState
 
 		if (gf != null && SONG.notes[curSection].gfSection)
 		{
-			camFollow.set(gf.getMidpoint().x, gf.getMidpoint().y);
+			camFollow.setPosition(gf.getMidpoint().x, gf.getMidpoint().y);
 			camFollow.x += gf.cameraPosition[0] + girlfriendCameraOffset[0];
 			camFollow.y += gf.cameraPosition[1] + girlfriendCameraOffset[1];
 			tweenCamIn();
@@ -3900,14 +3900,14 @@ class PlayState extends MusicBeatState
 	{
 		if(isDad)
 		{
-			camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
+			camFollow.setPosition(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
 			camFollow.x += dad.cameraPosition[0] + opponentCameraOffset[0];
 			camFollow.y += dad.cameraPosition[1] + opponentCameraOffset[1];
 			tweenCamIn();
 		}
 		else
 		{
-			camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
+			camFollow.setPosition(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
 			camFollow.x -= boyfriend.cameraPosition[0] - boyfriendCameraOffset[0];
 			camFollow.y += boyfriend.cameraPosition[1] + boyfriendCameraOffset[1];
 
@@ -3932,12 +3932,14 @@ class PlayState extends MusicBeatState
 			});
 		}
 	}
-
+	
+    /*
 	function snapCamFollowToPos(x:Float, y:Float) {
 		camFollow.set(x, y);
 		//camFollowPos.setPosition(x, y);
 	}
-
+    */
+    
 	public function finishSong(?ignoreNoteOffset:Bool = false):Void
 	{
 		var finishCallback:Void->Void = endSong; //In case you want to change it in a specific song.
