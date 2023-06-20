@@ -38,7 +38,7 @@ class FPS extends TextField
 	public var currentFPS(default, null):Float;
     public var logicFPStime(default, null):Float;
     public var DisplayFPS(default, null):Float;
-    public var closeFPSchange:Bool = true;
+   // public var closeFPSchange:Bool = true;
     
     
 	//@:noCompletion private var cacheCount:Int;
@@ -144,7 +144,7 @@ class FPS extends TextField
         logicFPSnum ++;
         if (logicFPStime >= 200)
         {
-        currentFPS = Math.ceil(currentFPS * 0.5 + 1 / (logicFPStime / logicFPSnum / 1000) * 0.5) ;
+        currentFPS = Math.ceil(currentFPS * 0.9 + 1 / (logicFPStime / logicFPSnum / 1000) * 0.1) ;
         logicFPStime = 0;
         logicFPSnum = 0;
         }
@@ -154,15 +154,8 @@ class FPS extends TextField
 		
 		if (currentFPS > ClientPrefs.framerate) currentFPS = ClientPrefs.framerate;
 		
-		//skippedFPS = true;
-		// skippedFPS += deltaTime;
 		
-		//if (skippedFPS >= deltaTime * 2 )
-		//{
-		closeFPSchange = true;
 		
-		if ( closeFPSchange )
-		{
             if ( DisplayFPS > currentFPS )
             {
             DisplayFPS = DisplayFPS - 1;
@@ -172,13 +165,8 @@ class FPS extends TextField
             DisplayFPS = DisplayFPS + 1;
             }
             
-            closeFPSchange = false;
-        }    
-           // skippedFPS = 0;
-       // }      
+           
         
-		//if (currentCount != cacheCount /*&& visible*/)
-		//{
 		
 			text = "FPS: " + DisplayFPS + "/" + ClientPrefs.framerate;
 			var memoryMegas:Float = 0;
