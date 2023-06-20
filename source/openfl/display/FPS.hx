@@ -38,7 +38,7 @@ class FPS extends TextField
 	public var currentFPS(default, null):Float;
     public var logicFPStime(default, null):Float;
     public var DisplayFPS(default, null):Float;
-    public var skippedFPS(default, null):Float;
+    public var closeFPSchange:Bool = true;
     
     
 	//@:noCompletion private var cacheCount:Int;
@@ -56,7 +56,7 @@ class FPS extends TextField
 		currentFPS = 0;
 		logicFPStime = 0;
 		DisplayFPS = 0;
-		skippedFPS = 0;
+		skippedFPS = true;
 		
 		selectable = false;
 		mouseEnabled = false;
@@ -155,9 +155,13 @@ class FPS extends TextField
 		if (currentFPS > ClientPrefs.framerate) currentFPS = ClientPrefs.framerate;
 		
 		//skippedFPS = true;
-		skippedFPS += deltaTime;
+		// skippedFPS += deltaTime;
 		
-		if (skippedFPS >= deltaTime * 2 )
+		//if (skippedFPS >= deltaTime * 2 )
+		//{
+		closeFPSchange = true;
+		
+		if ( closeFPSchange )
 		{
             if ( DisplayFPS > currentFPS )
             {
@@ -168,8 +172,10 @@ class FPS extends TextField
             DisplayFPS = DisplayFPS + 1;
             }
             
-            skippedFPS = 0;
-        }      
+            closeFPSchange = false;
+        }    
+           // skippedFPS = 0;
+       // }      
         
 		//if (currentCount != cacheCount /*&& visible*/)
 		//{
