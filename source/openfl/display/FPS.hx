@@ -56,7 +56,7 @@ class FPS extends TextField
 		currentFPS = 0;
 		logicFPStime = 0;
 		DisplayFPS = 0;
-		skippedFPS = true;
+		//skippedFPS = true;
 		
 		selectable = false;
 		mouseEnabled = false;
