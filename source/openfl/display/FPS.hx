@@ -144,7 +144,7 @@ class FPS extends TextField
         logicFPSnum ++;
         if (logicFPStime >= 200)
         {
-        currentFPS = Math.ceil(currentFPS * 0.9 + 1 / (logicFPStime / logicFPSnum / 1000) * 0.1) ;
+        currentFPS = Math.ceil(currentFPS * 0.99 + 1 / (logicFPStime / logicFPSnum / 1000) * 0.01) ;
         logicFPStime = 0;
         logicFPSnum = 0;
         }
