@@ -38,7 +38,7 @@ class FPS extends TextField
 	public var currentFPS(default, null):Float;
     public var logicFPStime(default, null):Float;
     public var DisplayFPS(default, null):Float;
-   // public var closeFPSchange:Bool = true;
+    public var skippedFPS(default, null):Float;
     
     
 	//@:noCompletion private var cacheCount:Int;
@@ -56,11 +56,11 @@ class FPS extends TextField
 		currentFPS = 0;
 		logicFPStime = 0;
 		DisplayFPS = 0;
-		//skippedFPS = true;
+		skippedFPS = 0;
 		
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 12, color);
+		defaultTextFormat = new TextFormat(Assets.getFont("assets/fonts/dialogueFont.ttf").fontName, 12, color);
 		autoSize = LEFT;
 		multiline = true;
 		text = "FPS: ";
@@ -144,7 +144,7 @@ class FPS extends TextField
         logicFPSnum ++;
         if (logicFPStime >= 200)
         {
-        currentFPS = Math.ceil(currentFPS * 0.95 + 1 / (logicFPStime / logicFPSnum / 1000) * 0.05) ;
+        currentFPS = Math.ceil(currentFPS * 0.5 + 1 / (logicFPStime / logicFPSnum / 1000) * 0.5) ;
         logicFPStime = 0;
         logicFPSnum = 0;
         }
@@ -154,8 +154,11 @@ class FPS extends TextField
 		
 		if (currentFPS > ClientPrefs.framerate) currentFPS = ClientPrefs.framerate;
 		
+		//skippedFPS = true;
+		skippedFPS += deltaTime;
 		
-		
+		if (skippedFPS >= deltaTime * 2 )
+		{
             if ( DisplayFPS > currentFPS )
             {
             DisplayFPS = DisplayFPS - 1;
@@ -165,41 +168,39 @@ class FPS extends TextField
             DisplayFPS = DisplayFPS + 1;
             }
             
-           
+            skippedFPS = 0;
+        }      
         
+		//if (currentCount != cacheCount /*&& visible*/)
+		//{
 		
 			text = "FPS: " + DisplayFPS + "/" + ClientPrefs.framerate;
 			var memoryMegas:Float = 0;
-			
-			#if openfl
+						
 			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
 			text += "\nMemory: " + memoryMegas + " MB";
-            text += "\nPSYCH V2.5(DEBUG)\nCAM V2.5.0" + "  "  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
-			#end
-			
+						
             var newmemoryMegas:Float = 0;
-			// textColor = 0xFFFFFFFF;
+
 			if (memoryMegas > 1000) // || DisplayFPS <= ClientPrefs.framerate / 2)
 			{
 			newmemoryMegas = Math.ceil( Math.abs( System.totalMemory ) / 10000000 / 1.024)/100;
 				// textColor = 0xFFFFFFFF;
 				text = "FPS: " + DisplayFPS + "/" + ClientPrefs.framerate;
-				text += "\nMemory: " + newmemoryMegas + " GB";
-                text += "\nPSYCH V2.5(DEBUG)\nCAM V2.5.0" + "  "  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
+				text += "\nMemory: " + newmemoryMegas + " GB";            
 			}
-
+						
+            text += "\nNF Engine V1.0.0\nVS Camellia V2.5.0" + "  "  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
+            
+        /*
 			#if (gl_stats && !disable_cffi && (!html5 || !canvas))
 			text += "\ntotalDC: " + Context3DStats.totalDrawCalls();
 			text += "\nstageDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE);
 			text += "\nstage3DDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE3D);
 			#end
-
-         //   text += '\nDisplayFPS: ' + DisplayFPS + '\ncurrentFPS: ' + currentFPS;
-
+        */
 			text += "\n";
-		//}
-
-		//cacheCount = currentCount;
+	
 	}
 	
 	
