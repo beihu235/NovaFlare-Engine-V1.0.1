@@ -42,7 +42,7 @@ class FPS extends TextField
     
     
 	//@:noCompletion private var cacheCount:Int;
-	@:noCompletion private var currentTime:Float;
+	//@:noCompletion private var currentTime:Float;
 	@:noCompletion private var times:Array<Float>;
 	
 
@@ -60,14 +60,14 @@ class FPS extends TextField
 		
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat(Assets.getFont("assets/fonts/dialogueFont.ttf").fontName, 12, color);
+		defaultTextFormat = new TextFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 12, color);
 		autoSize = LEFT;
 		multiline = true;
 		text = "FPS: ";
 		textColor = 0xFFFFFFFF;
  
 		//cacheCount = 0;
-		currentTime = 0;
+		//currentTime = 0;
 		times = [];
 
 		#if flash
@@ -109,14 +109,14 @@ class FPS extends TextField
 	{
 	
 	//var elapsed = FlxG.elapsed;    		    		
-		currentTime += deltaTime;
+		/*currentTime += deltaTime;
 		times.push(currentTime);
 
 		while (times[0] < currentTime - 1000)
 		{
 			times.shift();
 		}
-		
+		*/
 		
 		if (ClientPrefs.rainbowFPS)
 	    {
