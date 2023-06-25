@@ -1880,7 +1880,7 @@ class ChartingState extends MusicBeatState
 
 			//ARROW VORTEX freak NO DEADASS
 			
-			if (tips)
+			if (tipsClose)
 			    {
 			    for (tipText in tipTextGroup) tipText.visible = false;
 			    _virtualpad.alpha = 0.75;
