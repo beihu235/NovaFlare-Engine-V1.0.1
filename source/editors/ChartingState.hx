@@ -247,6 +247,7 @@ class ChartingState extends MusicBeatState
 		#end
 
 		vortex = FlxG.save.data.chart_vortex;
+		tips = FlxG.save.data.chart_tips;
 		ignoreWarnings = FlxG.save.data.ignoreWarnings;
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.scrollFactor.set();
@@ -395,7 +396,7 @@ class ChartingState extends MusicBeatState
 		}
 		lastSong = currentSongName;
 
-		zoomTxt = new FlxText(10, 10, 0, "Zoom: 1 / 1", 16);
+		zoomTxt = new FlxText(10, 100, 0, "Zoom: 1 / 1", 16);
 		zoomTxt.scrollFactor.set();
 		add(zoomTxt);
 
@@ -411,6 +412,7 @@ class ChartingState extends MusicBeatState
 	var check_mute_inst:FlxUICheckBox = null;
 	var check_vortex:FlxUICheckBox = null;
 	var check_warnings:FlxUICheckBox = null;
+	var check_tips:FlxUICheckBox = null;
 	var playSoundBf:FlxUICheckBox = null;
 	var playSoundDad:FlxUICheckBox = null;
 	var UI_songTitle:FlxUIInputText;
@@ -1260,6 +1262,17 @@ class ChartingState extends MusicBeatState
 			vortex = FlxG.save.data.chart_vortex;
 			reloadGridLayer();
 		};
+		
+		check_tips = new FlxUICheckBox(130, 200, null, null, "Vortex Editor (BETA)", 100);
+		if (FlxG.save.data.chart_tips == null) FlxG.save.data.chart_tips = false;
+		check_tips.checked = FlxG.save.data.chart_tips;
+
+		check_tips.callback = function()
+		{
+			FlxG.save.data.chart_tips = check_tips.checked;
+			tips = FlxG.save.data.chart_tips;
+			reloadGridLayer();
+		};
 
 		check_warnings = new FlxUICheckBox(10, 120, null, null, "Ignore Progress Warnings", 100);
 		if (FlxG.save.data.ignoreWarnings == null) FlxG.save.data.ignoreWarnings = false;
@@ -1357,6 +1370,7 @@ class ChartingState extends MusicBeatState
 		tab_group_chart.add(check_warnings);
 		tab_group_chart.add(playSoundBf);
 		tab_group_chart.add(playSoundDad);
+		tab_group_chart.add(check_tips);
 		UI_box.addGroup(tab_group_chart);
 	}
 
@@ -1854,7 +1868,17 @@ class ChartingState extends MusicBeatState
 			#end
 
 			//ARROW VORTEX freak NO DEADASS
-
+			
+			if (tips)
+			    {
+			    tipText.visible = true;			
+			    button.alpha = 0.75;
+			    }
+            else
+                {
+                tipText.visible = false;
+                button.alpha = 0.4;                        
+                }
 
 
 			if (FlxG.keys.pressed.W || FlxG.keys.pressed.S #if android || _virtualpad.buttonUp.pressed || _virtualpad.buttonDown.pressed #end)
