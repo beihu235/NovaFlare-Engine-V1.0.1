@@ -366,7 +366,10 @@ class ChartingState extends MusicBeatState
 		\nQ/E - Decrease/Increase Note Sustain Length
 		\nSpace - Stop/Resume song";
 		
-
+        var tipTextGroup:FlxTypedGroup<FlxText>;
+        tipTextGroup = new FlxTypedGroup<FlxText>();
+        add(tipTextGroup);
+        
 		var tipTextArray:Array<String> = text.split('\n');
 		for (i in 0...tipTextArray.length) {
 			var tipText:FlxText = new FlxText(UI_box.x, UI_box.y + UI_box.height + 8, 0, tipTextArray[i], 16);
@@ -375,12 +378,11 @@ class ChartingState extends MusicBeatState
 			//tipText.borderSize = 2;
 			tipText.scrollFactor.set();
 			add(tipText);
+			tipTextGroup.add(tipText);
 		}
 		
-		var tipTextGroup:FlxTypedGroup<FlxText>;
-        tipTextGroup = new FlxTypedGroup<FlxText>();
-        add(tipTextGroup);
-        tipTextGroup.add(tipText);
+		
+        
         
         
 		add(UI_box);
@@ -1880,11 +1882,11 @@ class ChartingState extends MusicBeatState
 			
 			if (tips)
 			    {
-			     for (tipText in tipTextArray) tipText.visible = true;	
+			     for (tipText in tipTextGroup) tipText.visible = true;	
 			    }
             else
                 {
-                for (tipText in tipTextArray) tipText.visible = false;	
+                for (tipText in tipTextGroup) tipText.visible = false;	
                 }
 
 
