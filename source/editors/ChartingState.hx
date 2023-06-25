@@ -1882,11 +1882,17 @@ class ChartingState extends MusicBeatState
 			
 			if (tips)
 			    {
-			     for (tipText in tipTextGroup) tipText.visible = true;	
+			    tipTextGroup.forEach(function(text:FlxText)
+			    {
+			    text.visible = true;
+			    });			    
 			    }
             else
                 {
-                for (tipText in tipTextGroup) tipText.visible = false;	
+                tipTextGroup.forEach(function(text:FlxText)
+			    {
+			    text.visible = false;
+			    });				    
                 }
 
 
