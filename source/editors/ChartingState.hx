@@ -205,7 +205,7 @@ class ChartingState extends MusicBeatState
 
 	var text:String = "";
 	public static var vortex:Bool = false;
-	public static var tips:Bool = true;
+	public static var tipsClose:Bool = true;
 	public var mouseQuant:Bool = false;
 	override function create()
 	{
@@ -248,7 +248,7 @@ class ChartingState extends MusicBeatState
 		#end
 
 		vortex = FlxG.save.data.chart_vortex;
-		tips = FlxG.save.data.chart_tips;
+		tipsClose = FlxG.save.data.chart_tipsClose;
 		ignoreWarnings = FlxG.save.data.ignoreWarnings;
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.scrollFactor.set();
@@ -407,7 +407,7 @@ class ChartingState extends MusicBeatState
 		}
 		lastSong = currentSongName;
 
-		zoomTxt = new FlxText(10, 100, 0, "Zoom: 1 / 1", 16);
+		zoomTxt = new FlxText(10, 100-16, 0, "Zoom: 1 / 1", 16);
 		zoomTxt.scrollFactor.set();
 		add(zoomTxt);
 
@@ -423,7 +423,7 @@ class ChartingState extends MusicBeatState
 	var check_mute_inst:FlxUICheckBox = null;
 	var check_vortex:FlxUICheckBox = null;
 	var check_warnings:FlxUICheckBox = null;
-	var check_tips:FlxUICheckBox = null;
+	var check_tipsClose:FlxUICheckBox = null;
 	var playSoundBf:FlxUICheckBox = null;
 	var playSoundDad:FlxUICheckBox = null;
 	var UI_songTitle:FlxUIInputText;
@@ -1274,14 +1274,14 @@ class ChartingState extends MusicBeatState
 			reloadGridLayer();
 		};
 		
-		check_tips = new FlxUICheckBox(130, 200, null, null, "Close Tips", 100);
-		if (FlxG.save.data.chart_tips == null) FlxG.save.data.chart_tips = false;
-		check_tips.checked = FlxG.save.data.chart_tips;
+		check_tipsClose = new FlxUICheckBox(130, 200, null, null, "Close tipsClose", 100);
+		if (FlxG.save.data.chart_tipsClose == null) FlxG.save.data.chart_tipsClose = false;
+		check_tipsClose.checked = FlxG.save.data.chart_tipsClose;
 
-		check_tips.callback = function()
+		check_tipsClose.callback = function()
 		{
-			FlxG.save.data.chart_tips = check_tips.checked;
-			tips = FlxG.save.data.chart_tips;
+			FlxG.save.data.chart_tipsClose = check_tipsClose.checked;
+			tipsClose = FlxG.save.data.chart_tipsClose;
 			reloadGridLayer();
 		};
 
@@ -1381,7 +1381,7 @@ class ChartingState extends MusicBeatState
 		tab_group_chart.add(check_warnings);
 		tab_group_chart.add(playSoundBf);
 		tab_group_chart.add(playSoundDad);
-		tab_group_chart.add(check_tips);
+		tab_group_chart.add(check_tipsClose);
 		UI_box.addGroup(tab_group_chart);
 	}
 
@@ -1882,12 +1882,16 @@ class ChartingState extends MusicBeatState
 			
 			if (tips)
 			    {
-			    for (tipText in tipTextGroup) tipText.visible = true;
+			    for (tipText in tipTextGroup) tipText.visible = false;
+			    _virtualpad.alpha = 0.75;
 			    }
+			    
             else
                 {
-                for (tipText in tipTextGroup) tipText.visible = false;
+                for (tipText in tipTextGroup) tipText.visible = true;
+                _virtualpad.alpha = 0.5;
                 }
+                
 
 
 			if (FlxG.keys.pressed.W || FlxG.keys.pressed.S #if android || _virtualpad.buttonUp.pressed || _virtualpad.buttonDown.pressed #end)
