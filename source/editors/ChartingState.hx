@@ -205,6 +205,7 @@ class ChartingState extends MusicBeatState
 
 	var text:String = "";
 	public static var vortex:Bool = false;
+	public static var tips:Bool = true;
 	public var mouseQuant:Bool = false;
 	override function create()
 	{
@@ -1263,7 +1264,7 @@ class ChartingState extends MusicBeatState
 			reloadGridLayer();
 		};
 		
-		check_tips = new FlxUICheckBox(130, 200, null, null, "Vortex Editor (BETA)", 100);
+		check_tips = new FlxUICheckBox(130, 200, null, null, "Close Tips", 100);
 		if (FlxG.save.data.chart_tips == null) FlxG.save.data.chart_tips = false;
 		check_tips.checked = FlxG.save.data.chart_tips;
 
