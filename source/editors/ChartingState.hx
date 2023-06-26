@@ -472,7 +472,7 @@ class ChartingState extends MusicBeatState
 			MusicBeatState.resetState();
 		});
 		
-		check_AutoSaveChart = new FlxUICheckBox(110, reloadSongJson.y, null, null, "Close Tips", 100);
+		check_AutoSaveChart = new FlxUICheckBox(110, reloadSongJson.y + 30, null, null, "AutoSaveChart", 100);
 		if (FlxG.save.data.chart_AutoSaveChart == null) FlxG.save.data.chart_AutoSaveChart = false;
 		check_AutoSaveChart.checked = FlxG.save.data.chart_AutoSaveChart;
 
