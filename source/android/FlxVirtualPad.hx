@@ -32,7 +32,12 @@ class FlxVirtualPad extends FlxSpriteGroup {
 	public var buttonUp2:FlxButton;
 	public var buttonRight2:FlxButton;
 	public var buttonDown2:FlxButton;
-
+    
+    public var buttonCELeft:FlxButton;
+	public var buttonCEUp:FlxButton;
+	public var buttonCERight:FlxButton;
+	public var buttonCEDown:FlxButton;
+	
 	public var dPad:FlxSpriteGroup;
 	public var actions:FlxSpriteGroup;
 
@@ -70,7 +75,12 @@ class FlxVirtualPad extends FlxSpriteGroup {
 		buttonUp2 = new FlxButton(0, 0);
 		buttonRight2 = new FlxButton(0, 0);
 		buttonDown2 = new FlxButton(0, 0);
-
+        
+        buttonCELeft = new FlxButton(0, 0);
+		buttonCEUp = new FlxButton(0, 0);
+		buttonCERight = new FlxButton(0, 0);
+		buttonCEDown = new FlxButton(0, 0);
+		
 		switch (DPad){
 			case UP_DOWN:
 				dPad.add(add(buttonUp = createButton(0, FlxG.height - 85 * 3, 44 * 3, 127, "up", 0x00FF00)));
@@ -165,7 +175,10 @@ class FlxVirtualPad extends FlxSpriteGroup {
 				actions.add(add(buttonD = createButton(FlxG.width - 170 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "d", 0x0078FF)));
 				actions.add(add(buttonC = createButton(FlxG.width - 128 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "c", 0x44FF00)));
 				actions.add(add(buttonB = createButton(FlxG.width - 86 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "b", 0xFFCB00)));								
-				actions.add(add(buttonA = createButton(FlxG.width - 44 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "a", 0xFF0000)));							
+				actions.add(add(buttonA = createButton(FlxG.width - 44 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "a", 0xFF0000)));				
+				
+				dPad.add(add(buttonCEUp = createButton(FlxG.width - (44 + 42 * 4) * 3, FlxG.height - 85 * 3, 44 * 3, 127, "up", 0x00FF00)));
+				dPad.add(add(buttonCEDown = createButton(FlxG.width - (44 + 42 * 4) * 3, FlxG.height - 45 * 3, 44 * 3, 127, "down", 0x00FFFF)));						
 			case NONE:
 		}
 	}
@@ -219,6 +232,11 @@ class FlxVirtualPad extends FlxSpriteGroup {
 		buttonUp2 = null;
 		buttonDown2 = null;
 		buttonRight2 = null;
+		
+		buttonCELeft = null;
+		buttonCEUp = null;
+		buttonCEDown = null;
+		buttonCERight = null;
 	}
 }
 
