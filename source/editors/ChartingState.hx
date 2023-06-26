@@ -250,7 +250,7 @@ class ChartingState extends MusicBeatState
 
 		vortex = FlxG.save.data.chart_vortex;
 		tipsClose = FlxG.save.data.chart_tipsClose;
-		tAutoSaveChart = FlxG.save.data.chart_AutoSaveChart;
+		AutoSaveChart = FlxG.save.data.chart_AutoSaveChart;
 		ignoreWarnings = FlxG.save.data.ignoreWarnings;
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.scrollFactor.set();
@@ -683,7 +683,7 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(player1DropDown);
 		tab_group_song.add(stageDropDown);
 		
-		tab_group_song.add(AutoSaveChart);
+		tab_group_song.add(check_AutoSaveChart);
 
 		UI_box.addGroup(tab_group_song);
 
