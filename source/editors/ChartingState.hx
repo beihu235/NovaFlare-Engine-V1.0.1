@@ -1883,7 +1883,7 @@ class ChartingState extends MusicBeatState
 			if (tipsClose)
 			    {
 			    for (tipText in tipTextGroup) tipText.visible = false;
-			    _virtualpad.alpha = 0.75;
+			    _virtualpad.alpha = 1;
 			    }
 			    
             else
