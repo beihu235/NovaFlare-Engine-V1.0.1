@@ -1617,7 +1617,7 @@ class ChartingState extends MusicBeatState
 			{
 				dummyArrow.visible = true;
 				dummyArrow.x = Math.floor(FlxG.mouse.x / GRID_SIZE) * GRID_SIZE;
-				if (_virtualpad.buttonY.pressed)
+				if (_virtualpad.buttonC.pressed)
 					dummyArrow.y = touch.y;
 				else
 				{
@@ -1844,7 +1844,7 @@ class ChartingState extends MusicBeatState
 
 			if (!FlxG.keys.pressed.ALT && FlxG.keys.justPressed.R)
 			{
-				if (FlxG.keys.pressed.SHIFT #if android || _virtualpad.buttonY.pressed #end)
+				if (FlxG.keys.pressed.SHIFT #if android || _virtualpad.buttonC.pressed #end)
 					resetSection(true);
 				else
 					resetSection();
@@ -1900,7 +1900,7 @@ class ChartingState extends MusicBeatState
 
 				var holdingShift:Float = 1;
 				if (FlxG.keys.pressed.CONTROL) holdingShift = 0.25;
-				else if (FlxG.keys.pressed.SHIFT #if android || _virtualpad.buttonY.pressed #end) holdingShift = 4;
+				else if (FlxG.keys.pressed.SHIFT #if android || _virtualpad.buttonC.pressed #end) holdingShift = 4;
 
 				var daTime:Float = 700 * FlxG.elapsed * holdingShift;
 
@@ -1939,7 +1939,7 @@ class ChartingState extends MusicBeatState
 
 			var style = currentType;
 
-			if (FlxG.keys.pressed.SHIFT #if android || _virtualpad.buttonY.pressed #end) {
+			if (FlxG.keys.pressed.SHIFT #if android || _virtualpad.buttonC.pressed #end) {
 				style = 3;
 			}
 
@@ -1948,7 +1948,7 @@ class ChartingState extends MusicBeatState
 			//AWW YOU MADE IT SEXY <3333 THX SHADMAR
 
 			if(!blockInput){
-				if(FlxG.keys.justPressed.RIGHT #if android || (_virtualpad.buttonRight.justPressed && !_virtualpad.buttonY.pressed) #end){
+				if(FlxG.keys.justPressed.RIGHT #if android || (_virtualpad.buttonRight.justPressed && !_virtualpad.buttonC.pressed) #end){
 					curQuant++;
 					if(curQuant>quantizations.length-1)
 						curQuant = 0;
@@ -1956,7 +1956,7 @@ class ChartingState extends MusicBeatState
 					quantization = quantizations[curQuant];
 				}
 
-				if(FlxG.keys.justPressed.LEFT  #if android || (_virtualpad.buttonLeft.justPressed && !_virtualpad.buttonY.pressed) #end){
+				if(FlxG.keys.justPressed.LEFT  #if android || (_virtualpad.buttonLeft.justPressed && !_virtualpad.buttonC.pressed) #end){
 					curQuant--;
 					if(curQuant<0)
 						curQuant = quantizations.length-1;
@@ -2034,12 +2034,12 @@ class ChartingState extends MusicBeatState
 				}
 			}
 			var shiftThing:Int = 1;
-			if (FlxG.keys.pressed.SHIFT #if android || _virtualpad.buttonY.pressed #end)
+			if (FlxG.keys.pressed.SHIFT #if android || _virtualpad.buttonC.pressed #end)
 				shiftThing = 4;
 
-			if (FlxG.keys.justPressed.D #if android || (_virtualpad.buttonRight.justPressed && _virtualpad.buttonY.pressed) #end)
+			if (FlxG.keys.justPressed.D #if android || (_virtualpad.buttonRight.justPressed && _virtualpad.buttonC.pressed) #end)
 				changeSection(curSec + shiftThing);
-			if (FlxG.keys.justPressed.A #if android || (_virtualpad.buttonLeft.justPressed && _virtualpad.buttonY.pressed) #end) {
+			if (FlxG.keys.justPressed.A #if android || (_virtualpad.buttonLeft.justPressed && _virtualpad.buttonC.pressed) #end) {
 				if(curSec <= 0) {
 					changeSection(_song.notes.length-1);
 				} else {
