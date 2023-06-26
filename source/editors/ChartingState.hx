@@ -206,6 +206,7 @@ class ChartingState extends MusicBeatState
 	var text:String = "";
 	public static var vortex:Bool = false;
 	public static var tipsClose:Bool = true;
+	public static var AutoSaveChart:Bool = true;
 	public var mouseQuant:Bool = false;
 	override function create()
 	{
@@ -249,6 +250,7 @@ class ChartingState extends MusicBeatState
 
 		vortex = FlxG.save.data.chart_vortex;
 		tipsClose = FlxG.save.data.chart_tipsClose;
+		tAutoSaveChart = FlxG.save.data.chart_AutoSaveChart;
 		ignoreWarnings = FlxG.save.data.ignoreWarnings;
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.scrollFactor.set();
@@ -424,6 +426,7 @@ class ChartingState extends MusicBeatState
 	var check_vortex:FlxUICheckBox = null;
 	var check_warnings:FlxUICheckBox = null;
 	var check_tipsClose:FlxUICheckBox = null;
+	var check_AutoSaveChart:FlxUICheckBox = null;
 	var playSoundBf:FlxUICheckBox = null;
 	var playSoundDad:FlxUICheckBox = null;
 	var UI_songTitle:FlxUIInputText;
@@ -468,6 +471,17 @@ class ChartingState extends MusicBeatState
 			PlayState.SONG = Song.parseJSONshit(FlxG.save.data.autosave);
 			MusicBeatState.resetState();
 		});
+		
+		check_AutoSaveChart = new FlxUICheckBox(110, reloadSongJson.y, null, null, "Close Tips", 100);
+		if (FlxG.save.data.chart_AutoSaveChart == null) FlxG.save.data.chart_AutoSaveChart = false;
+		check_AutoSaveChart.checked = FlxG.save.data.chart_AutoSaveChart;
+
+		check_AutoSaveChart.callback = function()
+		{
+			FlxG.save.data.chart_AutoSaveChart = check_AutoSaveChart.checked;
+			AutoSaveChart = FlxG.save.data.chart_AutoSaveChart;
+			reloadGridLayer();
+		};
 
 		var loadEventJson:FlxButton = new FlxButton(loadAutosaveBtn.x, loadAutosaveBtn.y + 30, 'Load Events', function()
 		{
@@ -668,6 +682,8 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(gfVersionDropDown);
 		tab_group_song.add(player1DropDown);
 		tab_group_song.add(stageDropDown);
+		
+		tab_group_song.add(AutoSaveChart);
 
 		UI_box.addGroup(tab_group_song);
 
@@ -1274,7 +1290,7 @@ class ChartingState extends MusicBeatState
 			reloadGridLayer();
 		};
 		
-		check_tipsClose = new FlxUICheckBox(130, 200, null, null, "Close tipsClose", 100);
+		check_tipsClose = new FlxUICheckBox(130, 200, null, null, "Close Tips", 100);
 		if (FlxG.save.data.chart_tipsClose == null) FlxG.save.data.chart_tipsClose = false;
 		check_tipsClose.checked = FlxG.save.data.chart_tipsClose;
 
@@ -1382,6 +1398,7 @@ class ChartingState extends MusicBeatState
 		tab_group_chart.add(playSoundBf);
 		tab_group_chart.add(playSoundDad);
 		tab_group_chart.add(check_tipsClose);
+		
 		UI_box.addGroup(tab_group_chart);
 	}
 
