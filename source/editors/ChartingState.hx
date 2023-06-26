@@ -3119,6 +3119,29 @@ class ChartingState extends MusicBeatState
 			#end
 		}
 	}
+	
+	private function AutoSaveLevel()
+	{
+		if(_song.events != null && _song.events.length > 1) _song.events.sort(sortByTime);
+		var json = {
+			"song": _song
+		};
+
+		var data:String = Json.stringify(json, "\t");
+
+		if ((data != null) && (data.length > 0))
+		{
+			#if android
+			SUtil.saveContent(Paths.formatToSongPath(_song.song) + postfix, "-autosave.json", data.trim());
+			#else
+			_file = new FileReference();
+			//_file.addEventListener(Event.COMPLETE, onSaveComplete);
+			//_file.addEventListener(Event.CANCEL, onSaveCancel);
+			_file.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
+			_file.save(data.trim(), Paths.formatToSongPath(_song.song) + "-autosave.json");
+			#end
+		}
+	}
 
 	function sortByTime(Obj1:Array<Dynamic>, Obj2:Array<Dynamic>):Int
 	{
