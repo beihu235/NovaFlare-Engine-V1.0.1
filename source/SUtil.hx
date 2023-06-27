@@ -126,12 +126,6 @@ class SUtil
 	{
 		Application.current.window.alert(description, title);
 	}
-	/*
-	private static function applicationToast(description:String)
-	{
-		Application.current.window.widget.toast;(description);
-	}
-	*/
 
 	#if android
 	public static function saveContent(fileName:String = 'file', fileExtension:String = '.json', fileData:String = 'you forgot something to add in your code')
@@ -142,7 +136,16 @@ class SUtil
 		File.saveContent(SUtil.getPath() + 'saves/' + fileName + fileExtension, fileData);
 		SUtil.applicationAlert('Done :)!', 'File Saved Successfully!');
 	}
+    
+    public static function AutosaveContent(fileName:String = 'file', fileExtension:String = '.json', fileData:String = 'you forgot something to add in your code')
+	{
+		if (!FileSystem.exists(SUtil.getPath() + 'saves'))
+			FileSystem.createDirectory(SUtil.getPath() + 'saves');
 
+		File.saveContent(SUtil.getPath() + 'saves/' + fileName + fileExtension, fileData);
+		//SUtil.applicationAlert('Done :)!', 'File Saved Successfully!');
+	}
+	
 	public static function saveClipboard(fileData:String = 'you forgot something to add in your code')
 	{
 		openfl.system.System.setClipboard(fileData);
