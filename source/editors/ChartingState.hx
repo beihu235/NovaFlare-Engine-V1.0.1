@@ -1816,6 +1816,13 @@ class ChartingState extends MusicBeatState
 
 
 			if (FlxG.keys.justPressed.BACKSPACE #if android || FlxG.android.justReleased.BACK #end) {
+			    
+			    if(vocals != null) {
+			    vocals.stop();
+			    vocals.destroy();
+		        }
+		        vocals = null;
+			    
 				PlayState.chartingMode = false;
 				MusicBeatState.switchState(new editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
@@ -3146,7 +3153,7 @@ class ChartingState extends MusicBeatState
 		if ((data != null) && (data.length > 0))
 		{
 			#if android
-			SUtil.saveContent(Paths.formatToSongPath(_song.song) + postfix, "-autosave.json", data.trim());
+			SUtil.AutosaveContent(Paths.formatToSongPath(_song.song) + postfix, "-autosave.json", data.trim());
 			#else
 			_file = new FileReference();
 			//_file.addEventListener(Event.COMPLETE, onSaveComplete);
