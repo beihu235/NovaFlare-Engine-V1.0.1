@@ -1599,8 +1599,8 @@ class ChartingState extends MusicBeatState
 		}      
 		
 		#if android 
-		    if (_virtualpad.buttonCEUp_M.pressed) FlxG.mouse.wheel = FlxG.mouse.wheel + 1;
-		    if (_virtualpad.buttonCEDown_M.pressed) FlxG.mouse.wheel = FlxG.mouse.wheel - 1;
+		    if (_virtualpad.buttonCEUp_M.pressed) FlxG.mouse.wheel++;
+		    if (_virtualpad.buttonCEDown_M.pressed) FlxG.mouse.wheel--;
 		#end
 		
 		if(FlxG.sound.music.time < 0) {
@@ -1844,12 +1844,12 @@ class ChartingState extends MusicBeatState
 				{
 					UI_box.selected_tab -= 1;
 					if (UI_box.selected_tab < 0)
-						UI_box.selected_tab = 3;
+						UI_box.selected_tab = 5;
 				}
 				else
 				{
 					UI_box.selected_tab += 1;
-					if (UI_box.selected_tab >= 3)
+					if (UI_box.selected_tab >= 5)
 						UI_box.selected_tab = 0;
 				}
 			}
