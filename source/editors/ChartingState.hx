@@ -111,7 +111,9 @@ class ChartingState extends MusicBeatState
 	public static var curSec:Int = 0;
 	public static var lastSection:Int = 0;
 	private static var lastSong:String = '';
-
+    
+    var AutoSaveTime:Float = 0;
+    
 	var bpmTxt:FlxText;
 
 	var camPos:FlxObject;
@@ -1588,7 +1590,14 @@ class ChartingState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		curStep = recalculateSteps();
-
+		
+		AutoSaveTime = AutoSaveTime + elapsed
+		
+		if ( AutoSaveTime > 60 && AutoSaveChart && FlxG.sound.music.pause && (!FlxG.keys.pressed.W || !FlxG.keys.pressed.S #if android || !_virtualpad.buttonUp.pressed || !_virtualpad.buttonDown.pressed #end))  {
+		AutoSaveTime = 0;
+		AutoSaveLevel()				
+		}      
+		
 		if(FlxG.sound.music.time < 0) {
 			FlxG.sound.music.pause();
 			FlxG.sound.music.time = 0;
