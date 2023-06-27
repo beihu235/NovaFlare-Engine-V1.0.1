@@ -39,6 +39,9 @@ class FlxVirtualPad extends FlxSpriteGroup {
 	public var buttonCEDown:FlxButton;
 	public var buttonCEG:FlxButton;
 	
+	public var buttonCEUp_M:FlxButton;
+	public var buttonCEDown_M:FlxButton;
+	
 	public var dPad:FlxSpriteGroup;
 	public var actions:FlxSpriteGroup;
 
