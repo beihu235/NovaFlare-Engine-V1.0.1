@@ -459,14 +459,14 @@ class FlxUIDropDownMenuCustom extends FlxUIGroup implements IFlxUIWidget impleme
 			#else
 			if(list.length > 1 && canScroll) 
 			{
-				if(FlxG.mouse.wheel > 0 || FlxG.keys.justPressed.UP) 
+				if(FlxG.mouse.wheel > 0 || FlxG.keys.justPressed.UP #if android || _virtualpad.buttonCEUp_M.pressed #end) 
 				{
 					// Go up
 					--currentScroll;
 					if(currentScroll < 0) currentScroll = 0;
 					updateButtonPositions();
 				}
-				else if (FlxG.mouse.wheel < 0 || FlxG.keys.justPressed.DOWN) 
+				else if (FlxG.mouse.wheel < 0 || FlxG.keys.justPressed.DOWN #if android || _virtualpad.buttonCEDown_M.pressed #end) 
 				{
 					// Go down
 					currentScroll++;
