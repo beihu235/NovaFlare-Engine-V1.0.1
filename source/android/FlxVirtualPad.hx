@@ -37,6 +37,7 @@ class FlxVirtualPad extends FlxSpriteGroup {
 	public var buttonCEUp:FlxButton;
 	public var buttonCERight:FlxButton;
 	public var buttonCEDown:FlxButton;
+	public var buttonCEG:FlxButton;
 	
 	public var dPad:FlxSpriteGroup;
 	public var actions:FlxSpriteGroup;
@@ -80,6 +81,7 @@ class FlxVirtualPad extends FlxSpriteGroup {
 		buttonCEUp = new FlxButton(0, 0);
 		buttonCERight = new FlxButton(0, 0);
 		buttonCEDown = new FlxButton(0, 0);
+		buttonCEG = new FlxButton(0, 0);
 		
 		switch (DPad){
 			case UP_DOWN:
@@ -178,7 +180,8 @@ class FlxVirtualPad extends FlxSpriteGroup {
 				actions.add(add(buttonA = createButton(FlxG.width - 44 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "a", 0xFF0000)));				
 				
 				dPad.add(add(buttonCEUp = createButton(FlxG.width - (44 + 42 * 4) * 3, FlxG.height - 85 * 3, 44 * 3, 127, "up", 0x00FF00)));
-				dPad.add(add(buttonCEDown = createButton(FlxG.width - (44 + 42 * 4) * 3, FlxG.height - 45 * 3, 44 * 3, 127, "down", 0x00FFFF)));						
+				dPad.add(add(buttonCEDown = createButton(FlxG.width - (44 + 42 * 4) * 3, FlxG.height - 45 * 3, 44 * 3, 127, "down", 0x00FFFF)));		
+				dPad.add(add(buttonCEG = createButton(FlxG.width - (44 + 42 * 1) * 3, 25, 44 * 3, 127, "g", 0x00FF00)));				
 			case NONE:
 		}
 	}
@@ -237,6 +240,7 @@ class FlxVirtualPad extends FlxSpriteGroup {
 		buttonCEUp = null;
 		buttonCEDown = null;
 		buttonCERight = null;
+		buttonCEG = null;
 	}
 }
 
