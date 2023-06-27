@@ -474,7 +474,7 @@ class ChartingState extends MusicBeatState
 			MusicBeatState.resetState();
 		});
 		
-		check_AutoSaveChart = new FlxUICheckBox(110, reloadSongJson.y + 30, null, null, "AutoSaveChart", 100);
+		check_AutoSaveChart = new FlxUICheckBox(110, reloadSongJson.y + 30, null, null, "AutoSave", 100);
 		if (FlxG.save.data.chart_AutoSaveChart == null) FlxG.save.data.chart_AutoSaveChart = false;
 		check_AutoSaveChart.checked = FlxG.save.data.chart_AutoSaveChart;
 
@@ -1593,7 +1593,7 @@ class ChartingState extends MusicBeatState
 		
 		AutoSaveTime = AutoSaveTime + elapsed;
 		
-		if ( AutoSaveTime > 60 && AutoSaveChart && FlxG.sound.music.pause && (!FlxG.keys.pressed.W || !FlxG.keys.pressed.S #if android || !_virtualpad.buttonUp.pressed || !_virtualpad.buttonDown.pressed #end))  {
+		if ( AutoSaveTime > 60 && AutoSaveChart && (!FlxG.keys.pressed.W || !FlxG.keys.pressed.S #if android || !_virtualpad.buttonUp.pressed || !_virtualpad.buttonDown.pressed #end))  {
 		AutoSaveTime = 0;
 		AutoSaveLevel();				
 		}      
