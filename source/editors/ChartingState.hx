@@ -1597,12 +1597,12 @@ class ChartingState extends MusicBeatState
 		AutoSaveTime = 0;
 		AutoSaveLevel();				
 		}      
-		
+		/*
 		#if android 
 		    if (_virtualpad.buttonCEUp_M.pressed) FlxG.mouse.wheel++;
 		    if (_virtualpad.buttonCEDown_M.pressed) FlxG.mouse.wheel--;
 		#end
-		
+		*/
 		if(FlxG.sound.music.time < 0) {
 			FlxG.sound.music.pause();
 			FlxG.sound.music.time = 0;
