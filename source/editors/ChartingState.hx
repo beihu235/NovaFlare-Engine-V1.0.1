@@ -1824,13 +1824,13 @@ class ChartingState extends MusicBeatState
 				updateZoom();
 			}
 
-			if (FlxG.keys.justPressed.TAB)
+			if (FlxG.keys.justPressed.TAB #if android || _virtualpad.buttonCEG.justPressed #end)
 			{
 				if (FlxG.keys.pressed.SHIFT)
 				{
 					UI_box.selected_tab -= 1;
 					if (UI_box.selected_tab < 0)
-						UI_box.selected_tab = 2;
+						UI_box.selected_tab = 3;
 				}
 				else
 				{
