@@ -126,8 +126,8 @@ class FlxVirtualPad extends FlxSpriteGroup {
 				dPad.add(add(buttonLeft = createButton(42 * 3, FlxG.height - 85 * 3, 44 * 3, 127, "left", 0xFF00FF)));
 				dPad.add(add(buttonRight = createButton(42 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "right", 0xFF0000)));
 				
-				dPad.add(add(buttonCEUp_M = createButton(0, FlxG.height - 125 * 3, 44 * 3, 127, "left", 0xFF00FF)));
-				dPad.add(add(buttonCEDown_M = createButton(42 * 3, FlxG.height - 125 * 3, 44 * 3, 127, "right", 0xFF0000)));
+				dPad.add(add(buttonCEUp_M = createButton(0, FlxG.height - 125 * 3, 44 * 3, 127, "up", 0xFF00FF)));
+				dPad.add(add(buttonCEDown_M = createButton(42 * 3, FlxG.height - 125 * 3, 44 * 3, 127, "down", 0xFF0000)));
 			case NONE:
 		}
 
