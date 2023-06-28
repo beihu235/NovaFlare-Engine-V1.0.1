@@ -163,6 +163,7 @@ class ChartingState extends MusicBeatState
 	var value2InputText:FlxUIInputText;
 	var currentSongName:String;
 	var zoomTxt:FlxText;
+	var autosaveTxt:FlxText;
 
 	var zoomList:Array<Float> = [
 		0.25,
@@ -414,7 +415,13 @@ class ChartingState extends MusicBeatState
 		zoomTxt = new FlxText(10, 100-16, 0, "Zoom: 1 / 1", 16);
 		zoomTxt.scrollFactor.set();
 		add(zoomTxt);
-
+        
+        autosaveTxt = new FlxText(10, 100 + 16 * 9, 0, "Chart Auto Save Now!", 16);
+		autosaveTxt.scrollFactor.set();
+		autosaveTxt.alpha = 0;
+		add(autosaveTxt);
+		
+		
 		updateGrid();
 
 		#if android
@@ -1594,8 +1601,17 @@ class ChartingState extends MusicBeatState
 		AutoSaveTime = AutoSaveTime + elapsed;
 		
 		if ( AutoSaveTime > 60 && AutoSaveChart && !FlxG.sound.music.playing && (!FlxG.keys.pressed.W || !FlxG.keys.pressed.S #if android || !_virtualpad.buttonUp.pressed || !_virtualpad.buttonDown.pressed #end))  {
-		AutoSaveTime = 0;
-		AutoSaveLevel();				
+		    AutoSaveTime = 0;
+		    AutoSaveLevel();				
+		    autosaveTxt.alpha = 1;
+		    
+		    FlxTween.tween(autosaveTxt, {alpha: 0}, 5, {
+			ease: FlxEase.quadOut,
+			onComplete: function(twn:FlxTween)
+				{
+					spr.kill();
+				}
+			});
 		}      
 		/*
 		#if android 
