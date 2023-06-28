@@ -7,6 +7,7 @@ import flixel.addons.ui.interfaces.IHasParams;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.math.FlxMath;
+import flixel.ui.FlxButton;
 import flixel.util.FlxColor;
 import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxStringUtil;
@@ -18,11 +19,7 @@ import flixel.addons.ui.FlxUI9SliceSprite;
 import flixel.addons.ui.FlxUIAssets;
 import flixel.addons.ui.StrNameLabel;
 import flixel.addons.ui.FlxUI;
-#if android
-import android.flixel.FlxButton;
-#else
-import flixel.ui.FlxButton;
-#end
+
 
 /*
 THIS IS AN EDIT OF FlxUIDropDownMenu I'VE MADE BECAUSE I'M TIRED OF IT NOT SUPPORTING SCROLLING UP/DOWN
@@ -40,15 +37,7 @@ The differences are the following:
 class FlxUIDropDownMenuCustom extends FlxUIGroup implements IFlxUIWidget implements IFlxUIClickable implements IHasParams
 {
 	public var skipButtonUpdate(default, set):Bool;
-    
-    
-    override function create()
-	{
-	#if android
-		addVirtualPad(CHART_EDITOR, CHART_EDITOR);
-		#end
-	super.create();
-	}
+
 	private function set_skipButtonUpdate(b:Bool):Bool
 	{
 		skipButtonUpdate = b;
@@ -450,14 +439,14 @@ class FlxUIDropDownMenuCustom extends FlxUIGroup implements IFlxUIWidget impleme
 					var g = swipe.startPosition.y - swipe.endPosition.y;
 					if (25 <= Math.sqrt(f * f + g * g))
 					{
-						if ((-45 <= swipe.startPosition.angleBetween(swipe.endPosition) && 45 >= swipe.startPosition.angleBetween(swipe.endPosition)) || _virtualpad.buttonCEDown_M.pressed)
+						if ((-45 <= swipe.startPosition.angleBetween(swipe.endPosition) && 45 >= swipe.startPosition.angleBetween(swipe.endPosition)) #if android || _virtualpad.buttonCEDown_M.pressed #end)
 						{
 							// Go down
 							currentScroll++;
 							if(currentScroll >= list.length) currentScroll = list.length-1;
 							updateButtonPositions();
 						}
-						else if (-180 <= swipe.startPosition.angleBetween(swipe.endPosition) && -135 >= swipe.startPosition.angleBetween(swipe.endPosition) || (135 <= swipe.startPosition.angleBetween(swipe.endPosition) && 180 >= swipe.startPosition.angleBetween(swipe.endPosition)) || _virtualpad.buttonCEUp_M.pressed)
+						else if (-180 <= swipe.startPosition.angleBetween(swipe.endPosition) && -135 >= swipe.startPosition.angleBetween(swipe.endPosition) || (135 <= swipe.startPosition.angleBetween(swipe.endPosition) && 180 >= swipe.startPosition.angleBetween(swipe.endPosition)) #if android || _virtualpad.buttonCEUp_M.pressed #end)
 						{
 							// Go up
 							--currentScroll;
@@ -470,14 +459,14 @@ class FlxUIDropDownMenuCustom extends FlxUIGroup implements IFlxUIWidget impleme
 			#else
 			if(list.length > 1 && canScroll) 
 			{
-				if(FlxG.mouse.wheel > 0) 
+				if(FlxG.mouse.wheel > 0 || FlxG.keys.justPressed.UP ) 
 				{
 					// Go up
 					--currentScroll;
 					if(currentScroll < 0) currentScroll = 0;
 					updateButtonPositions();
 				}
-				else if (FlxG.mouse.wheel < 0) 
+				else if (FlxG.mouse.wheel < 0 || FlxG.keys.justPressed.DOWN) 
 				{
 					// Go down
 					currentScroll++;
