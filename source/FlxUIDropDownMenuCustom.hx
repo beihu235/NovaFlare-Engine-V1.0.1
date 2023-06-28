@@ -439,14 +439,14 @@ class FlxUIDropDownMenuCustom extends FlxUIGroup implements IFlxUIWidget impleme
 					var g = swipe.startPosition.y - swipe.endPosition.y;
 					if (25 <= Math.sqrt(f * f + g * g))
 					{
-						if ((-45 <= swipe.startPosition.angleBetween(swipe.endPosition) && 45 >= swipe.startPosition.angleBetween(swipe.endPosition)))
+						if ((-45 <= swipe.startPosition.angleBetween(swipe.endPosition) && 45 >= swipe.startPosition.angleBetween(swipe.endPosition)) || _virtualpad.buttonCEDown_M.pressed)
 						{
 							// Go down
 							currentScroll++;
 							if(currentScroll >= list.length) currentScroll = list.length-1;
 							updateButtonPositions();
 						}
-						else if (-180 <= swipe.startPosition.angleBetween(swipe.endPosition) && -135 >= swipe.startPosition.angleBetween(swipe.endPosition) || (135 <= swipe.startPosition.angleBetween(swipe.endPosition) && 180 >= swipe.startPosition.angleBetween(swipe.endPosition)))
+						else if (-180 <= swipe.startPosition.angleBetween(swipe.endPosition) && -135 >= swipe.startPosition.angleBetween(swipe.endPosition) || (135 <= swipe.startPosition.angleBetween(swipe.endPosition) && 180 >= swipe.startPosition.angleBetween(swipe.endPosition)) || _virtualpad.buttonCEUp_M.pressed)
 						{
 							// Go up
 							--currentScroll;
@@ -459,14 +459,14 @@ class FlxUIDropDownMenuCustom extends FlxUIGroup implements IFlxUIWidget impleme
 			#else
 			if(list.length > 1 && canScroll) 
 			{
-				if(FlxG.mouse.wheel > 0 || FlxG.keys.justPressed.UP #if android || _virtualpad.buttonCEUp_M.pressed #end) 
+				if(FlxG.mouse.wheel > 0) 
 				{
 					// Go up
 					--currentScroll;
 					if(currentScroll < 0) currentScroll = 0;
 					updateButtonPositions();
 				}
-				else if (FlxG.mouse.wheel < 0 || FlxG.keys.justPressed.DOWN #if android || _virtualpad.buttonCEDown_M.pressed #end) 
+				else if (FlxG.mouse.wheel < 0) 
 				{
 					// Go down
 					currentScroll++;
