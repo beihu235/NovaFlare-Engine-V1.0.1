@@ -40,6 +40,14 @@ The differences are the following:
  */
 class FlxUIDropDownMenuCustom extends FlxUIGroup implements IFlxUIWidget implements IFlxUIClickable implements IHasParams
 {
+    
+    #if android
+	var _virtualpad:FlxVirtualPad;
+	var androidc:AndroidControls;
+	var trackedinputsUI:Array<FlxActionInput> = [];
+	var trackedinputsNOTES:Array<FlxActionInput> = [];
+	#end
+    
 	public var skipButtonUpdate(default, set):Bool;
 
 	private function set_skipButtonUpdate(b:Bool):Bool
