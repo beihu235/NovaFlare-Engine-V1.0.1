@@ -1597,12 +1597,18 @@ class ChartingState extends MusicBeatState
 		AutoSaveTime = 0;
 		AutoSaveLevel();				
 		}      
-		/*
+		
 		#if android 
-		    if (_virtualpad.buttonCEUp_M.pressed) FlxG.mouse.wheel++;
-		    if (_virtualpad.buttonCEDown_M.pressed) FlxG.mouse.wheel--;
+		    if (_virtualpad.buttonCEUp_M.pressed) {		    
+		    FlxUIDropDownMenuCustom.currentScroll++;
+		    FlxUIDropDownMenuCustom.updateButtonPositions();
+		    }
+		    if (_virtualpad.buttonCEDown_M.pressed){
+		    FlxUIDropDownMenuCustom.currentScroll--;
+		    FlxUIDropDownMenuCustom.updateButtonPositions();
+		    } 
 		#end
-		*/
+		
 		if(FlxG.sound.music.time < 0) {
 			FlxG.sound.music.pause();
 			FlxG.sound.music.time = 0;
@@ -1856,7 +1862,7 @@ class ChartingState extends MusicBeatState
 				else
 				{
 					UI_box.selected_tab += 1;
-					if (UI_box.selected_tab >= 5)
+					if (UI_box.selected_tab >= 4)
 						UI_box.selected_tab = 0;
 				}
 			}
