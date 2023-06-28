@@ -1597,7 +1597,7 @@ class ChartingState extends MusicBeatState
 		AutoSaveTime = 0;
 		AutoSaveLevel();				
 		}      
-		
+		/*
 		#if android 
 		    if (_virtualpad.buttonCEUp_M.pressed) {		    
 		    FlxUIDropDownMenuCustom.currentScroll++;
@@ -1608,7 +1608,7 @@ class ChartingState extends MusicBeatState
 		    FlxUIDropDownMenuCustom.updateButtonPositions();
 		    } 
 		#end
-		
+		*/
 		if(FlxG.sound.music.time < 0) {
 			FlxG.sound.music.pause();
 			FlxG.sound.music.time = 0;
