@@ -1867,7 +1867,7 @@ class ChartingState extends MusicBeatState
 				}
 			}
 
-			if (FlxG.keys.justPressed.SPACE #if android || _virtualpad.buttonX.justPressed #end)
+			if (FlxG.keys.justPressed.SPACE #if android || _virtualpad.buttonY.justPressed #end)
 			{
 				if (FlxG.sound.music.playing)
 				{
@@ -2080,7 +2080,8 @@ class ChartingState extends MusicBeatState
 			var shiftThing:Int = 1;
 			if (FlxG.keys.pressed.SHIFT #if android || _virtualpad.buttonC.pressed #end)
 				shiftThing = 4;
-
+			if ( _virtualpad.buttonX.pressed )
+                shiftThing = 10;
 			if (FlxG.keys.justPressed.D #if android || (_virtualpad.buttonRight.justPressed && _virtualpad.buttonC.pressed) #end)
 				changeSection(curSec + shiftThing);
 			if (FlxG.keys.justPressed.A #if android || (_virtualpad.buttonLeft.justPressed && _virtualpad.buttonC.pressed) #end) {
