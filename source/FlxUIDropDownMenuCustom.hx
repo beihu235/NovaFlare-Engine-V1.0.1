@@ -34,7 +34,7 @@ The differences are the following:
 /**
  * @author larsiusprime
  */
-class FlxUIDropDownMenuCustom extends FlxUIGroup implements IFlxUIWidget implements IFlxUIClickable implements IHasParams IMusicBeatState implements
+class FlxUIDropDownMenuCustom extends FlxUIGroup implements IFlxUIWidget implements IFlxUIClickable implements IHasParams implements IMusicBeatState 
 {
     
     
