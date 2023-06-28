@@ -20,7 +20,11 @@ import flixel.addons.ui.FlxUIAssets;
 import flixel.addons.ui.StrNameLabel;
 import flixel.addons.ui.FlxUI;
 
-
+#if android
+import flixel.input.actions.FlxActionInput;
+import android.AndroidControls.AndroidControls;
+import android.FlxVirtualPad;
+#end
 /*
 THIS IS AN EDIT OF FlxUIDropDownMenu I'VE MADE BECAUSE I'M TIRED OF IT NOT SUPPORTING SCROLLING UP/DOWN
 BAH!
@@ -34,9 +38,15 @@ The differences are the following:
 /**
  * @author larsiusprime
  */
-class FlxUIDropDownMenuCustom extends /*FlxUIGroup implements IFlxUIWidget implements IFlxUIClickable implements IHasParams implements*/ MusicBeatState 
+class FlxUIDropDownMenuCustom extends FlxUIGroup implements IFlxUIWidget implements IFlxUIClickable implements IHasParams
 {
     
+    
+ 
+function getVirtualPad():FlxVirtualPad {
+  for (th in FlxG.state) if (th is FlxVirtualPad) return cast(th, FlxVirtualPad);
+  return null;
+}
     
 	public var skipButtonUpdate(default, set):Bool;
 
@@ -441,14 +451,14 @@ class FlxUIDropDownMenuCustom extends /*FlxUIGroup implements IFlxUIWidget imple
 					var g = swipe.startPosition.y - swipe.endPosition.y;
 					if (25 <= Math.sqrt(f * f + g * g))
 					{
-						if ((-45 <= swipe.startPosition.angleBetween(swipe.endPosition) && 45 >= swipe.startPosition.angleBetween(swipe.endPosition)) #if android || _virtualpad.buttonCEDown_M.pressed #end)
+						if ((-45 <= swipe.startPosition.angleBetween(swipe.endPosition) && 45 >= swipe.startPosition.angleBetween(swipe.endPosition)) #if android || getVirtualPad().buttonCEDown_M.pressed #end)
 						{
 							// Go down
 							currentScroll++;
 							if(currentScroll >= list.length) currentScroll = list.length-1;
 							updateButtonPositions();
 						}
-						else if (-180 <= swipe.startPosition.angleBetween(swipe.endPosition) && -135 >= swipe.startPosition.angleBetween(swipe.endPosition) || (135 <= swipe.startPosition.angleBetween(swipe.endPosition) && 180 >= swipe.startPosition.angleBetween(swipe.endPosition)) #if android || _virtualpad.buttonCEUp_M.pressed #end)
+						else if (-180 <= swipe.startPosition.angleBetween(swipe.endPosition) && -135 >= swipe.startPosition.angleBetween(swipe.endPosition) || (135 <= swipe.startPosition.angleBetween(swipe.endPosition) && 180 >= swipe.startPosition.angleBetween(swipe.endPosition)) #if android || getVirtualPad().buttonCEDown_M.pressed #end)
 						{
 							// Go up
 							--currentScroll;
