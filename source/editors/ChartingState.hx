@@ -416,7 +416,7 @@ class ChartingState extends MusicBeatState
 		zoomTxt.scrollFactor.set();
 		add(zoomTxt);
         
-        autosaveTxt = new FlxText(10, 100 + 16 * 9, 0, "Chart Auto Save Now!", 16);
+        autosaveTxt = new FlxText(10, 100 + 16 * 11, 0, "Chart Auto Save Now!", 16);
 		autosaveTxt.scrollFactor.set();
 		autosaveTxt.alpha = 0;
 		add(autosaveTxt);
@@ -2096,8 +2096,10 @@ class ChartingState extends MusicBeatState
 			var shiftThing:Int = 1;
 			if (FlxG.keys.pressed.SHIFT #if android || _virtualpad.buttonC.pressed #end)
 				shiftThing = 4;
-			if ( _virtualpad.buttonX.pressed )
+		    #if android 
+		    if ( _virtualpad.buttonX.pressed )
                 shiftThing = 10;
+            #end
 			if (FlxG.keys.justPressed.D #if android || (_virtualpad.buttonRight.justPressed && _virtualpad.buttonC.pressed) #end)
 				changeSection(curSec + shiftThing);
 			if (FlxG.keys.justPressed.A #if android || (_virtualpad.buttonLeft.justPressed && _virtualpad.buttonC.pressed) #end) {
