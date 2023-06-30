@@ -2096,13 +2096,11 @@ class ChartingState extends MusicBeatState
 			var shiftThing:Int = 1;
 			if (FlxG.keys.pressed.SHIFT #if android || _virtualpad.buttonC.pressed #end)
 				shiftThing = 4;
-		    #if android 
 		    if ( _virtualpad.buttonX.pressed )
                 shiftThing = 10;
-            #end
-			if (FlxG.keys.justPressed.D #if android || (_virtualpad.buttonRight.justPressed && _virtualpad.buttonC.pressed) #end)
+			if (FlxG.keys.justPressed.D #if android || (_virtualpad.buttonRight.justPressed && ( _virtualpad.buttonC.pressed || _virtualpad.buttonX.pressed)) #end)
 				changeSection(curSec + shiftThing);
-			if (FlxG.keys.justPressed.A #if android || (_virtualpad.buttonLeft.justPressed && _virtualpad.buttonC.pressed) #end) {
+			if (FlxG.keys.justPressed.A #if android || (_virtualpad.buttonLeft.justPressed && ( _virtualpad.buttonC.pressed || _virtualpad.buttonX.pressed)) #end) {
 				if(curSec <= 0) {
 					changeSection(_song.notes.length-1);
 				} else {
@@ -2149,7 +2147,7 @@ class ChartingState extends MusicBeatState
 			playbackSpeed -= 0.01;
 		if (!holdingShift && pressedRB || holdingShift && holdingRB)
 			playbackSpeed += 0.01;
-		if (FlxG.keys.pressed.ALT && (pressedLB || pressedRB || holdingLB || holdingRB))
+		if (FlxG.keys.pressed.ALT && (pressedLB || pressedRB || holdingLB || holdingRB) #if android || _virtualpad.buttonZ.pressed #end)
 			playbackSpeed = 1;
 		//
 
