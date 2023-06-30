@@ -1154,14 +1154,14 @@ class CharacterEditorState extends MusicBeatState
 				if (FlxG.keys.pressed.SHIFT)
 					addToCam *= 4;
 
-				if (FlxG.keys.pressed.I)
+				if (FlxG.keys.pressed.I #if android || (_virtualpad.buttonUp.Pressed && _virtualpad.buttonC.Pressed) #end)
 					camFollow.y -= addToCam;
-				else if (FlxG.keys.pressed.K)
+				else if (FlxG.keys.pressed.K #if android || (_virtualpad.buttonDown.Pressed && _virtualpad.buttonC.Pressed) #end)
 					camFollow.y += addToCam;
 
-				if (FlxG.keys.pressed.J)
+				if (FlxG.keys.pressed.J #if android || (_virtualpad.buttonLeft.justPressed && _virtualpad.buttonC.Pressed) #end)
 					camFollow.x -= addToCam;
-				else if (FlxG.keys.pressed.L)
+				else if (FlxG.keys.pressed.L #if android || (_virtualpad.buttonRight.Pressed && _virtualpad.buttonC.Pressed) #end)
 					camFollow.x += addToCam;
 			}
 
@@ -1197,10 +1197,10 @@ class CharacterEditorState extends MusicBeatState
 				}
 
 				var controlArray:Array<Bool> = [
-					FlxG.keys.justPressed.LEFT #if android || _virtualpad.buttonLeft.justPressed #end,
-					FlxG.keys.justPressed.RIGHT #if android || _virtualpad.buttonRight.justPressed #end,
-					FlxG.keys.justPressed.UP #if android || _virtualpad.buttonUp.justPressed #end,
-					FlxG.keys.justPressed.DOWN #if android || _virtualpad.buttonDown.justPressed #end
+					FlxG.keys.justPressed.LEFT #if android || (_virtualpad.buttonLeft.justPressed && !_virtualpad.buttonC.Pressed) #end,
+					FlxG.keys.justPressed.RIGHT #if android || (_virtualpad.buttonRight.justPressed && !_virtualpad.buttonC.Pressed) #end,
+					FlxG.keys.justPressed.UP #if android || (_virtualpad.buttonUp.justPressed && !_virtualpad.buttonC.Pressed) #end,
+					FlxG.keys.justPressed.DOWN #if android || (_virtualpad.buttonDown.justPressed && !_virtualpad.buttonC.Pressed) #end
 				];
 
 				for (i in 0...controlArray.length) {
