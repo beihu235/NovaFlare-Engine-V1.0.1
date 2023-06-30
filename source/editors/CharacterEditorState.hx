@@ -1148,7 +1148,7 @@ class CharacterEditorState extends MusicBeatState
 				if(FlxG.camera.zoom < 0.1) FlxG.camera.zoom = 0.1;
 			}
 
-			if (FlxG.keys.pressed.I || FlxG.keys.pressed.J || FlxG.keys.pressed.K || FlxG.keys.pressed.L)
+			if (FlxG.keys.pressed.I || FlxG.keys.pressed.J || FlxG.keys.pressed.K || FlxG.keys.pressed.L #if android || ( (_virtualpad.buttonUp.pressed || _virtualpad.buttonDown.pressed || _virtualpad.buttonLeft.pressed || _virtualpad.buttonRight.pressed   ) && _virtualpad.buttonC.pressed) #end)
 			{
 				var addToCam:Float = 500 * elapsed;
 				if (FlxG.keys.pressed.SHIFT)
@@ -1159,7 +1159,7 @@ class CharacterEditorState extends MusicBeatState
 				else if (FlxG.keys.pressed.K #if android || (_virtualpad.buttonDown.pressed && _virtualpad.buttonC.pressed) #end)
 					camFollow.y += addToCam;
 
-				if (FlxG.keys.pressed.J #if android || (_virtualpad.buttonLeft.justPressed && _virtualpad.buttonC.pressed) #end)
+				if (FlxG.keys.pressed.J #if android || (_virtualpad.buttonLeft.pressed && _virtualpad.buttonC.pressed) #end)
 					camFollow.x -= addToCam;
 				else if (FlxG.keys.pressed.L #if android || (_virtualpad.buttonRight.pressed && _virtualpad.buttonC.pressed) #end)
 					camFollow.x += addToCam;
