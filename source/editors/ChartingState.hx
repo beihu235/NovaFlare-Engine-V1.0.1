@@ -1877,9 +1877,14 @@ class ChartingState extends MusicBeatState
 				}
 				else
 				{
-					UI_box.selected_tab += 1;
-					if (UI_box.selected_tab > 5)
+					
+					if (UI_box.selected_tab >= 5){
 						UI_box.selected_tab = 1;
+					}	
+					else
+					{
+					    UI_box.selected_tab += 1;
+					}
 				}
 			}
 
@@ -1961,7 +1966,7 @@ class ChartingState extends MusicBeatState
 				var holdingShift:Float = 1;
 				if (FlxG.keys.pressed.CONTROL) holdingShift = 0.25;
 				else if (FlxG.keys.pressed.SHIFT #if android || _virtualpad.buttonC.pressed #end) holdingShift = 4;
-
+                else if (_virtualpad.buttonX.pressed) holdingShift = 10;
 				var daTime:Float = 700 * FlxG.elapsed * holdingShift;
 
 				if (FlxG.keys.pressed.W #if android || _virtualpad.buttonUp.pressed #end)
@@ -2096,11 +2101,9 @@ class ChartingState extends MusicBeatState
 			var shiftThing:Int = 1;
 			if (FlxG.keys.pressed.SHIFT #if android || _virtualpad.buttonC.pressed #end)
 				shiftThing = 4;
-		    if ( _virtualpad.buttonX.pressed )
-                shiftThing = 10;
-			if (FlxG.keys.justPressed.D #if android || (_virtualpad.buttonRight.justPressed && ( _virtualpad.buttonC.pressed || _virtualpad.buttonX.pressed)) #end)
+			if (FlxG.keys.justPressed.D #if android || (_virtualpad.buttonRight.justPressed && _virtualpad.buttonC.pressed) #end)
 				changeSection(curSec + shiftThing);
-			if (FlxG.keys.justPressed.A #if android || (_virtualpad.buttonLeft.justPressed && ( _virtualpad.buttonC.pressed || _virtualpad.buttonX.pressed)) #end) {
+			if (FlxG.keys.justPressed.A #if android || (_virtualpad.buttonLeft.justPressed && _virtualpad.buttonC.pressed) #end) {
 				if(curSec <= 0) {
 					changeSection(_song.notes.length-1);
 				} else {
