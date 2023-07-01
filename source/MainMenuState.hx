@@ -3,6 +3,7 @@ package;
 #if desktop
 import Discord.DiscordClient;
 #end
+import flixel.addons.display.FlxBackdrop;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -17,6 +18,7 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import lime.app.Application;
+import openfl.display.BlendMode;
 import Achievements;
 import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
@@ -25,10 +27,8 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var psychEngineVersion:String = '2.5.0'; //This is also used for Discord RPC
+	public static var psychEngineVersion:String = '0.6.3'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
-	
-	public static var AllowControl:Bool = false;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
@@ -36,17 +36,18 @@ class MainMenuState extends MusicBeatState
 	
 	var optionShit:Array<String> = [
 		'story_mode',
-		'freeplay',				
-		'options',
-		'credits'
+		'freeplay',
+		#if MODS_ALLOWED 'mods', #end
+		//#if ACHIEVEMENTS_ALLOWED 'awards', #end
+		'credits',
+		//#if !switch 'donate', #end
+		'options'
 	];
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
-	
-	var logoBumpin:FlxSprite;
 
 	override function create()
 	{
@@ -78,13 +79,22 @@ class MainMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG-source'));
-		bg.scrollFactor.set(0, 0);
-		bg.setGraphicSize(Std.int(bg.width * 0.345));
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
+		bg.scrollFactor.set(0, yScroll);
+		bg.setGraphicSize(Std.int(bg.width * 1.175));
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
+		
+		var bgScroll:FlxBackdrop = new FlxBackdrop(Paths.image('mainmenu_sprite/backdrop'), 1, 1, true, true, 0, 0);
+		bgScroll.scrollFactor.set();
+		bgScroll.alpha = 0.3;
+		bgScroll.blend = blendModeFromString('add');
+		bgScroll.screenCenter();
+		bgScroll.velocity.set(100, 70);
+		bgScroll.antialiasing = ClientPrefs.globalAntialiasing;
+		add(bgScroll);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		camFollowPos = new FlxObject(0, 0, 1, 1);
@@ -102,34 +112,19 @@ class MainMenuState extends MusicBeatState
 		add(magenta);
 		
 		// magenta.scrollFactor.set();
-		
-		logoBumpin = new FlxSprite(400,FlxG.height*-0.1);
-		logoBumpin.updateHitbox();
-		// logoBumpin.screenCenter();
-		logoBumpin.frames = Paths.getSparrowAtlas('logoBumpin-source');
-		logoBumpin.antialiasing = ClientPrefs.globalAntialiasing;
-		logoBumpin.animation.addByPrefix('idle', "logo bumpin", 24);
-	    logoBumpin.animation.play('idle');
-	    logoBumpin.scrollFactor.set(0, 0);
-	    logoBumpin.scale.x = 0.6;
-        logoBumpin.scale.y = 0.6;
-		add(logoBumpin);
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
-		var scale:Float = 0.5;
+		var scale:Float = 1;
 		/*if(optionShit.length > 6) {
 			scale = 6 / optionShit.length;
 		}*/
-		
-	    // public static var firstStart:Bool = true;
-	    
-	    
+
 		for (i in 0...optionShit.length)
 		{
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(-1950, (i * 90)  + offset+220);
+			var menuItem:FlxSprite = new FlxSprite(100, (i * 140)  + offset);
 			menuItem.scale.x = scale;
 			menuItem.scale.y = scale;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
@@ -137,6 +132,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
+			//menuItem.screenCenter(X);
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
@@ -144,28 +140,8 @@ class MainMenuState extends MusicBeatState
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
 			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
-			
-			
-			FlxTween.tween(menuItem, {x: 50}, (0.8 + 0.15 * i), {
-			    ease: FlxEase.quadOut,
-			    type: ONESHOT,
-				onComplete: function(twn:FlxTween)
-				{
-				    if (i == curSelected)
-				    {
-				    changeItem();
-				    }
-				    
-		            if(i == optionShit.length- 1)
-		            {
-		            AllowControl = true;
-		            }
-				}
-				});                                   
 		}
-		
-		
-        
+
 		FlxG.camera.follow(camFollowPos, null, 1);
 
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
@@ -179,7 +155,7 @@ class MainMenuState extends MusicBeatState
 
 		// NG.core.calls.event.logEvent('swag').send();
 
-		
+		changeItem();
 
 		#if ACHIEVEMENTS_ALLOWED
 		Achievements.loadAchievements();
@@ -198,9 +174,6 @@ class MainMenuState extends MusicBeatState
 		addVirtualPad(UP_DOWN, A_B_E);
 		#end
 
-
-        
-        
 		super.create();
 	}
 
@@ -228,8 +201,6 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
-		if (AllowControl)
-		{
 			if (controls.UI_UP_P)
 			{
 				FlxG.sound.play(Paths.sound('scrollMenu'));
@@ -245,7 +216,6 @@ class MainMenuState extends MusicBeatState
 			if (controls.BACK)
 			{
 				selectedSomethin = true;
-				AllowControl = false;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new TitleState());
 			}
@@ -259,16 +229,15 @@ class MainMenuState extends MusicBeatState
 				else
 				{
 					selectedSomethin = true;
-					AllowControl = false;
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 
-					// if (ClientPrefs.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);
+					if(ClientPrefs.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 
 					menuItems.forEach(function(spr:FlxSprite)
 					{
 						if (curSelected != spr.ID)
 						{
-							FlxTween.tween(spr, {alpha: 0}, 1.2, {
+							FlxTween.tween(spr, {alpha: 0}, 0.4, {
 								ease: FlxEase.quadOut,
 								onComplete: function(twn:FlxTween)
 								{
@@ -287,11 +256,17 @@ class MainMenuState extends MusicBeatState
 									case 'story_mode':
 										MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
-										MusicBeatState.switchState(new FreeplayState());									
-									case 'options':
-										MusicBeatState.switchState(new ChooseOptionsState());
+										MusicBeatState.switchState(new FreeplayState());
+									#if MODS_ALLOWED
+									case 'mods':
+										MusicBeatState.switchState(new ModsMenuState());
+									#end
+								/*	case 'awards':
+										MusicBeatState.switchState(new AchievementsMenuState()); */
 									case 'credits':
-										MusicBeatState.switchState(new CreditsState());	
+										MusicBeatState.switchState(new CreditsState());
+									case 'options':
+										LoadingState.loadAndSwitchState(new options.OptionsState());
 								}
 							});
 						}
@@ -302,17 +277,16 @@ class MainMenuState extends MusicBeatState
 			else if (FlxG.keys.anyJustPressed(debugKeys) #if android || _virtualpad.buttonE.justPressed #end)
 			{
 				selectedSomethin = true;
-				AllowControl = false;
 				MusicBeatState.switchState(new MasterEditorMenu());
 			}
 			#end
-		}	// AllowControl
 		}
 
 		super.update(elapsed);
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
+			//spr.screenCenter(X);
 		});
 	}
 
@@ -342,4 +316,23 @@ class MainMenuState extends MusicBeatState
 			}
 		});
 	}
+	
+	function blendModeFromString(blend:String):BlendMode {
+		switch(blend.toLowerCase().trim()) {
+			case 'add': return ADD;
+			case 'alpha': return ALPHA;
+			case 'darken': return DARKEN;
+			case 'difference': return DIFFERENCE;
+			case 'erase': return ERASE;
+			case 'hardlight': return HARDLIGHT;
+			case 'invert': return INVERT;
+			case 'layer': return LAYER;
+			case 'lighten': return LIGHTEN;
+			case 'multiply': return MULTIPLY;
+			case 'overlay': return OVERLAY;
+			case 'screen': return SCREEN;
+			case 'shader': return SHADER;
+			case 'subtract': return SUBTRACT;
+		}
+		return NORMAL;
 }
