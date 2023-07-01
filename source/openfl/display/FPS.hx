@@ -190,7 +190,7 @@ class FPS extends TextField
 				text += "\nMemory: " + newmemoryMegas + " GB";            
 			}
 						
-            text += "\nNF Engine V1.0.0\nVS CAM FM V2.5.0" + "  "  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
+            text += "\nNF Engine V1.0.0\n"  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
             
         /*
 			#if (gl_stats && !disable_cffi && (!html5 || !canvas))
