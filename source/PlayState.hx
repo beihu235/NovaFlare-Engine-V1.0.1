@@ -3918,6 +3918,7 @@ class PlayState extends MusicBeatState
 
 	public function finishSong(?ignoreNoteOffset:Bool = false):Void
 	{
+	    openSubState(new GameplayChangersSubstate());
 		var finishCallback:Void->Void = endSong; //In case you want to change it in a specific song.
 
 		updateTime = false;
@@ -3943,7 +3944,7 @@ class PlayState extends MusicBeatState
 	public var transitioning = false;
 	public function endSong():Void
 	{
-	    openSubState(new GameplayChangersSubstate());
+	    
 	    
 		//Should kill you if you tried to cheat
 		if(!startingSong) {
