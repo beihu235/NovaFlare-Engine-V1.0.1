@@ -42,8 +42,6 @@ typedef TitleData =
 
 	titlex:Float,
 	titley:Float,
-	titleScaleX:Float,
-	titleScaleY:Float,
 	startx:Float,
 	starty:Float,
 	gfx:Float,
@@ -231,8 +229,7 @@ class TitleState extends MusicBeatState
 	var danceLeft:Bool = false;
 	var titleText:FlxSprite;
 	var swagShader:ColorSwap = null;
-    var bg:FlxSprite = new FlxSprite();
-    
+
 	function startIntro()
 	{
 		if (!initialized)
@@ -266,7 +263,7 @@ class TitleState extends MusicBeatState
 		Conductor.changeBPM(titleJSON.bpm);
 		persistentUpdate = true;
 
-		
+		var bg:FlxSprite = new FlxSprite();
 
 		if (titleJSON.backgroundSprite != null && titleJSON.backgroundSprite.length > 0 && titleJSON.backgroundSprite != "none"){
 			bg.loadGraphic(Paths.image(titleJSON.backgroundSprite));
@@ -281,8 +278,7 @@ class TitleState extends MusicBeatState
 
 		logoBl = new FlxSprite(titleJSON.titlex, titleJSON.titley);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
-        logoBl.scale.x = titleJSON.titleScaleX;
-        logoBl.scale.y = titleJSON.titleScaleY;
+
 		logoBl.antialiasing = ClientPrefs.globalAntialiasing;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
@@ -491,7 +487,6 @@ class TitleState extends MusicBeatState
 			{
 				titleText.color = FlxColor.WHITE;
 				titleText.alpha = 1;
-				FlxTransitionableState.skipNextTransIn = true;
 				
 				if(titleText != null) titleText.animation.play('press');
 
@@ -501,7 +496,7 @@ class TitleState extends MusicBeatState
 				transitioning = true;
 				// FlxG.sound.music.stop();
 
-				new FlxTimer().start(1.5, function(tmr:FlxTimer)
+				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
 					if (mustUpdate) {
 						MusicBeatState.switchState(new OutdatedState());
@@ -511,27 +506,6 @@ class TitleState extends MusicBeatState
 					closedState = true;
 				});
 				// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
-				
-				FlxTween.tween(logoBl, {y: titleJSON.titley + FlxG.height}, 1.5, {
-					ease: FlxEase.expoIn,
-					onComplete: function(twn:FlxTween)
-					{
-					}
-				});
-				
-				FlxTween.tween(titleText, {y: titleJSON.starty + FlxG.height}, 1.5, {
-					ease: FlxEase.expoIn,
-					onComplete: function(twn:FlxTween)
-					{
-					}
-				});
-				
-				FlxTween.tween(bg, {y: FlxG.height}, 1.5, {
-					ease: FlxEase.expoIn,
-					onComplete: function(twn:FlxTween)
-					{
-					}
-				});
 			}
 			#if TITLE_SCREEN_EASTER_EGG
 			else if (FlxG.keys.firstJustPressed() != FlxKey.NONE)
@@ -750,7 +724,7 @@ class TitleState extends MusicBeatState
 					default: //Go back to normal ugly ass boring GF
 						remove(ngSpr);
 						remove(credGroup);
-						FlxG.camera.flash(FlxColor.WHITE, 1);
+						FlxG.camera.flash(FlxColor.WHITE, 2);
 						skippedIntro = true;
 						playJingle = false;
 
@@ -787,7 +761,7 @@ class TitleState extends MusicBeatState
 			{
 				remove(ngSpr);
 				remove(credGroup);
-				FlxG.camera.flash(FlxColor.WHITE, 2);
+				FlxG.camera.flash(FlxColor.WHITE, 4);
 
 				var easteregg:String = FlxG.save.data.psychDevsEasterEgg;
 				if (easteregg == null) easteregg = '';
