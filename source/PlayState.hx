@@ -4082,7 +4082,7 @@ class PlayState extends MusicBeatState
 				    else
 				    {				    
 				    //MusicBeatState.switchState(new FreeplayState());
-				     openSubState(new GameplayChangersSubstate());
+				     openSubState(new GameplayChangersSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 				    }
 				   if ( PlayState.SONG.song == 'setting' || PlayState.SONG.song == 'source-FreeplayState' || PlayState.SONG.song == 'source-OptionsState' || PlayState.SONG.song == 'source-MainMenuState' || PlayState.SONG.song == 'source-StoryMenuState'  )
 				    {
