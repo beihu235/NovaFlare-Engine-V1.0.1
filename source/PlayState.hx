@@ -3943,7 +3943,8 @@ class PlayState extends MusicBeatState
 	public var transitioning = false;
 	public function endSong():Void
 	{
-	    openSubState(new GameplayChangersSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+	    openSubState(new GameplayChangersSubstate());
+	    
 		//Should kill you if you tried to cheat
 		if(!startingSong) {
 			notes.forEach(function(daNote:Note) {
@@ -4159,7 +4160,7 @@ class PlayState extends MusicBeatState
 		coolText.x = FlxG.width * 0.35;
 		//
 
-		//var rating:FlxSprite = new FlxSprite();
+		var rating:FlxSprite = new FlxSprite();
 		var score:Int = 350;
 
 		//tryna do MS based judgment due to popular demand
@@ -4194,8 +4195,7 @@ class PlayState extends MusicBeatState
 			pixelShitPart1 = 'pixelUI/';
 			pixelShitPart2 = '-pixel';
 		}
-        
-        /*
+
 		rating.loadGraphic(Paths.image(pixelShitPart1 + daRating.image + pixelShitPart2));
 		rating.cameras = [camHUD];
 		rating.screenCenter();
@@ -4207,7 +4207,6 @@ class PlayState extends MusicBeatState
 		rating.visible = (!ClientPrefs.hideHud && showRating);
 		rating.x += ClientPrefs.comboOffset[0];
 		rating.y -= ClientPrefs.comboOffset[1];
-		
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
 		comboSpr.cameras = [camHUD];
@@ -4220,8 +4219,8 @@ class PlayState extends MusicBeatState
 		comboSpr.y -= ClientPrefs.comboOffset[1];
 		comboSpr.y += 60;
 		comboSpr.velocity.x += FlxG.random.int(1, 10) * playbackRate;
-        */
-		/*insert(members.indexOf(strumLineNotes), rating);
+
+		insert(members.indexOf(strumLineNotes), rating);
 		
 		if (!ClientPrefs.comboStacking)
 		{
@@ -4244,7 +4243,6 @@ class PlayState extends MusicBeatState
 
 		comboSpr.updateHitbox();
 		rating.updateHitbox();
-		*/
 
 		var seperatedScore:Array<Int> = [];
 
@@ -4254,7 +4252,7 @@ class PlayState extends MusicBeatState
 		seperatedScore.push(Math.floor(combo / 100) % 10);
 		seperatedScore.push(Math.floor(combo / 10) % 10);
 		seperatedScore.push(combo % 10);
-        /*
+
 		var daLoop:Int = 0;
 		var xThing:Float = 0;
 		if (showCombo)
@@ -4318,8 +4316,8 @@ class PlayState extends MusicBeatState
 
 			daLoop++;
 			if(numScore.x > xThing) xThing = numScore.x;
-		} */
-		//comboSpr.x = xThing + 50;
+		}
+		comboSpr.x = xThing + 50;
 		/*
 			trace(combo);
 			trace(seperatedScore);
@@ -4328,7 +4326,6 @@ class PlayState extends MusicBeatState
 		coolText.text = Std.string(seperatedScore);
 		// add(coolText);
 
-		/*
 		FlxTween.tween(rating, {alpha: 0}, 0.2 / playbackRate, {
 			startDelay: Conductor.crochet * 0.001 / playbackRate
 		});
@@ -4343,7 +4340,6 @@ class PlayState extends MusicBeatState
 			},
 			startDelay: Conductor.crochet * 0.002 / playbackRate
 		});
-		*/
 	}
 
 	public var strumsBlocked:Array<Bool> = [];
