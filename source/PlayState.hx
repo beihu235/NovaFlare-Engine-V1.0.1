@@ -4081,7 +4081,8 @@ class PlayState extends MusicBeatState
 				    }
 				    else
 				    {				    
-				    MusicBeatState.switchState(new FreeplayState());
+				    //MusicBeatState.switchState(new FreeplayState());
+				     openSubState(new ResultsScreen());
 				    }
 				   if ( PlayState.SONG.song == 'setting' || PlayState.SONG.song == 'source-FreeplayState' || PlayState.SONG.song == 'source-OptionsState' || PlayState.SONG.song == 'source-MainMenuState' || PlayState.SONG.song == 'source-StoryMenuState'  )
 				    {
