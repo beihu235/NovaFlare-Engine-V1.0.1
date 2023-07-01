@@ -62,9 +62,6 @@ import DialogueBoxPsych;
 import Conductor.Rating;
 import flixel.system.FlxAssets.FlxShader;
 
-import Replay.Ana;
-import Replay.Analysis;
-
 #if !flash 
 import flixel.addons.display.FlxRuntimeShader;
 import openfl.filters.ShaderFilter;
@@ -187,7 +184,6 @@ class PlayState extends MusicBeatState
 	public var gfSpeed:Int = 1;
 	public var health:Float = 1;
 	public var combo:Int = 0;
-	public static var highestCombo:Int = 0;
 
 	private var healthBarBG:AttachedSprite;
 	public var healthBar:FlxBar;
@@ -202,20 +198,7 @@ class PlayState extends MusicBeatState
 	public var goods:Int = 0;
 	public var bads:Int = 0;
 	public var shits:Int = 0;
-	
-	public static var rep:Replay;
-	public static var loadRep:Bool = false;
-	public static var inResults:Bool = false;
-	
-	// Replay shit
-	private var saveNotes:Array<Dynamic> = [];
-	private var saveJudge:Array<String> = [];
-	private var replayAna:Analysis = new Analysis(); // replay analysis
-	
-	public static var songMultiplier = 1.0;		
-    
-    public static var stageTesting:Bool = false;
-    
+
 	private var generatedMusic:Bool = false;
 	public var endingSong:Bool = false;
 	public var startingSong:Bool = false;
@@ -236,8 +219,9 @@ class PlayState extends MusicBeatState
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
 	public var camHUD:FlxCamera;
+	public var camShadow:FlxCamera;
 	public var camGame:FlxCamera;
-	
+	public var camNote:FlxCamera;
 	public var camOther:FlxCamera;
 	public var cameraSpeed:Float = 1;
 
@@ -430,14 +414,19 @@ class PlayState extends MusicBeatState
 
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
+		camShadow = new FlxCamera();
 		camHUD = new FlxCamera();
-		
+		camNote = new FlxCamera();
 		camOther = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
+		camNote.bgColor.alpha = 0;
+		camShadow.bgColor.alpha = 0;
 		camOther.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camGame);
+		FlxG.cameras.add(camShadow, false);
 		FlxG.cameras.add(camHUD, false);
+		FlxG.cameras.add(camNote, false);
 		FlxG.cameras.add(camOther, false);
 		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
 
@@ -1225,9 +1214,9 @@ class PlayState extends MusicBeatState
 			botplayTxt.y = timeBarBG.y - 78;
 		}
 
-		strumLineNotes.cameras = [camHUD];
-		grpNoteSplashes.cameras = [camHUD];
-		notes.cameras = [camHUD];
+		strumLineNotes.cameras = [camNote];
+		grpNoteSplashes.cameras = [camNote];
+		notes.cameras = [camNote];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
 		iconP1.cameras = [camHUD];
@@ -3986,15 +3975,6 @@ class PlayState extends MusicBeatState
 
 		deathCounter = 0;
 		seenCutscene = false;
-		
-		if (!loadRep)
-			rep.SaveReplay(saveNotes, saveJudge, replayAna);
-		else
-		{
-			//PlayStateChangeables.botPlay = false;
-			//PlayStateChangeables.scrollSpeed = 1;
-			//PlayStateChangeables.useDownscroll = false;
-		}
 
 		
 
@@ -4102,7 +4082,7 @@ class PlayState extends MusicBeatState
 				    else
 				    {				    
 				    //MusicBeatState.switchState(new FreeplayState());
-				    openSubState(new ResultsScreen());
+				     openSubState(new GameplayChangersSubstate());
 				    }
 				   if ( PlayState.SONG.song == 'setting' || PlayState.SONG.song == 'source-FreeplayState' || PlayState.SONG.song == 'source-OptionsState' || PlayState.SONG.song == 'source-MainMenuState' || PlayState.SONG.song == 'source-StoryMenuState'  )
 				    {
@@ -4178,7 +4158,7 @@ class PlayState extends MusicBeatState
 		coolText.x = FlxG.width * 0.35;
 		//
 
-		var rating:FlxSprite = new FlxSprite();
+		//var rating:FlxSprite = new FlxSprite();
 		var score:Int = 350;
 
 		//tryna do MS based judgment due to popular demand
@@ -4213,7 +4193,8 @@ class PlayState extends MusicBeatState
 			pixelShitPart1 = 'pixelUI/';
 			pixelShitPart2 = '-pixel';
 		}
-
+        
+        /*
 		rating.loadGraphic(Paths.image(pixelShitPart1 + daRating.image + pixelShitPart2));
 		rating.cameras = [camHUD];
 		rating.screenCenter();
@@ -4225,6 +4206,7 @@ class PlayState extends MusicBeatState
 		rating.visible = (!ClientPrefs.hideHud && showRating);
 		rating.x += ClientPrefs.comboOffset[0];
 		rating.y -= ClientPrefs.comboOffset[1];
+		
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
 		comboSpr.cameras = [camHUD];
@@ -4237,8 +4219,8 @@ class PlayState extends MusicBeatState
 		comboSpr.y -= ClientPrefs.comboOffset[1];
 		comboSpr.y += 60;
 		comboSpr.velocity.x += FlxG.random.int(1, 10) * playbackRate;
-
-		insert(members.indexOf(strumLineNotes), rating);
+        */
+		/*insert(members.indexOf(strumLineNotes), rating);
 		
 		if (!ClientPrefs.comboStacking)
 		{
@@ -4261,6 +4243,7 @@ class PlayState extends MusicBeatState
 
 		comboSpr.updateHitbox();
 		rating.updateHitbox();
+		*/
 
 		var seperatedScore:Array<Int> = [];
 
@@ -4270,7 +4253,7 @@ class PlayState extends MusicBeatState
 		seperatedScore.push(Math.floor(combo / 100) % 10);
 		seperatedScore.push(Math.floor(combo / 10) % 10);
 		seperatedScore.push(combo % 10);
-
+        /*
 		var daLoop:Int = 0;
 		var xThing:Float = 0;
 		if (showCombo)
@@ -4334,8 +4317,8 @@ class PlayState extends MusicBeatState
 
 			daLoop++;
 			if(numScore.x > xThing) xThing = numScore.x;
-		}
-		comboSpr.x = xThing + 50;
+		} */
+		//comboSpr.x = xThing + 50;
 		/*
 			trace(combo);
 			trace(seperatedScore);
@@ -4344,6 +4327,7 @@ class PlayState extends MusicBeatState
 		coolText.text = Std.string(seperatedScore);
 		// add(coolText);
 
+		/*
 		FlxTween.tween(rating, {alpha: 0}, 0.2 / playbackRate, {
 			startDelay: Conductor.crochet * 0.001 / playbackRate
 		});
@@ -4358,6 +4342,7 @@ class PlayState extends MusicBeatState
 			},
 			startDelay: Conductor.crochet * 0.002 / playbackRate
 		});
+		*/
 	}
 
 	public var strumsBlocked:Array<Bool> = [];
@@ -4496,7 +4481,6 @@ class PlayState extends MusicBeatState
 	{
 		// HOLDING
 		var parsedHoldArray:Array<Bool> = parseKeys();
-		var anas:Array<Ana> = [null, null, null, null];
 
 		// TO DO: Find a better way to handle controller inputs, this should work for now
 		if(ClientPrefs.controllerMode)
@@ -4508,16 +4492,10 @@ class PlayState extends MusicBeatState
 				{
 					if(parsedArray[i] && strumsBlocked[i] != true)
 						onKeyPress(new KeyboardEvent(KeyboardEvent.KEY_DOWN, true, true, -1, keysArray[i][0]));
-						if (parsedArray[i])
-				anas[i] = new Ana(Conductor.songPosition, null, false, "miss", i);
 				}
 			}
 		}
-        
-        
-        
-			
-        
+
 		// FlxG.watch.addQuick('asdfa', upP);
 		if (startedCountdown && !boyfriend.stunned && generatedMusic)
 		{
@@ -4528,10 +4506,6 @@ class PlayState extends MusicBeatState
 				if (strumsBlocked[daNote.noteData] != true && daNote.isSustainNote && parsedHoldArray[daNote.noteData] && daNote.canBeHit
 				&& daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && !daNote.blockHit) {
 					goodNoteHit(daNote);
-					var noteDiff:Float = -(daNote.strumTime - Conductor.songPosition);
-					anas[daNote.noteData].hit = true;
-					anas[daNote.noteData].hitJudge = Ratings.judgeNote(noteDiff);
-					anas[daNote.noteData].nearestNote = [daNote.strumTime, daNote.noteData, daNote.sustainLength];
 				}
 			});
 
@@ -4558,10 +4532,6 @@ class PlayState extends MusicBeatState
 				}
 			}
 		}
-		if (!loadRep)
-			for (i in anas)
-			if (i != null)
-			replayAna.anaArray.push(i); // put em all there
 	}
 
 	private function parseKeys(?suffix:String = ''):Array<Bool>
@@ -4574,7 +4544,7 @@ class PlayState extends MusicBeatState
 		return ret;
 	}
 
-	function noteMiss(direction:Int = 1, daNote:Note):Void { //You didn't hit the key and let it go offscreen, also used by Hurt Notes
+	function noteMiss(daNote:Note):Void { //You didn't hit the key and let it go offscreen, also used by Hurt Notes
 		//Dupe note remove
 		notes.forEachAlive(function(note:Note) {
 			if (daNote != note && daNote.mustPress && daNote.noteData == note.noteData && daNote.isSustainNote == note.isSustainNote && Math.abs(daNote.strumTime - note.strumTime) < 1) {
@@ -4591,32 +4561,6 @@ class PlayState extends MusicBeatState
 			vocals.volume = 0;
 			doDeathCheck(true);
 		}
-		
-		
-		if (daNote != null)
-			{
-				if (!loadRep)
-				{
-					saveNotes.push([
-						daNote.strumTime,
-						0,
-						direction,
-						-(166 * Math.floor((Conductor.safeZoneOffset / 60) * 1000) / 166)
-					]);
-					saveJudge.push("miss");
-				}
-			}
-			else if (!loadRep)
-			{
-				saveNotes.push([
-					Conductor.songPosition,
-					0,
-					direction,
-					-(166 * Math.floor((Conductor.safeZoneOffset / 60) * 1000) / 166)
-				]);
-				saveJudge.push("miss");
-			}
-		//	
 
 		//For testing purposes
 		//trace(daNote.missHealth);
@@ -4678,9 +4622,6 @@ class PlayState extends MusicBeatState
 			{
 				boyfriend.stunned = false;
 			});*/
-			
-			// for replay
-	
 
 			if(boyfriend.hasMissAnimations) {
 				boyfriend.playAnim(singAnimations[Std.int(Math.abs(direction))] + 'miss', true);
@@ -4742,42 +4683,9 @@ class PlayState extends MusicBeatState
 			note.destroy();
 		}
 	}
-	
-	public function findByTime(time:Float):Array<Dynamic>
-	{
-		for (i in rep.replay.songNotes)
-		{
-			// trace('checking ' + Math.round(i[0]) + ' against ' + Math.round(time));
-			if (i[0] == time)
-				return i;
-		}
-		return null;
-	}
-
-	public function findByTimeIndex(time:Float):Int
-	{
-		for (i in 0...rep.replay.songNotes.length)
-		{
-			// trace('checking ' + Math.round(i[0]) + ' against ' + Math.round(time));
-			if (rep.replay.songNotes[i][0] == time)
-				return i;
-		}
-		return -1;
-	}
 
 		function goodNoteHit(note:Note):Void
 	{
-	    
-	    var noteDiff:Float = -(note.strumTime - Conductor.songPosition);
-	    
-	    if (loadRep)
-		{
-			noteDiff = findByTime(note.strumTime)[3];
-			//note.rating = rep.replay.songJudgements[findByTimeIndex(note.strumTime)];
-		}
-		else
-			note.rating = Ratings.judgeNote(noteDiff);
-	
 		if (!note.wasGoodHit)
 		{
 			if(cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
@@ -4812,15 +4720,6 @@ class PlayState extends MusicBeatState
 					note.destroy();
 				}
 				return;
-			}
-			
-			if (!loadRep && note.mustPress)
-			{
-				var array = [note.strumTime, note.sustainLength, note.noteData, noteDiff];
-				if (note.isSustainNote)
-					array[1] = -1;
-				saveNotes.push(array);
-				saveJudge.push(note.rating);
 			}
 
 			if (!note.isSustainNote)
