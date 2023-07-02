@@ -109,7 +109,6 @@ class MainMenuState extends MusicBeatState
 	    bgScroll = new FlxBackdrop(Paths.image('mainmenu_sprite/backdrop'), 1, 1, true, true, 0, 0);
 		bgScroll.scrollFactor.set();
 		bgScroll.alpha = 0.3;
-		bgScroll.blend = blendModeFromString('add');
 		bgScroll.color = ColorArray[currentColor];
 		bgScroll.screenCenter();
 		bgScroll.velocity.set(100, 70);
@@ -223,7 +222,7 @@ class MainMenuState extends MusicBeatState
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
 		
-		
+		bgScroll.alpha = 0.3;
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 			if (usingMouse)
@@ -234,15 +233,17 @@ class MainMenuState extends MusicBeatState
 
 			if (FlxG.mouse.overlaps(spr))
 			{
-				if (canClick)
+                if (FlxG.mouse.justPressed && canClick)
 				{
-					curSelected = spr.ID;
-					usingMouse = true;
-					spr.animation.play('selected');
-				}
-                if (FlxG.mouse.pressed && canClick)
-				{
-					selectSomething();
+				    if (curSelected = !spr.ID;) {
+				        curSelected = spr.ID;
+					    usingMouse = true;
+					    spr.animation.play('selected');			
+					    FlxG.sound.play(Paths.sound('scrollMenu'));	    
+				    }
+				    else    {
+					    selectSomething();
+					}
 				}								
 			}
 			spr.updateHitbox();
@@ -274,19 +275,21 @@ class MainMenuState extends MusicBeatState
             currentColor++;            
             if (currentColor > 7) currentColor = 1;
             currentColorAgain = currentColor - 1;
-            if (currentColorAgain <= 0) currentColor = 7;
+            if (currentColorAgain <= 0) currentColorAgain = 7;
             
             FlxTween.color(bgScroll, 0.4, ColorArray[currentColorAgain], ColorArray[currentColor], { ease: FlxEase.sineInOut});
            
 			camGame.zoom = 1 + 0.015;
 			//camGame.scale.y = 1 + 0.015;
 			FlxTween.tween(camGame, {zoom: 1}, 0.4, {ease: FlxEase.sineInOut});
+			
 			menuItems.forEach(function(spr:FlxSprite)	{
-				spr.scale.x = 0.9;
-				spr.scale.y = 0.9;
+				spr.scale.x = 0.83;
+				spr.scale.y = 0.83;
 				    FlxTween.tween(spr.scale, {x: 0.8}, 0.4, {ease: FlxEase.sineInOut});
 				    FlxTween.tween(spr.scale, {y: 0.8}, 0.4, {ease: FlxEase.sineInOut});
             });
+            
         }
         
       
@@ -298,53 +301,8 @@ class MainMenuState extends MusicBeatState
 			//spr.screenCenter(X);
 		});
 	}
-    /*
-	function changeItem(huh:Int = 0)
-	{
-		curSelected += huh;
-
-		if (curSelected >= menuItems.length)
-			curSelected = 0;
-		if (curSelected < 0)
-			curSelected = menuItems.length - 1;
-
-		menuItems.forEach(function(spr:FlxSprite)
-		{
-			spr.animation.play('idle');
-			spr.updateHitbox();
-
-			if (spr.ID == curSelected)
-			{
-				spr.animation.play('selected');
-				var add:Float = 0;
-				if(menuItems.length > 4) {
-					add = menuItems.length * 8;
-				}
-				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y - add);
-				spr.centerOffsets();
-			}
-		});
-	}
-	*/
-	function blendModeFromString(blend:String):BlendMode {
-		switch(blend.toLowerCase().trim()) {
-			case 'add': return ADD;
-			case 'alpha': return ALPHA;
-			case 'darken': return DARKEN;
-			case 'difference': return DIFFERENCE;
-			case 'erase': return ERASE;
-			case 'hardlight': return HARDLIGHT;
-			case 'invert': return INVERT;
-			case 'layer': return LAYER;
-			case 'lighten': return LIGHTEN;
-			case 'multiply': return MULTIPLY;
-			case 'overlay': return OVERLAY;
-			case 'screen': return SCREEN;
-			case 'shader': return SHADER;
-			case 'subtract': return SUBTRACT;
-		}
-		return NORMAL;
-    }
+    
+	
     
     function selectSomething()
 	{
@@ -368,73 +326,25 @@ class MainMenuState extends MusicBeatState
 			{				
 				//FlxG.camera.fade(FlxColor.BLACK, 0.7, false);
 			
-			FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
-							{
-								var daChoice:String = optionShit[curSelected];
+			    FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
+			    {
+			    var daChoice:String = optionShit[curSelected];
 
-								switch (daChoice)
-								{
-									case 'story_mode':
-										MusicBeatState.switchState(new StoryMenuState());
-									case 'freeplay':
-										MusicBeatState.switchState(new FreeplayState());	
-									case 'mods':
-										MusicBeatState.switchState(new ModsMenuState());									
-									case 'options':
-										MusicBeatState.switchState(new ChooseOptionsState());
-									case 'credits':
-										MusicBeatState.switchState(new CreditsState());	
-								}
-							});													
+				switch (daChoice)
+					{
+						case 'story_mode':
+							MusicBeatState.switchState(new StoryMenuState());
+						case 'freeplay':
+							MusicBeatState.switchState(new FreeplayState());	
+						case 'mods':
+							MusicBeatState.switchState(new ModsMenuState());									
+						case 'options':
+							MusicBeatState.switchState(new ChooseOptionsState());
+						case 'credits':
+							MusicBeatState.switchState(new CreditsState());	
+					}
+				});													
 			}
 		});
 	}
-	/*
-	function goToState()
-	{
-		var daChoice:String = optionShit[curSelected];
-
-		switch (daChoice)
-		{
-        case 'story_mode':
-			MusicBeatState.switchState(new StoryMenuState());
-			case 'freeplay':
-			MusicBeatState.switchState(new FreeplayState());
-			#if MODS_ALLOWED
-			case 'mods':
-			MusicBeatState.switchState(new ModsMenuState());
-			#end
-			//case 'awards':
-			//MusicBeatState.switchState(new AchievementsMenuState()); 
-			case 'credits':
-			MusicBeatState.switchState(new CreditsState());
-			case 'options':
-			LoadingState.loadAndSwitchState(new options.OptionsState());
-		}
-	}
-    
-	function changeItem(huh:Int = 0)
-	{
-		if (finishedFunnyMove)
-		{
-			curSelected += huh;
-
-			if (curSelected >= menuItems.length)
-				curSelected = 0;
-			if (curSelected < 0)
-				curSelected = menuItems.length - 1;
-		}
-		menuItems.forEach(function(spr:FlxSprite)
-		{
-			spr.animation.play('idle');
-
-			if (spr.ID == curSelected && finishedFunnyMove)
-			{
-				spr.animation.play('hover');
-			}
-
-			spr.updateHitbox();
-		});
-	}
-	*/
 }
