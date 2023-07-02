@@ -311,7 +311,7 @@ class MainMenuState extends MusicBeatState
             if (currentColor > 7) currentColor = 1;
             if (currentColorAgain <= 0) currentColor = 7;
             
-            FlxTween.color(bgScroll, 0.4, ColorArray[currentColorAgain], ColorArray[currentColorAgain], { ease: FlxEase.sineInOut});
+            FlxTween.color(bgScroll, 0.4, bgScroll.color, ColorArray[currentColorAgain], { ease: FlxEase.sineInOut});
            
 			camGame.zoom = 1 + 0.015;
 			FlxTween.tween(camGame, {zoom: 1}, 0.4, {
@@ -320,15 +320,15 @@ class MainMenuState extends MusicBeatState
 			});
 			
 			menuItems.forEach(function(spr:FlxSprite)	{
-			/*	spr.scale.x = 0.9;
+				spr.scale.x = 0.9;
 				spr.scale.y = 0.9;
-				    FlxTween.tween(spr, {scale.x: 0.8}, 0.4, {
+				    FlxTween.tween(spr, {scale: 0.8}, 0.4, {
 								ease: FlxEase.sineInOut,
 								onComplete: function(twn:FlxTween)
 								{
 								//	spr.kill();
 								}
-							});*/
+							});
             });
         }
         
