@@ -288,6 +288,8 @@ class MainMenuState extends MusicBeatState
 				spr.scale.y = 0.83;
 				    FlxTween.tween(spr.scale, {x: 0.8}, 0.4, {ease: FlxEase.sineInOut});
 				    FlxTween.tween(spr.scale, {y: 0.8}, 0.4, {ease: FlxEase.sineInOut});
+				spr.updateHitbox();    
+				spr.screenCenter(XY);
             });
             
         }
