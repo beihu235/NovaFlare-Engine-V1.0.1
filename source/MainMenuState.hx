@@ -238,15 +238,15 @@ class MainMenuState extends MusicBeatState
 
 			if (FlxG.mouse.overlaps(spr))
 			{
-			    if (FlxG.mouse.Pressed && canClick){
+			    if (FlxG.mouse.pressed && canClick){
 			    curSelected = spr.ID;
 			    usingMouse = true;		
-			    if (spr.animation.play('idle')) FlxG.sound.play(Paths.sound('scrollMenu'));	 
+			    if (spr.animation.curAnim.name = 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	 
 			    spr.animation.play('selected');	
 			    spr.offset.x = spr.offset.x * 0.8;
 			    spr.offset.y = spr.offset.y * 0.8;
 			    }
-                if (FlxG.mouse.justPressed && canClick && spr.animation.play('selected'))
+                if (FlxG.mouse.justPressed && canClick && spr.animation.curAnim.name = 'idle')
 				{
 				    if (curSelected == spr.ID) {
 				        selectSomething();
@@ -255,7 +255,7 @@ class MainMenuState extends MusicBeatState
 					    curSelected = spr.ID;
 					    usingMouse = true;
 					    		
-					    if (spr.animation.play('idle')) FlxG.sound.play(Paths.sound('scrollMenu'));	    
+					    if (spr.animation.curAnim.name = 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	    
 					    spr.animation.play('selected');	
 					    spr.offset.x = spr.offset.x * 0.8;
 			            spr.offset.y = spr.offset.y * 0.8;
