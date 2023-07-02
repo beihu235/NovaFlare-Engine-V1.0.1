@@ -280,7 +280,7 @@ class MainMenuState extends MusicBeatState
            
 			camGame.zoom = 1 + 0.015;
 			//camGame.scale.y = 1 + 0.015;
-			FlxTween.tween(camGame., {zoom: 1}, 0.4, {ease: FlxEase.sineInOut});
+			FlxTween.tween(camGame, {zoom: 1}, 0.4, {ease: FlxEase.sineInOut});
 			menuItems.forEach(function(spr:FlxSprite)	{
 				spr.scale.x = 0.9;
 				spr.scale.y = 0.9;
