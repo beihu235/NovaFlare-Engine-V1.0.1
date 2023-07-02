@@ -309,7 +309,7 @@ class MainMenuState extends MusicBeatState
             currentColor++;
             currentColorAgain = currentColor - 1;
             if (currentColor > 7) currentColor = 1;
-            if (currentColorAgain = 0) currentColor = 7;
+            if (currentColorAgain <= 0) currentColor = 7;
             
             FlxTween.color(bgScroll, 0.4, ColorArray[currentColorAgain], ColorArray[currentColorAgain], 0.0, 1.0, { ease: FlxEase.sineInOut});
            
