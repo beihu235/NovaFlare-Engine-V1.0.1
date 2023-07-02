@@ -64,8 +64,8 @@ class MainMenuState extends MusicBeatState
 		0xFFFF0000
 	                                
 	    ];
-	var currentColor:Int = 1;    
-	var currentColorAgain:Int = 0;    
+	var static currentColor:Int = 1;    
+	var static currentColorAgain:Int = 0;    
 	var allowColorChange:Bool = true;
 
 	override function create()
@@ -236,7 +236,13 @@ class MainMenuState extends MusicBeatState
 
 			if (FlxG.mouse.overlaps(spr))
 			{
-                if (FlxG.mouse.justPressed && canClick)
+			    if (FlxG.mouse.Pressed && canClick){
+			    curSelected = spr.ID;
+			    usingMouse = true;		
+			    if (spr.animation.play('idle')) FlxG.sound.play(Paths.sound('scrollMenu'));	 
+			    spr.animation.play('selected');	
+			    }
+                if (FlxG.mouse.justPressed && canClick && spr.animation.play('selected');)
 				{
 				    if (curSelected == spr.ID) {
 				        selectSomething();
@@ -244,8 +250,9 @@ class MainMenuState extends MusicBeatState
 				    else    {					    
 					    curSelected = spr.ID;
 					    usingMouse = true;
-					    spr.animation.play('selected');			
-					    FlxG.sound.play(Paths.sound('scrollMenu'));	    
+					    		
+					    if (spr.animation.play('idle')) FlxG.sound.play(Paths.sound('scrollMenu'));	    
+					    spr.animation.play('selected');	
 					}
 				}								
 			}
