@@ -144,7 +144,7 @@ class MainMenuState extends MusicBeatState
 		for (i in 0...optionShit.length)
 		{
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(100, (i * 100)  + offset);
+			var menuItem:FlxSprite = new FlxSprite(100, (i * 120)  + offset);
 			menuItem.scale.x = 0.8;
 			menuItem.scale.y = 0.8;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
@@ -152,7 +152,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			menuItem.screenCenter(X);
+			//menuItem.screenCenter(X);
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
@@ -303,22 +303,20 @@ class MainMenuState extends MusicBeatState
 		}
         crochetTime = crochetTime + elapsed;
         
-        if ( crochetTime >= crochetTime ) {
+        if ( crochetTime >= crochet ) {
         
             crochetTime = 0;
-            currentColor++;
-            currentColorAgain = currentColor - 1;
+            currentColor++;            
             if (currentColor > 7) currentColor = 1;
+            currentColorAgain = currentColor - 1;
             if (currentColorAgain <= 0) currentColor = 7;
             
-            FlxTween.color(bgScroll, 0.4, bgScroll.color, ColorArray[currentColorAgain], { ease: FlxEase.sineInOut});
+            FlxTween.color(bgScroll, 0.4, ColorArray[currentColorAgain], ColorArray[currentColor], { ease: FlxEase.sineInOut});
            
-			camGame.zoom = 1 + 0.015;
-			FlxTween.tween(camGame, {zoom: 1}, 0.4, {
-		    ease: FlxEase.sineInOut,
-			
-			});
-			
+			camGame.scale.x = 1 + 0.015;
+			camGame.scale.y = 1 + 0.015;
+			FlxTween.tween(camGame.scale, {x: 1}, 0.4, {ease: FlxEase.sineInOut});
+			FlxTween.tween(camGame.scale, {y: 1}, 0.4, {ease: FlxEase.sineInOut});
 			menuItems.forEach(function(spr:FlxSprite)	{
 				spr.scale.x = 0.9;
 				spr.scale.y = 0.9;
