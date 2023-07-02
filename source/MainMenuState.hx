@@ -313,10 +313,9 @@ class MainMenuState extends MusicBeatState
             
             FlxTween.color(bgScroll, 0.4, ColorArray[currentColorAgain], ColorArray[currentColor], { ease: FlxEase.sineInOut});
            
-			camGame.scale.x = 1 + 0.015;
-			camGame.scale.y = 1 + 0.015;
-			FlxTween.tween(camGame.scale, {x: 1}, 0.4, {ease: FlxEase.sineInOut});
-			FlxTween.tween(camGame.scale, {y: 1}, 0.4, {ease: FlxEase.sineInOut});
+			camGame.zoom = 1 + 0.015;
+			//camGame.scale.y = 1 + 0.015;
+			FlxTween.tween(camGame., {zoom: 1}, 0.4, {ease: FlxEase.sineInOut});
 			menuItems.forEach(function(spr:FlxSprite)	{
 				spr.scale.x = 0.9;
 				spr.scale.y = 0.9;
