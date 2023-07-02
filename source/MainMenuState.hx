@@ -328,10 +328,10 @@ class MainMenuState extends MusicBeatState
 				spr.scale.x = 0.9;
 				spr.scale.y = 0.9;
 				    FlxTween.tween(spr, {alpha: 0}, 0.4, {
-								ease: FlxEase.quadOut,
+								ease: FlxEase.sineInOut,
 								onComplete: function(twn:FlxTween)
 								{
-									spr.kill();
+								//	spr.kill();
 								}
 							});
             });
