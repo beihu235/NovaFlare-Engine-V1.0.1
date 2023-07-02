@@ -325,7 +325,7 @@ class MainMenuState extends MusicBeatState
 			});
 			
 			menuItems.forEach(function(spr:FlxSprite)	{
-				spr.scale.x = 0.9;
+			/*	spr.scale.x = 0.9;
 				spr.scale.y = 0.9;
 				    FlxTween.tween(spr, {scale.x: 0.8}, 0.4, {
 								ease: FlxEase.sineInOut,
@@ -342,7 +342,7 @@ class MainMenuState extends MusicBeatState
 							
 						}
 					});
-						
+				*/		
             });
         }
         
