@@ -175,7 +175,7 @@ class MainMenuState extends MusicBeatState
 
 		// NG.core.calls.event.logEvent('swag').send();
 
-		changeItem();
+		//changeItem();
 
 		#if ACHIEVEMENTS_ALLOWED
 		Achievements.loadAchievements();
@@ -207,6 +207,9 @@ class MainMenuState extends MusicBeatState
 	#end
 
 	var selectedSomethin:Bool = false;
+	
+	var canClick:Bool = true;
+	var usingMouse:Bool = false;
 
 	override function update(elapsed:Float)
 	{
@@ -221,16 +224,58 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
+		
+		menuItems.forEach(function(spr:FlxSprite)
+		{
+			if (usingMouse)
+			{
+				if (!FlxG.mouse.overlaps(spr))
+					spr.animation.play('idle');
+			}
+
+			if (FlxG.mouse.overlaps(spr))
+			{
+				if (canClick)
+				{
+					curSelected = spr.ID;
+					usingMouse = true;
+					spr.animation.play('selected');
+				}
+                if (FlxG.mouse.pressed && canClick)
+				{
+					switch (optionShit[curSelected])
+					{
+						selectSomething();
+					}
+				}
+				}
+				
+			}
+
+
+			spr.updateHitbox();
+		});
+		
+		if (!selectedSomethin)
+		{
+			if (controls.BACK)
+			{
+				selectedSomethin = true;
+				FlxG.sound.play(Paths.sound('cancelMenu'));
+				MusicBeatState.switchState(new TitleState());
+			}
+		}
+		/*
 			if (controls.UI_UP_P)
 			{
 				FlxG.sound.play(Paths.sound('scrollMenu'));
-				changeItem(-1);
+				//changeItem(-1);
 			}
 
 			if (controls.UI_DOWN_P)
 			{
 				FlxG.sound.play(Paths.sound('scrollMenu'));
-				changeItem(1);
+				//changeItem(1);
 			}
 
 			if (controls.BACK)
@@ -281,8 +326,8 @@ class MainMenuState extends MusicBeatState
 									case 'mods':
 										MusicBeatState.switchState(new ModsMenuState());
 									#end
-								/*	case 'awards':
-										MusicBeatState.switchState(new AchievementsMenuState()); */
+									case 'awards':
+										MusicBeatState.switchState(new AchievementsMenuState()); 
 									case 'credits':
 										MusicBeatState.switchState(new CreditsState());
 									case 'options':
@@ -292,6 +337,7 @@ class MainMenuState extends MusicBeatState
 						}
 					});
 				}
+				*/
 			}
 			#if (desktop || android)
 			else if (FlxG.keys.anyJustPressed(debugKeys) #if android || _virtualpad.buttonE.justPressed #end)
@@ -299,7 +345,7 @@ class MainMenuState extends MusicBeatState
 				selectedSomethin = true;
 				MusicBeatState.switchState(new MasterEditorMenu());
 			}
-			#end
+			#end 
 		}
         crochetTime = crochetTime + elapsed;
         
@@ -333,7 +379,7 @@ class MainMenuState extends MusicBeatState
 			//spr.screenCenter(X);
 		});
 	}
-
+    /*
 	function changeItem(huh:Int = 0)
 	{
 		curSelected += huh;
@@ -360,7 +406,7 @@ class MainMenuState extends MusicBeatState
 			}
 		});
 	}
-	
+	*/
 	function blendModeFromString(blend:String):BlendMode {
 		switch(blend.toLowerCase().trim()) {
 			case 'add': return ADD;
@@ -379,5 +425,81 @@ class MainMenuState extends MusicBeatState
 			case 'subtract': return SUBTRACT;
 		}
 		return NORMAL;
-}
+    }
+    
+    function selectSomething()
+	{
+		selectedSomethin = true;
+		FlxG.sound.play(Paths.sound('confirmMenu'));
+		canClick = false;
+
+		menuItems.forEach(function(spr:FlxSprite)
+		{
+			if (curSelected != spr.ID)
+			{
+				FlxTween.tween(spr, {alpha: 0}, 0.4, {
+					ease: FlxEase.quadOut,
+					onComplete: function(twn:FlxTween)
+					{
+						spr.kill();
+					}
+			    });
+			}
+			else
+			{				
+				FlxG.camera.fade(FlxColor.BLACK, 0.7, false);
+				new FlxTimer().start(1, function(tmr:FlxTimer)
+				{
+					goToState();
+				});
+			}
+		});
+	}
+	
+	function goToState()
+	{
+		var daChoice:String = optionShit[curSelected];
+
+		switch (daChoice)
+		{
+        case 'story_mode':
+			MusicBeatState.switchState(new StoryMenuState());
+			case 'freeplay':
+			MusicBeatState.switchState(new FreeplayState());
+			#if MODS_ALLOWED
+			case 'mods':
+			MusicBeatState.switchState(new ModsMenuState());
+			#end
+			//case 'awards':
+			//MusicBeatState.switchState(new AchievementsMenuState()); 
+			case 'credits':
+			MusicBeatState.switchState(new CreditsState());
+			case 'options':
+			LoadingState.loadAndSwitchState(new options.OptionsState());
+		}
+	}
+
+	function changeItem(huh:Int = 0)
+	{
+		if (finishedFunnyMove)
+		{
+			curSelected += huh;
+
+			if (curSelected >= menuItems.length)
+				curSelected = 0;
+			if (curSelected < 0)
+				curSelected = menuItems.length - 1;
+		}
+		menuItems.forEach(function(spr:FlxSprite)
+		{
+			spr.animation.play('idle');
+
+			if (spr.ID == curSelected && finishedFunnyMove)
+			{
+				spr.animation.play('hover');
+			}
+
+			spr.updateHitbox();
+		});
+	}
 }
