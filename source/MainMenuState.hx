@@ -248,14 +248,12 @@ class MainMenuState extends MusicBeatState
 						selectSomething();
 					}
 				}
-				}
+				
 				
 			}
-
-
 			spr.updateHitbox();
 		});
-		
+		}
 		if (!selectedSomethin)
 		{
 			if (controls.BACK)
