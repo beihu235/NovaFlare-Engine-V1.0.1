@@ -308,17 +308,41 @@ class MainMenuState extends MusicBeatState
             currentColor++;
             
             if (currentColor > 7) currentColor = 1;
-            FlxTween.tween(bgScroll, {color: ColorArray[currentColor]}, 0.4, {ease: FlxEase.sineInOut});
+            FlxTween.tween(bgScroll, {color: ColorArray[currentColor]}, 0.4, {
+		    ease: FlxEase.sineInOut,
+			onComplete: function(twn:FlxTween)
+			{
+			
+			}
+			});
 			camGame.zoom = 1 + 0.015;
-			FlxTween.tween(camGame, {zoom: 1}, 0.4, {ease: FlxEase.sineInOut});
+			FlxTween.tween(camGame, {zoom: 1}, 0.4, {
+		    ease: FlxEase.sineInOut,
+			onComplete: function(twn:FlxTween)
+			{
+			
+			}
+			});
 			
 			menuItems.forEach(function(spr:FlxSprite)	{
 				spr.scale.x = 0.9;
 				spr.scale.y = 0.9;
-				    
-				FlxTween.tween(spr, {scale.x: 0.8}, 0.4, {ease: FlxEase.sineInOut});
-				FlxTween.tween(spr, {scale.y: 0.8}, 0.4, {ease: FlxEase.sineInOut});
-				
+				  /*  FlxTween.tween(spr, {scale.x: 0.8}, 0.4, {
+								ease: FlxEase.sineInOut,
+								onComplete: function(twn:FlxTween)
+								{
+									//spr.kill();
+								}
+							});
+					*/
+				    FlxTween.tween(spr, {scale.y: 0.8}, 0.4, {
+						ease: FlxEase.sineInOut,
+						onComplete: function(twn:FlxTween)
+						{
+							
+						}
+					});
+				*/		
             });
         }
         
