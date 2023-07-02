@@ -300,17 +300,17 @@ class MainMenuState extends MusicBeatState
             currentColorAgain = currentColor - 1;
             if (currentColorAgain <= 0) currentColorAgain = 7;
             
-            FlxTween.color(bgScroll, 0.4, ColorArray[currentColorAgain], ColorArray[currentColor], { ease: FlxEase.sineInOut});
+            FlxTween.color(bgScroll, 0.4, ColorArray[currentColorAgain], ColorArray[currentColor], { ease: FlxEase.cubeOut});
            
 			camGame.zoom = 1 + 0.015;
 			//camGame.scale.y = 1 + 0.015;
-			FlxTween.tween(camGame, {zoom: 1}, 0.4, {ease: FlxEase.sineInOut});
+			FlxTween.tween(camGame, {zoom: 1}, 0.4, {ease: FlxEase.cubeOut});
 			
 			menuItems.forEach(function(spr:FlxSprite)	{
 				spr.scale.x = 0.83;
 				spr.scale.y = 0.83;
-				    FlxTween.tween(spr.scale, {x: 0.8}, 0.4, {ease: FlxEase.sineInOut});
-				    FlxTween.tween(spr.scale, {y: 0.8}, 0.4, {ease: FlxEase.sineInOut});
+				    FlxTween.tween(spr.scale, {x: 0.8}, 0.4, {ease: FlxEase.cubeOut});
+				    FlxTween.tween(spr.scale, {y: 0.8}, 0.4, {ease: FlxEase.cubeOut});
 				spr.updateHitbox();    
 				
             });
