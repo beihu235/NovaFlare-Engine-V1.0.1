@@ -246,7 +246,7 @@ class MainMenuState extends MusicBeatState
 			    spr.offset.x = spr.offset.x * 0.8;
 			    spr.offset.y = spr.offset.y * 0.8;
 			    }
-                if (FlxG.mouse.justPressed && canClick && spr.animation.play('selected');)
+                if (FlxG.mouse.justPressed && canClick && spr.animation.play('selected'))
 				{
 				    if (curSelected == spr.ID) {
 				        selectSomething();
