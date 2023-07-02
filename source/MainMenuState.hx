@@ -143,7 +143,7 @@ class MainMenuState extends MusicBeatState
 		for (i in 0...optionShit.length)
 		{
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(100, (i * 120)  + offset);
+			var menuItem:FlxSprite = new FlxSprite(100, (i * 130)  + offset);
 			menuItem.scale.x = 0.8;
 			menuItem.scale.y = 0.8;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
@@ -193,7 +193,7 @@ class MainMenuState extends MusicBeatState
 		#end
 
 		#if android
-		addVirtualPad(UP_DOWN, A_B_E);
+		addVirtualPad(NONE, A_B_E);
 		#end
 
 		super.create();
