@@ -232,7 +232,8 @@ class MainMenuState extends MusicBeatState
 			{
 				if (!FlxG.mouse.overlaps(spr))
 					spr.animation.play('idle');
-					spr.offset.x = spr.offset.x * 0.8
+					spr.offset.x = spr.offset.x * 0.8;
+			        spr.offset.y = spr.offset.y * 0.8;
 			}
 
 			if (FlxG.mouse.overlaps(spr))
