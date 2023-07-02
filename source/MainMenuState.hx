@@ -327,7 +327,7 @@ class MainMenuState extends MusicBeatState
 			menuItems.forEach(function(spr:FlxSprite)	{
 				spr.scale.x = 0.9;
 				spr.scale.y = 0.9;
-				    FlxTween.tween(spr, {alpha: 0}, 0.4, {
+				    FlxTween.tween(spr, {scale.x: 0.8}, 0.4, {
 								ease: FlxEase.sineInOut,
 								onComplete: function(twn:FlxTween)
 								{
