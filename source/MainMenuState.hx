@@ -51,6 +51,9 @@ class MainMenuState extends MusicBeatState
 	
 	var bgScroll:FlxBackdrop;
 	
+	var crochet = Conductor.crochet / 1000 * 4;
+	var crochetTime:Float = 0;
+	
 	var ColorArray:Array<Int> = [
 		0xFF9400D3,
 		0xFF4B0082,
@@ -95,8 +98,8 @@ class MainMenuState extends MusicBeatState
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
-		bg.scrollFactor.set(0, yScroll);
-		bg.setGraphicSize(Std.int(bg.width * 1.175));
+		bg.scrollFactor.set(0,0);
+		bg.setGraphicSize(Std.int(bg.width));
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
@@ -141,8 +144,8 @@ class MainMenuState extends MusicBeatState
 		{
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
 			var menuItem:FlxSprite = new FlxSprite(100, (i * 140)  + offset);
-			menuItem.scale.x = scale;
-			menuItem.scale.y = scale;
+			menuItem.scale.x = 0.8;
+			menuItem.scale.y = 0.8;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
@@ -297,19 +300,32 @@ class MainMenuState extends MusicBeatState
 			}
 			#end
 		}
+        crochetTime = crochetTime + elapsed 
         
-        if ( allowColorChange ) {
+        if ( crochetTime >= crochetTime ) {
+        
+            crochetTime = 0;
             currentColor++;
-                if (currentColor > 7) currentColor = 1;
-            allowColorChange = false;
-            FlxTween.tween(bgScroll, {color: ColorArray[currentColor]}, 5, {
+            
+            if (currentColor > 7) currentColor = 1;
+            FlxTween.tween(bgScroll, {color: ColorArray[currentColor]}, 1, {
 		    ease: FlxEase.sineInOut,
 			onComplete: function(twn:FlxTween)
 			{
-				allowColorChange = true;
+			
 			}
 			});
-		}	
+			camGame.zoom = 1 + 0.015;
+			FlxTween.tween(camGame, {zoom: 1}, 0.4, {
+		    ease: FlxEase.sineInOut,
+			onComplete: function(twn:FlxTween)
+			{
+			
+			}
+			});
+        }
+        
+      
         
 		super.update(elapsed);
 
