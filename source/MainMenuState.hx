@@ -152,7 +152,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
 			
-			menuItem.x = menuItem.x - menuItem.width
+			menuItem.x = menuItem.x - menuItem.width;
 			
 			menuItem.screenCenter(X);
 			menuItems.add(menuItem);
