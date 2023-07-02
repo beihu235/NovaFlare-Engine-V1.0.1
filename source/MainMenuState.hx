@@ -235,7 +235,7 @@ class MainMenuState extends MusicBeatState
 			{
                 if (FlxG.mouse.justPressed && canClick)
 				{
-				    if (curSelected = !spr.ID;) {
+				    if (curSelected = !spr.ID) {
 				        curSelected = spr.ID;
 					    usingMouse = true;
 					    spr.animation.play('selected');			
