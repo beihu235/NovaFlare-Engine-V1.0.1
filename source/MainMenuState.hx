@@ -222,8 +222,7 @@ class MainMenuState extends MusicBeatState
 		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
-		if (!selectedSomethin)
-		{
+		
 		
 		menuItems.forEach(function(spr:FlxSprite)
 		{
@@ -248,7 +247,7 @@ class MainMenuState extends MusicBeatState
 			}
 			spr.updateHitbox();
 		});
-		}
+		
 		if (!selectedSomethin)
 		{
 			if (controls.BACK)
@@ -256,10 +255,9 @@ class MainMenuState extends MusicBeatState
 				selectedSomethin = true;
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new TitleState());
-			}
-		}
+			}		
 	
-			}
+			
 			#if (desktop || android)
 			else if (FlxG.keys.anyJustPressed(debugKeys) #if android || _virtualpad.buttonE.justPressed #end)
 			{
