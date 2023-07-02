@@ -152,7 +152,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
 			
-			menuItem.x = menuItem.x - menuItem.width;
+			//menuItem.x = menuItem.x - menuItem.width;
 			
 			//menuItem.screenCenter(X);
 			menuItems.add(menuItem);
@@ -240,16 +240,7 @@ class MainMenuState extends MusicBeatState
 
 			if (FlxG.mouse.overlaps(spr))
 			{
-			    if (FlxG.mouse.pressed && canClick){
-			    curSelected = spr.ID;
-			    usingMouse = true;		
-			    if (spr.animation.curAnim.name == 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	 
-			    spr.animation.play('selected');	
-			    spr.offset.x = spr.offset.x * 0.8;
-			    spr.offset.y = spr.offset.y * 0.8;
-			    spr.updateHitbox();
-			        spr.centerOffsets();
-			    }
+			    
                 if (FlxG.mouse.justPressed && canClick && spr.animation.curAnim.name != 'idle')
 				{
 				    if (curSelected == spr.ID) {
@@ -266,7 +257,17 @@ class MainMenuState extends MusicBeatState
 			            spr.updateHitbox();
 			            spr.centerOffsets();
 					}
-				}								
+				}
+				if (FlxG.mouse.pressed && canClick){
+			    curSelected = spr.ID;
+			    usingMouse = true;		
+			    if (spr.animation.curAnim.name == 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	 
+			    spr.animation.play('selected');	
+			    spr.offset.x = spr.offset.x * 0.8;
+			    spr.offset.y = spr.offset.y * 0.8;
+			    spr.updateHitbox();
+			        spr.centerOffsets();
+			    }
 			}
 			spr.updateHitbox();
 			
