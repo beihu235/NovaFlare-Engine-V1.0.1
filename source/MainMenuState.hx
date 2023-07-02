@@ -250,7 +250,7 @@ class MainMenuState extends MusicBeatState
 			    spr.updateHitbox();
 			        spr.centerOffsets();
 			    }
-                if (FlxG.mouse.justPressed && canClick && spr.animation.curAnim.name == 'idle')
+                if (FlxG.mouse.justPressed && canClick && spr.animation.curAnim.name != 'idle')
 				{
 				    if (curSelected == spr.ID) {
 				        selectSomething();
