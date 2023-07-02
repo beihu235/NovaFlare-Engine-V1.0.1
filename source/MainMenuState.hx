@@ -151,7 +151,10 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			//menuItem.screenCenter(X);
+			
+			menuItem.x = menuItem.x - menuItem.width
+			
+			menuItem.screenCenter(X);
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
@@ -247,6 +250,7 @@ class MainMenuState extends MusicBeatState
 				}								
 			}
 			spr.updateHitbox();
+			
 		});
 		
 		if (!selectedSomethin)
@@ -289,7 +293,7 @@ class MainMenuState extends MusicBeatState
 				    FlxTween.tween(spr.scale, {x: 0.8}, 0.4, {ease: FlxEase.sineInOut});
 				    FlxTween.tween(spr.scale, {y: 0.8}, 0.4, {ease: FlxEase.sineInOut});
 				spr.updateHitbox();    
-				spr.screenCenter(XY);
+				
             });
             
         }
@@ -300,7 +304,7 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-			//spr.screenCenter(X);
+			spr.screenCenter(X);
 		});
 	}
     
