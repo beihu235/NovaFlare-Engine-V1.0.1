@@ -308,7 +308,7 @@ class MainMenuState extends MusicBeatState
             currentColor++;
             
             if (currentColor > 7) currentColor = 1;
-            FlxTween.tween(bgScroll, {color: ColorArray[currentColor]}, 1, {
+            FlxTween.tween(bgScroll, {color: ColorArray[currentColor]}, 0.4, {
 		    ease: FlxEase.sineInOut,
 			onComplete: function(twn:FlxTween)
 			{
