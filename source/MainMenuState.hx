@@ -232,6 +232,7 @@ class MainMenuState extends MusicBeatState
 			{
 				if (!FlxG.mouse.overlaps(spr))
 					spr.animation.play('idle');
+					spr.offset.x = spr.offset.x * 0.8
 			}
 
 			if (FlxG.mouse.overlaps(spr))
@@ -241,6 +242,8 @@ class MainMenuState extends MusicBeatState
 			    usingMouse = true;		
 			    if (spr.animation.play('idle')) FlxG.sound.play(Paths.sound('scrollMenu'));	 
 			    spr.animation.play('selected');	
+			    spr.offset.x = spr.offset.x * 0.8;
+			    spr.offset.y = spr.offset.y * 0.8;
 			    }
                 if (FlxG.mouse.justPressed && canClick && spr.animation.play('selected');)
 				{
@@ -253,6 +256,8 @@ class MainMenuState extends MusicBeatState
 					    		
 					    if (spr.animation.play('idle')) FlxG.sound.play(Paths.sound('scrollMenu'));	    
 					    spr.animation.play('selected');	
+					    spr.offset.x = spr.offset.x * 0.8;
+			            spr.offset.y = spr.offset.y * 0.8;
 					}
 				}								
 			}
