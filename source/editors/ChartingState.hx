@@ -1878,10 +1878,11 @@ class ChartingState extends MusicBeatState
 				else
 				{
 					UI_box.selected_tab += 1;
-					if (UI_box.selected_tab > 5) UI_box.selected_tab = 1;
+					
 				}
 			}
-
+            if (UI_box.selected_tab > 5) UI_box.selected_tab = 1;
+            
 			if (FlxG.keys.justPressed.SPACE #if android || _virtualpad.buttonY.justPressed #end)
 			{
 				if (FlxG.sound.music.playing)
