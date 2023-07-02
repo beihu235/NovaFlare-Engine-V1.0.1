@@ -356,7 +356,7 @@ class MainMenuState extends MusicBeatState
 		{
 			if (curSelected != spr.ID)
 			{
-				FlxTween.tween(spr, {alpha: 0}, 0.4, {
+				FlxTween.tween(spr, {alpha: 0}, 1.2, {
 					ease: FlxEase.quadOut,
 					onComplete: function(twn:FlxTween)
 					{
@@ -366,15 +366,30 @@ class MainMenuState extends MusicBeatState
 			}
 			else
 			{				
-				FlxG.camera.fade(FlxColor.BLACK, 0.7, false);
-				new FlxTimer().start(1, function(tmr:FlxTimer)
-				{
-					goToState();
-				});
+				//FlxG.camera.fade(FlxColor.BLACK, 0.7, false);
+			
+			FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
+							{
+								var daChoice:String = optionShit[curSelected];
+
+								switch (daChoice)
+								{
+									case 'story_mode':
+										MusicBeatState.switchState(new StoryMenuState());
+									case 'freeplay':
+										MusicBeatState.switchState(new FreeplayState());	
+									case 'mods':
+										MusicBeatState.switchState(new ModsMenuState());									
+									case 'options':
+										MusicBeatState.switchState(new ChooseOptionsState());
+									case 'credits':
+										MusicBeatState.switchState(new CreditsState());	
+								}
+							});													
 			}
 		});
 	}
-	
+	/*
 	function goToState()
 	{
 		var daChoice:String = optionShit[curSelected];
@@ -397,7 +412,7 @@ class MainMenuState extends MusicBeatState
 			LoadingState.loadAndSwitchState(new options.OptionsState());
 		}
 	}
-
+    
 	function changeItem(huh:Int = 0)
 	{
 		if (finishedFunnyMove)
@@ -421,4 +436,5 @@ class MainMenuState extends MusicBeatState
 			spr.updateHitbox();
 		});
 	}
+	*/
 }
