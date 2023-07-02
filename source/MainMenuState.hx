@@ -49,6 +49,8 @@ class MainMenuState extends MusicBeatState
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
 	
+	var bgScroll:FlxBackdrop;
+	
 	var ColorArray:Array<Int> = [
 		0xFF9400D3,
 		0xFF4B0082,
@@ -100,11 +102,11 @@ class MainMenuState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 		
-		var bgScroll:FlxBackdrop = new FlxBackdrop(Paths.image('mainmenu_sprite/backdrop'), 1, 1, true, true, 0, 0);
+	    bgScroll = new FlxBackdrop(Paths.image('mainmenu_sprite/backdrop'), 1, 1, true, true, 0, 0);
 		bgScroll.scrollFactor.set();
 		bgScroll.alpha = 0.3;
 		bgScroll.blend = blendModeFromString('add');
-		bgScrol.color = ColorArray[currentColor];
+		bgScroll.color = ColorArray[currentColor];
 		bgScroll.screenCenter();
 		bgScroll.velocity.set(100, 70);
 		bgScroll.antialiasing = ClientPrefs.globalAntialiasing;
