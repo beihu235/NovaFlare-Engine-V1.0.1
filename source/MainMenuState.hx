@@ -48,6 +48,19 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
+	
+	var ColorArray:Array<Int> = [
+		0xFF9400D3,
+		0xFF4B0082,
+		0xFF0000FF,
+		0xFF00FF00,
+		0xFFFFFF00,
+		0xFFFF7F00,
+		0xFFFF0000
+	                                
+	    ];
+	var currentColor:Int = 1;    
+	var allowColorChange:Bool = true;
 
 	override function create()
 	{
@@ -91,6 +104,7 @@ class MainMenuState extends MusicBeatState
 		bgScroll.scrollFactor.set();
 		bgScroll.alpha = 0.3;
 		bgScroll.blend = blendModeFromString('add');
+		bgScrol.color = ColorArray[currentColor];
 		bgScroll.screenCenter();
 		bgScroll.velocity.set(100, 70);
 		bgScroll.antialiasing = ClientPrefs.globalAntialiasing;
@@ -281,7 +295,20 @@ class MainMenuState extends MusicBeatState
 			}
 			#end
 		}
-
+        
+        if ( allowColorChange ) {
+            currentColor++;
+                if (currentColor > 7) currentColor = 1;
+            allowColorChange = false;
+            FlxTween.tween(bgScroll, {color: ColorArray[currentColor]}, 5, {
+		    ease: FlxEase.sineInOut,
+			onComplete: function(twn:FlxTween)
+			{
+				allowColorChange = true;
+			}
+			});
+		}	
+        
 		super.update(elapsed);
 
 		menuItems.forEach(function(spr:FlxSprite)
