@@ -152,7 +152,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			//menuItem.screenCenter(X);
+			menuItem.screenCenter(X);
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
@@ -322,13 +322,8 @@ class MainMenuState extends MusicBeatState
 			menuItems.forEach(function(spr:FlxSprite)	{
 				spr.scale.x = 0.9;
 				spr.scale.y = 0.9;
-				    FlxTween.tween(spr, {scale: 0.8}, 0.4, {
-								ease: FlxEase.sineInOut,
-								onComplete: function(twn:FlxTween)
-								{
-								//	spr.kill();
-								}
-							});
+				    FlxTween.tween(spr.scale, {x: 0.8}, 0.4, {ease: FlxEase.sineInOut});
+				    FlxTween.tween(spr.scale, {y: 0.8}, 0.4, {ease: FlxEase.sineInOut});
             });
         }
         
