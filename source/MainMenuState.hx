@@ -272,7 +272,7 @@ class MainMenuState extends MusicBeatState
 					    if (spr.animation.curAnim.name == 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	    
 					    spr.animation.play('selected');	
 					    spr.offset.x = spr.offset.x * 0.8;
-			            spr.offset.y = spr.offset.y * 0.8 +  + spr.width / 2;
+			            spr.offset.y = spr.offset.y * 0.8 + spr.width / 2;
 			            
 			            
 					}
