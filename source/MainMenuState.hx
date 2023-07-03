@@ -50,7 +50,7 @@ class MainMenuState extends MusicBeatState
 	var debugKeys:Array<FlxKey>;
 	
 	var bgScroll:FlxBackdrop;
-	var bpm = titleJSON.bpm;
+	var bpm = TitleState.titleJSON.bpm;
 	var crochet = 60 / bpm;
 	var crochetTime:Float = 0;
 	
