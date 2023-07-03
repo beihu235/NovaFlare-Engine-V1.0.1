@@ -18,7 +18,9 @@ class FlxNewHitbox extends FlxSpriteGroup
 	public var buttonDown:FlxButton = new FlxButton(0, 0);
 	public var buttonUp:FlxButton = new FlxButton(0, 0);
 	public var buttonRight:FlxButton = new FlxButton(0, 0);
-
+    
+    public var buttonSpace:FlxButton = new FlxButton(0, 0);
+    
 	/**
 	 * Create the zone.
 	 */
@@ -30,7 +32,7 @@ class FlxNewHitbox extends FlxSpriteGroup
 		add(buttonDown = createHint(FlxG.width / 4, 0, Std.int(FlxG.width / 4), FlxG.height, 0x00FFFF));
 		add(buttonUp = createHint(FlxG.width / 2, 0, Std.int(FlxG.width / 4), FlxG.height, 0x00FF00));
 		add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF0000));
-
+        add(buttonSpace = createHint(0, (FlxG.width / 5) * 4, FlxG.width, Std.int(FlxG.height / 5), 0xFFFF00));
 		scrollFactor.set();
 	}
 
@@ -45,6 +47,8 @@ class FlxNewHitbox extends FlxSpriteGroup
 		buttonDown = null;
 		buttonUp = null;
 		buttonRight = null;
+		
+		buttonSpace = null;
 	}
 
 	private function createHintGraphic(Width:Int, Height:Int, Color:Int = 0xFFFFFF):BitmapData
