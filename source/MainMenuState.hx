@@ -232,10 +232,10 @@ class MainMenuState extends MusicBeatState
 			{
 				if (!FlxG.mouse.overlaps(spr))
 					spr.animation.play('idle');
-					spr.offset.x = spr.offset.x * 0.8;
-			        spr.offset.y = spr.offset.y * 0.8;
+					//spr.offset.x = spr.offset.x * 0.8;
+			        //spr.offset.y = spr.offset.y * 0.8;
 			        spr.updateHitbox();
-			        spr.centerOffsets();
+			        
 			}
 
 			if (FlxG.mouse.overlaps(spr))
@@ -252,10 +252,10 @@ class MainMenuState extends MusicBeatState
 					    		
 					    if (spr.animation.curAnim.name == 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	    
 					    spr.animation.play('selected');	
-					    spr.offset.x = spr.offset.x * 0.8;
-			            spr.offset.y = spr.offset.y * 0.8;
-			            spr.updateHitbox();
-			            spr.centerOffsets();
+					    //spr.offset.x = spr.offset.x * 0.8;
+			            //spr.offset.y = spr.offset.y * 0.8;
+			            
+			            
 					}
 				}
 				if (FlxG.mouse.pressed && canClick){
@@ -263,10 +263,10 @@ class MainMenuState extends MusicBeatState
 			    usingMouse = true;		
 			    if (spr.animation.curAnim.name == 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	 
 			    spr.animation.play('selected');	
-			    spr.offset.x = spr.offset.x * 0.8;
-			    spr.offset.y = spr.offset.y * 0.8;
+			    //spr.offset.x = spr.offset.x * 0.8;
+			    //spr.offset.y = spr.offset.y * 0.8;
 			    spr.updateHitbox();
-			        spr.centerOffsets();
+			    
 			    }
 			}
 			spr.updateHitbox();
@@ -301,17 +301,17 @@ class MainMenuState extends MusicBeatState
             currentColorAgain = currentColor - 1;
             if (currentColorAgain <= 0) currentColorAgain = 7;
             
-            FlxTween.color(bgScroll, 0.4, ColorArray[currentColorAgain], ColorArray[currentColor], { ease: FlxEase.cubeOut});
+            FlxTween.color(bgScroll, 0.6, ColorArray[currentColorAgain], ColorArray[currentColor], { ease: FlxEase.cubeOut});
            
-			camGame.zoom = 1 + 0.015;
+			camGame.zoom = 1 + 0.03;
 			//camGame.scale.y = 1 + 0.015;
-			FlxTween.tween(camGame, {zoom: 1}, 0.4, {ease: FlxEase.cubeOut});
+			FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
 			
 			menuItems.forEach(function(spr:FlxSprite)	{
 				spr.scale.x = 0.83;
 				spr.scale.y = 0.83;
-				    FlxTween.tween(spr.scale, {x: 0.8}, 0.4, {ease: FlxEase.cubeOut});
-				    FlxTween.tween(spr.scale, {y: 0.8}, 0.4, {ease: FlxEase.cubeOut});
+				    FlxTween.tween(spr.scale, {x: 0.8}, 0.6, {ease: FlxEase.cubeOut});
+				    FlxTween.tween(spr.scale, {y: 0.8}, 0.6, {ease: FlxEase.cubeOut});
 				spr.updateHitbox();    
 				
             });
@@ -324,7 +324,8 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-			//spr.screenCenter(X);
+			spr.updateHitbox();
+			spr.centerOffsets();
 		});
 	}
     
