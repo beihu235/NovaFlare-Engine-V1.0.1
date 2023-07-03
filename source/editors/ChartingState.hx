@@ -1881,7 +1881,7 @@ class ChartingState extends MusicBeatState
 					
 				}
 			}
-            if (UI_box.selected_tab > 5) UI_box.selected_tab = 1;
+            if (UI_box.selected_tab > 4) UI_box.selected_tab = 0;
             
 			if (FlxG.keys.justPressed.SPACE #if android || _virtualpad.buttonY.justPressed #end)
 			{
