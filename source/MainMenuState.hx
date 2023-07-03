@@ -143,7 +143,7 @@ class MainMenuState extends MusicBeatState
 		for (i in 0...optionShit.length)
 		{
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(100, (i * 130)  + offset);
+			var menuItem:FlxSprite = new FlxSprite(-1950, (i * 130)  + offset);
 			menuItem.scale.x = 0.8;
 			menuItem.scale.y = 0.8;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
@@ -162,6 +162,25 @@ class MainMenuState extends MusicBeatState
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
 			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
+			spr.offset.x = spr.offset.x * 0.8;
+			spr.offset.y = spr.offset.y * 0.8;
+			
+			if (menuItem.ID == curSelected){
+			menuItem.animation.play('selected');
+			menuItem.updateHitbox();
+			menuItem.centerOffsets();
+			spr.offset.x = spr.offset.x * 0.8;
+			spr.offset.y = spr.offset.y * 0.8 + spr.width / 2;
+			}
+			
+			FlxTween.tween(menuItem, {x: 100}, (0.8 + 0.15 * i), {
+			    ease: FlxEase.quadOut,
+			    type: ONESHOT,
+				onComplete: function(twn:FlxTween)
+				    {
+
+				    }
+				});                                   
 		}
 
 		FlxG.camera.follow(camFollowPos, null, 1);
@@ -232,15 +251,15 @@ class MainMenuState extends MusicBeatState
 			{
 				if (!FlxG.mouse.overlaps(spr))
 					spr.animation.play('idle');
-					//spr.offset.x = spr.offset.x * 0.8;
-			        //spr.offset.y = spr.offset.y * 0.8;
+					spr.offset.x = spr.offset.x * 0.8;
+			        spr.offset.y = spr.offset.y * 0.8;
 			        spr.updateHitbox();
 			        
 			}
 
 			if (FlxG.mouse.overlaps(spr))
 			{
-			    
+			    usingMouse = true;
                 if (FlxG.mouse.justPressed && canClick && spr.animation.curAnim.name != 'idle')
 				{
 				    if (curSelected == spr.ID) {
@@ -248,28 +267,28 @@ class MainMenuState extends MusicBeatState
 				    }
 				    else    {					    
 					    curSelected = spr.ID;
-					    usingMouse = true;
+					    
 					    		
 					    if (spr.animation.curAnim.name == 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	    
 					    spr.animation.play('selected');	
-					    //spr.offset.x = spr.offset.x * 0.8;
-			            //spr.offset.y = spr.offset.y * 0.8;
+					    spr.offset.x = spr.offset.x * 0.8;
+			            spr.offset.y = spr.offset.y * 0.8 +  + spr.width / 2;
 			            
 			            
 					}
 				}
 				if (FlxG.mouse.pressed && canClick){
 			    curSelected = spr.ID;
-			    usingMouse = true;		
+			    	
 			    if (spr.animation.curAnim.name == 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	 
 			    spr.animation.play('selected');	
-			    //spr.offset.x = spr.offset.x * 0.8;
-			    //spr.offset.y = spr.offset.y * 0.8;
-			    spr.updateHitbox();
+			    spr.offset.x = spr.offset.x * 0.8;
+			    spr.offset.y = spr.offset.y * 0.8 + spr.width / 2;
+			    
 			    
 			    }
 			}
-			spr.updateHitbox();
+		
 			
 		});
 		
@@ -341,8 +360,8 @@ class MainMenuState extends MusicBeatState
 		{
 			if (curSelected != spr.ID)
 			{
-				FlxTween.tween(spr, {alpha: 0}, 1.2, {
-					ease: FlxEase.quadOut,
+				FlxTween.tween(spr, {x: -800}, 0.8 + 0.15 * i, {
+					ease: FlxEase.quadInOut,
 					onComplete: function(twn:FlxTween)
 					{
 						spr.kill();
@@ -353,12 +372,22 @@ class MainMenuState extends MusicBeatState
 			{				
 				//FlxG.camera.fade(FlxColor.BLACK, 0.7, false);
 			
-			    FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
-			    {
+			    FlxTween.tween(spr, {y: 360}, 1.2, {
+					ease: FlxEase.backInOut,
+					onComplete: function(twn:FlxTween)
+					{
+						//spr.kill();
+					}
+			    });
+			
+			    FlxTween.tween(spr, {x: 640}, 1.2, {
+					ease: FlxEase.backInOut,
+					onComplete: function(twn:FlxTween)
+					{
 			    var daChoice:String = optionShit[curSelected];
 
-				switch (daChoice)
-					{
+				    switch (daChoice)
+					    {
 						case 'story_mode':
 							MusicBeatState.switchState(new StoryMenuState());
 						case 'freeplay':
@@ -369,6 +398,7 @@ class MainMenuState extends MusicBeatState
 							MusicBeatState.switchState(new ChooseOptionsState());
 						case 'credits':
 							MusicBeatState.switchState(new CreditsState());	
+					    }
 					}
 				});													
 			}
