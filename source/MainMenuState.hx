@@ -162,15 +162,15 @@ class MainMenuState extends MusicBeatState
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
 			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
-			spr.offset.x = spr.offset.x * 0.8;
-			spr.offset.y = spr.offset.y * 0.8;
+			menuItem.offset.x = menuItem.offset.x * 0.8;
+			menuItem.offset.y = menuItem.offset.y * 0.8;
 			
 			if (menuItem.ID == curSelected){
 			menuItem.animation.play('selected');
 			menuItem.updateHitbox();
 			menuItem.centerOffsets();
-			spr.offset.x = spr.offset.x * 0.8;
-			spr.offset.y = spr.offset.y * 0.8 + spr.width / 2;
+			menuItem.offset.x = menuItem.offset.x * 0.8;
+			menuItem.offset.y = menuItem.offset.y * 0.8 + menuItem.width / 2;
 			}
 			
 			FlxTween.tween(menuItem, {x: 100}, (0.8 + 0.15 * i), {
@@ -360,7 +360,7 @@ class MainMenuState extends MusicBeatState
 		{
 			if (curSelected != spr.ID)
 			{
-				FlxTween.tween(spr, {x: -800}, 0.8 + 0.15 * i, {
+				FlxTween.tween(spr, {x: -800}, 0.8 + 0.15 * spr.ID, {
 					ease: FlxEase.quadInOut,
 					onComplete: function(twn:FlxTween)
 					{
