@@ -83,7 +83,7 @@ class TitleState extends MusicBeatState
 
 	var titleJSON:TitleData;
 	
-	public static var bpm:Float = 0;
+	public static var bpm:Float = 100;
 
 	public static var updateVersion:String = '';
 
