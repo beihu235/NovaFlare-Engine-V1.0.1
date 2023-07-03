@@ -50,8 +50,8 @@ class MainMenuState extends MusicBeatState
 	var debugKeys:Array<FlxKey>;
 	
 	var bgScroll:FlxBackdrop;
-	
-	var crochet = Conductor.crochet / 1000 * 4;
+	var bpm = titleJSON.bpm;
+	var crochet = 60 / bpm;
 	var crochetTime:Float = 0;
 	
 	var ColorArray:Array<Int> = [
@@ -142,7 +142,7 @@ class MainMenuState extends MusicBeatState
 
 		for (i in 0...optionShit.length)
 		{
-			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
+			var offset:Float = 130 - (Math.max(optionShit.length, 4) - 4) * 80;
 			var menuItem:FlxSprite = new FlxSprite(-1950, (i * 130)  + offset);
 			menuItem.scale.x = 0.8;
 			menuItem.scale.y = 0.8;
@@ -162,18 +162,18 @@ class MainMenuState extends MusicBeatState
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
 			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
-			menuItem.offset.x = menuItem.offset.x * 0.8;
-			menuItem.offset.y = menuItem.offset.y * 0.8;
+			//menuItem.offset.x = menuItem.offset.x * 0.8;
+			//menuItem.offset.y = menuItem.offset.y * 0.8;
 			
 			if (menuItem.ID == curSelected){
 			menuItem.animation.play('selected');
 			menuItem.updateHitbox();
 			menuItem.centerOffsets();
-			menuItem.offset.x = menuItem.offset.x * 0.8;
-			menuItem.offset.y = menuItem.offset.y * 0.8 + menuItem.width / 2;
+			//menuItem.offset.x = menuItem.offset.x * 0.8;
+			//menuItem.offset.y = menuItem.offset.y * 0.8 + menuItem.width / 2;
 			}
 			
-			FlxTween.tween(menuItem, {x: 100}, (0.8 + 0.15 * i), {
+			FlxTween.tween(menuItem, {x: 100}, (0.6 + 0.15 * i), {
 			    ease: FlxEase.quadOut,
 			    type: ONESHOT,
 				onComplete: function(twn:FlxTween)
@@ -230,7 +230,7 @@ class MainMenuState extends MusicBeatState
 	var selectedSomethin:Bool = false;
 	
 	var canClick:Bool = true;
-	var usingMouse:Bool = false;
+	var usingMouse:Bool = true;
 
 	override function update(elapsed:Float)
 	{
@@ -249,10 +249,10 @@ class MainMenuState extends MusicBeatState
 		{
 			if (usingMouse)
 			{
-				if (!FlxG.mouse.overlaps(spr))
+				if (!FlxG.mouse.overlaps(spr) && canClick)
 					spr.animation.play('idle');
-					spr.offset.x = spr.offset.x * 0.8;
-			        spr.offset.y = spr.offset.y * 0.8;
+					//spr.offset.x = spr.offset.x * 0.8;
+			        //spr.offset.y = spr.offset.y * 0.8;
 			        spr.updateHitbox();
 			        
 			}
@@ -271,8 +271,8 @@ class MainMenuState extends MusicBeatState
 					    		
 					    if (spr.animation.curAnim.name == 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	    
 					    spr.animation.play('selected');	
-					    spr.offset.x = spr.offset.x * 0.8;
-			            spr.offset.y = spr.offset.y * 0.8 + spr.width / 2;
+					    //spr.offset.x = spr.offset.x * 0.8;
+			            //spr.offset.y = spr.offset.y * 0.8 + spr.width / 2;
 			            
 			            
 					}
@@ -282,8 +282,8 @@ class MainMenuState extends MusicBeatState
 			    	
 			    if (spr.animation.curAnim.name == 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	 
 			    spr.animation.play('selected');	
-			    spr.offset.x = spr.offset.x * 0.8;
-			    spr.offset.y = spr.offset.y * 0.8 + spr.width / 2;
+			    //spr.offset.x = spr.offset.x * 0.8;
+			    //spr.offset.y = spr.offset.y * 0.8 + spr.width / 2;
 			    
 			    
 			    }
@@ -312,7 +312,7 @@ class MainMenuState extends MusicBeatState
 		}
         crochetTime = crochetTime + elapsed;
         
-        if ( crochetTime >= crochet ) {
+        if ( crochetTime >= crochet && canClick) {
         
             crochetTime = 0;
             currentColor++;            
@@ -360,8 +360,8 @@ class MainMenuState extends MusicBeatState
 		{
 			if (curSelected != spr.ID)
 			{
-				FlxTween.tween(spr, {x: -800}, 0.8 + 0.15 * spr.ID, {
-					ease: FlxEase.quadInOut,
+				FlxTween.tween(spr, {x: -800}, 0.6 + 0.15 * spr.ID, {
+					ease: FlxEase.backInOut,
 					onComplete: function(twn:FlxTween)
 					{
 						spr.kill();
@@ -370,9 +370,9 @@ class MainMenuState extends MusicBeatState
 			}
 			else
 			{				
-				//FlxG.camera.fade(FlxColor.BLACK, 0.7, false);
+				//
 			
-			    FlxTween.tween(spr, {y: 360}, 1.2, {
+			    FlxTween.tween(spr, {y: 360 - spr.height / 2}, 1, {
 					ease: FlxEase.backInOut,
 					onComplete: function(twn:FlxTween)
 					{
@@ -380,10 +380,19 @@ class MainMenuState extends MusicBeatState
 					}
 			    });
 			
-			    FlxTween.tween(spr, {x: 640}, 1.2, {
-					ease: FlxEase.backInOut,
-					onComplete: function(twn:FlxTween)
-					{
+			    FlxTween.tween(spr, {x: 640 - spr.width / 2}, 1, {
+					ease: FlxEase.backInOut				
+				});													
+			}
+		});
+		
+		
+		FlxTween.tween(camGame, {zoom: 2}, 1.2, {ease: FlxEase.cubeInOut});
+		FlxG.camera.fade(FlxColor.BLACK, 1.2, false);
+		FlxTween.angle(camGame, 0, -45, 1.2, {
+		ease: FlxEase.cubeInOut,
+		onComplete: function(twn:FlxTween)
+				{
 			    var daChoice:String = optionShit[curSelected];
 
 				    switch (daChoice)
@@ -399,9 +408,7 @@ class MainMenuState extends MusicBeatState
 						case 'credits':
 							MusicBeatState.switchState(new CreditsState());	
 					    }
-					}
-				});													
-			}
+				}    
 		});
 	}
 }
