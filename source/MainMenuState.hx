@@ -50,8 +50,8 @@ class MainMenuState extends MusicBeatState
 	var debugKeys:Array<FlxKey>;
 	
 	var bgScroll:FlxBackdrop;
-	var bpm = TitleState.bpm;
-	var crochet = 60 / bpm;
+	var bpm:Float = 0;
+	var crochet:Float = 0;
 	var crochetTime:Float = 0;
 	
 	var ColorArray:Array<Int> = [
@@ -72,7 +72,10 @@ class MainMenuState extends MusicBeatState
 	{
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
-
+		
+		bpm == TitleState.bpm;
+        crochet == 60/bpm;
+        
 		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
 		#end
@@ -389,7 +392,7 @@ class MainMenuState extends MusicBeatState
 		
 		FlxTween.tween(camGame, {zoom: 2}, 1.2, {ease: FlxEase.cubeInOut});
 		FlxG.camera.fade(FlxColor.BLACK, 1.2, false);
-		FlxTween.angle(camGame, 0, -45, 1.2, {
+		FlxTween.tween(camGame, {angle: -45}, 1.2, {
 		ease: FlxEase.cubeInOut,
 		onComplete: function(twn:FlxTween)
 				{
