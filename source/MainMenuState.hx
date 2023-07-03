@@ -313,12 +313,12 @@ class MainMenuState extends MusicBeatState
 			}
 			#end 
 		}
-        crochetTime = crochetTime + elapsed;
+        //crochetTime = crochetTime + elapsed;
         
         
-        if ( Math.floor(FlxG.sound.music.time / crochet / 1000 ) % 4 == 0 && canClick) {
+        if ( (FlxG.sound.music.time / crochet ) % 4 == 0 && canClick) {
         
-            crochetTime = 0;
+            //crochetTime = 0;
             currentColor++;            
             if (currentColor > 7) currentColor = 1;
             currentColorAgain = currentColor - 1;
