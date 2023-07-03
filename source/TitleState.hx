@@ -83,14 +83,14 @@ class TitleState extends MusicBeatState
 
 	var titleJSON:TitleData;
 	
-	
+	public static var bpm:Float = 0;
 
 	public static var updateVersion:String = '';
 
 	override public function create():Void
 	{
-    public static var bpm:Float = titleJSON.bpm;
-
+    
+    bpm == titleJSON.bpm;
 		#if android
 		FlxG.android.preventDefaultKeys = [BACK];
 		#end
