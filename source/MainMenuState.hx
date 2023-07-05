@@ -147,9 +147,9 @@ class MainMenuState extends MusicBeatState
 		for (i in 0...optionShit.length)
 		{
 			var offset:Float = 130 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(-1950, (i * 140)  + offset);
-			menuItem.scale.x = 1;
-			menuItem.scale.y = 1;
+			var menuItem:FlxSprite = new FlxSprite(-1950, (i * 130)  + offset);
+			menuItem.scale.x = 0.8;
+			menuItem.scale.y = 0.8;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
@@ -177,7 +177,7 @@ class MainMenuState extends MusicBeatState
 			//menuItem.offset.y = menuItem.offset.y * 0.8 + menuItem.width / 2;
 			}
 			
-			FlxTween.tween(menuItem, {x: 100}, (0.6 + 0.1 * i), {
+			FlxTween.tween(menuItem, {x: 100}, (0.6 + 0.12 * i), {
 			    ease: FlxEase.quadOut,
 			    type: ONESHOT,
 				onComplete: function(twn:FlxTween)
@@ -214,6 +214,21 @@ class MainMenuState extends MusicBeatState
 			}
 		}
 		#end
+		
+		var test1:FlxText = new FlxText(12, FlxG.height - 36, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
+		test1.scrollFactor.set();
+		test1.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(test1);
+		
+		var test2:FlxText = new FlxText(12, FlxG.height - 48, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
+		test2.scrollFactor.set();
+		test2.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(test2);
+		
+		var test3:FlxText = new FlxText(12, FlxG.height - 60, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
+		test3.scrollFactor.set();
+		test3.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(test3);
 
 		#if android
 		addVirtualPad(NONE, A_B_E);
@@ -316,8 +331,8 @@ class MainMenuState extends MusicBeatState
 			#end 
 		}
        
-        SoundTime = Math.floor ( FlxG.sound.music.time / 100) / 10;
-        BeatTime = Math.floor (crochet * 10) / 10;
+        SoundTime = Math.floor( FlxG.sound.music.time / 100) / 10;
+        BeatTime = Math.floor(crochet * 10) / 10;
         
         if ( (SoundTime / BeatTime) % 4  == 0 && canClick && canBeat) {
         
@@ -351,7 +366,9 @@ class MainMenuState extends MusicBeatState
             
         }
         
-      
+        test1.text = "time: " + SoundTime;
+        test2.text = "beatTime: " + BeatTime;
+        test3.text = "startbeat: " + ((SoundTime / BeatTime) % 4);
         
 		super.update(elapsed);
 
