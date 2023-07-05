@@ -319,7 +319,7 @@ class MainMenuState extends MusicBeatState
         SoundTime = Math.floor ( FlxG.sound.music.time / 100) / 10;
         BeatTime = Math.floor (crochet * 10) / 10;
         
-        if (SoundTime / BeatTime % 4  == 0 && canClick && canBeat) {
+        if ( (SoundTime / BeatTime) % 4  == 0 && canClick && canBeat) {
         
             canBeat = false;
            
