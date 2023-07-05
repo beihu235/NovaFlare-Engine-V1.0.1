@@ -147,9 +147,9 @@ class MainMenuState extends MusicBeatState
 		for (i in 0...optionShit.length)
 		{
 			var offset:Float = 130 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(-1950, (i * 130)  + offset);
-			menuItem.scale.x = 0.8;
-			menuItem.scale.y = 0.8;
+			var menuItem:FlxSprite = new FlxSprite(-1950, (i * 140)  + offset);
+			menuItem.scale.x = 1;
+			menuItem.scale.y = 1;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
@@ -177,7 +177,7 @@ class MainMenuState extends MusicBeatState
 			//menuItem.offset.y = menuItem.offset.y * 0.8 + menuItem.width / 2;
 			}
 			
-			FlxTween.tween(menuItem, {x: 100}, (0.6 + 0.15 * i), {
+			FlxTween.tween(menuItem, {x: 100}, (0.6 + 0.1 * i), {
 			    ease: FlxEase.quadOut,
 			    type: ONESHOT,
 				onComplete: function(twn:FlxTween)
