@@ -52,7 +52,8 @@ class MainMenuState extends MusicBeatState
 	var bgScroll:FlxBackdrop;
 	var bpm:Float = 0;
 	var crochet:Float = 0;
-	var crochetTime:Float = 0;
+	var SoundTime:Float = 0;
+	var BeatTime:Float = 0;
 	
 	var ColorArray:Array<Int> = [
 		0xFF9400D3,
@@ -74,7 +75,7 @@ class MainMenuState extends MusicBeatState
 		Paths.clearUnusedMemory();
 		
 		bpm == TitleState.bpm;
-        crochet == 60/bpm;
+        crochet == 60 / bpm;
         
 		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
@@ -233,6 +234,7 @@ class MainMenuState extends MusicBeatState
 	var selectedSomethin:Bool = false;
 	
 	var canClick:Bool = true;
+	var canBeat:Bool = true;
 	var usingMouse:Bool = true;
 
 	override function update(elapsed:Float)
@@ -313,12 +315,14 @@ class MainMenuState extends MusicBeatState
 			}
 			#end 
 		}
-        //crochetTime = crochetTime + elapsed;
+       
+        SoundTime = Math.floor ( FlxG.sound.music.time / 100) / 10;
+        BeatTime = Math.floor (crochet * 10) / 10;
         
+        if SoundTime / BeatTime % 4  == 0 && canClick && canBeat) {
         
-        if ( Math.floor(FlxG.sound.music.time / 1000 ) % crochet  == 0 && canClick) {
-        
-            //crochetTime = 0;
+            canBeat = false;
+           
             currentColor++;            
             if (currentColor > 7) currentColor = 1;
             currentColorAgain = currentColor - 1;
@@ -328,7 +332,13 @@ class MainMenuState extends MusicBeatState
            
 			camGame.zoom = 1 + 0.03;
 			//camGame.scale.y = 1 + 0.015;
-			FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
+			FlxTween.tween(camGame, {zoom: 1}, 0.6, {
+			ease: FlxEase.cubeOut,
+			onComplete: function(twn:FlxTween)
+					{
+					    canBeat = true;
+					}
+		    });
 			
 			menuItems.forEach(function(spr:FlxSprite)	{
 				spr.scale.x = 0.83;
