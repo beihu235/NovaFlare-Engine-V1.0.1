@@ -403,7 +403,7 @@ class MainMenuState extends MusicBeatState
 		
 		FlxTween.tween(camGame, {zoom: 2}, 1.2, {ease: FlxEase.cubeInOut});
 		FlxG.camera.fade(FlxColor.BLACK, 1.2, false);
-		FlxTween.tween(camGame, {angle: -45}, 1.2, {
+		FlxTween.tween(camGame, {angle: 0}, 1.2, {
 		ease: FlxEase.cubeInOut,
 		onComplete: function(twn:FlxTween)
 				{
