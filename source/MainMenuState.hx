@@ -78,7 +78,7 @@ class MainMenuState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 		
-		bpm == TitleState.bpm;
+		bpm == Conductor.bpm;
         crochet == 60 / bpm;
         
 		#if MODS_ALLOWED
@@ -219,12 +219,12 @@ class MainMenuState extends MusicBeatState
 		}
 		#end
 		
-		 test1 = new FlxText(12, FlxG.height - 36, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
+		 test1 = new FlxText(12, FlxG.height - 84, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
 		test1.scrollFactor.set();
 		test1.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(test1);
 		
-	test2 = new FlxText(12, FlxG.height - 48, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
+	test2 = new FlxText(12, FlxG.height - 72, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
 		test2.scrollFactor.set();
 		test2.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(test2);
