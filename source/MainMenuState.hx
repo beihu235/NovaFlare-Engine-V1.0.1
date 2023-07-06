@@ -143,7 +143,7 @@ class MainMenuState extends MusicBeatState
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
-		var scale:Float = 1;
+		var scale:Float = 0.8;
 		/*if(optionShit.length > 6) {
 			scale = 6 / optionShit.length;
 		}*/
@@ -152,8 +152,8 @@ class MainMenuState extends MusicBeatState
 		{
 			var offset:Float = 130 - (Math.max(optionShit.length, 4) - 4) * 80;
 			var menuItem:FlxSprite = new FlxSprite(-1950, (i * 130)  + offset);
-			menuItem.scale.x = 0.8;
-			menuItem.scale.y = 0.8;
+			menuItem.scale.x = scale;
+			menuItem.scale.y = scale;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
@@ -162,8 +162,8 @@ class MainMenuState extends MusicBeatState
 			
 			//menuItem.x = menuItem.x - menuItem.width;
 			
-			//menuItem.screenCenter(X);
-			menuItem.centerOrigin();
+			menuItem.screenCenter(X);
+			//menuItem.centerOrigin();
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
@@ -338,8 +338,8 @@ class MainMenuState extends MusicBeatState
 			#end 
 		}
        
-        SoundTime = Math.floor( FlxG.sound.music.time / 100) / 10;
-        BeatTime = Math.floor(60 / Conductor.bpm * 10) / 10;
+        SoundTime = FlxG.sound.music.time / 100 / 10;
+        BeatTime = 60 / Conductor.bpm * 10 / 10;
         
         if ( Math.floor(SoundTime/BeatTime + 0.5) % 4  == 0 && canClick && canBeat) {
         
@@ -381,10 +381,10 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-		    //spr.screenCenter(X);
+		    spr.screenCenter(X);
 			spr.updateHitbox();
 			//spr.centerOffsets();
-			spr.centerOrigin();
+			//spr.centerOrigin();
 		});
 	}
     
