@@ -49,6 +49,10 @@ class MainMenuState extends MusicBeatState
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
 	
+	var test1:FlxText;
+	var test3:FlxText;
+	var test2:FlxText;
+	
 	var bgScroll:FlxBackdrop;
 	var bpm:Float = 0;
 	var crochet:Float = 0;
@@ -215,17 +219,17 @@ class MainMenuState extends MusicBeatState
 		}
 		#end
 		
-		var test1:FlxText = new FlxText(12, FlxG.height - 36, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
+		 test1 = new FlxText(12, FlxG.height - 36, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
 		test1.scrollFactor.set();
 		test1.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(test1);
 		
-		var test2:FlxText = new FlxText(12, FlxG.height - 48, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
+	test2 = new FlxText(12, FlxG.height - 48, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
 		test2.scrollFactor.set();
 		test2.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(test2);
 		
-		var test3:FlxText = new FlxText(12, FlxG.height - 60, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
+		test3 = new FlxText(12, FlxG.height - 60, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
 		test3.scrollFactor.set();
 		test3.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(test3);
@@ -334,7 +338,7 @@ class MainMenuState extends MusicBeatState
         SoundTime = Math.floor( FlxG.sound.music.time / 100) / 10;
         BeatTime = Math.floor(crochet * 10) / 10;
         
-        if ( (SoundTime / BeatTime) % 4  == 0 && canClick && canBeat) {
+        if ( (SoundTime/BeatTime) % 4  == 0 && canClick && canBeat) {
         
             canBeat = false;
            
