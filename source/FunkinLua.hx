@@ -3205,8 +3205,7 @@ class FunkinLua {
 
 	function cameraFromString(cam:String):FlxCamera {
 		switch(cam.toLowerCase()) {
-		    case 'camshadow' | 'shadow': return PlayState.instance.camShadow;
-		    case 'camnote' | 'note': return PlayState.instance.camNote;
+		   
 			case 'camhud' | 'hud': return PlayState.instance.camHUD;
 			case 'camother' | 'other': return PlayState.instance.camOther;
 		}

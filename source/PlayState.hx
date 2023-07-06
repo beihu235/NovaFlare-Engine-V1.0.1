@@ -219,9 +219,9 @@ class PlayState extends MusicBeatState
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
 	public var camHUD:FlxCamera;
-	public var camShadow:FlxCamera;
+
 	public var camGame:FlxCamera;
-	public var camNote:FlxCamera;
+
 	public var camOther:FlxCamera;
 	public var cameraSpeed:Float = 1;
 
@@ -414,19 +414,19 @@ class PlayState extends MusicBeatState
 
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
-		camShadow = new FlxCamera();
+		
 		camHUD = new FlxCamera();
-		camNote = new FlxCamera();
+		
 		camOther = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
-		camNote.bgColor.alpha = 0;
-		camShadow.bgColor.alpha = 0;
+		
+	
 		camOther.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camGame);
-		FlxG.cameras.add(camShadow, false);
+		
 		FlxG.cameras.add(camHUD, false);
-		FlxG.cameras.add(camNote, false);
+		
 		FlxG.cameras.add(camOther, false);
 		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
 
@@ -1214,9 +1214,9 @@ class PlayState extends MusicBeatState
 			botplayTxt.y = timeBarBG.y - 78;
 		}
 
-		strumLineNotes.cameras = [camNote];
-		grpNoteSplashes.cameras = [camNote];
-		notes.cameras = [camNote];
+		strumLineNotes.cameras = [camHUD];
+		grpNoteSplashes.cameras = [camHUD];
+		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
 		iconP1.cameras = [camHUD];
@@ -3918,7 +3918,7 @@ class PlayState extends MusicBeatState
 
 	public function finishSong(?ignoreNoteOffset:Bool = false):Void
 	{
-	    openSubState(new GameplayChangersSubstate());
+	    openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 		var finishCallback:Void->Void = endSong; //In case you want to change it in a specific song.
 
 		updateTime = false;
