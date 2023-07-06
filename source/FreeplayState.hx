@@ -400,8 +400,10 @@ class FreeplayState extends MusicBeatState
             if ( PlayState.SONG.song != 'setting' || PlayState.SONG.song != 'FreeplayState' || PlayState.SONG.song != 'OptionsState' || PlayState.SONG.song != 'MainMenuState'  )
             {
 			// FlxG.sound.music.volume = 0;
-					
-			// destroyFreeplayVocals();
+			}
+			else		
+			{
+			destroyFreeplayVocals();
 			}
 		}
 		else if(controls.RESET #if android || _virtualpad.buttonY.justPressed #end)
