@@ -162,7 +162,7 @@ class MainMenuState extends MusicBeatState
 			
 			//menuItem.x = menuItem.x - menuItem.width;
 			
-			menuItem.screenCenter(X);
+			//menuItem.screenCenter(X);
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
 			if(optionShit.length < 6) scr = 0;
@@ -176,7 +176,7 @@ class MainMenuState extends MusicBeatState
 			if (menuItem.ID == curSelected){
 			menuItem.animation.play('selected');
 			menuItem.updateHitbox();
-			menuItem.centerOffsets();
+			//menuItem.centerOffsets();
 			//menuItem.offset.x = menuItem.offset.x * 0.8;
 			//menuItem.offset.y = menuItem.offset.y * 0.8 + menuItem.width / 2;
 			}
@@ -294,7 +294,9 @@ class MainMenuState extends MusicBeatState
 					    
 					    		
 					    if (spr.animation.curAnim.name == 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	    
-					    spr.animation.play('selected');	
+					    spr.animation.play('selected');						    
+					    spr.centerOffsets();
+					    spr.updateHitbox();
 					    //spr.offset.x = spr.offset.x * 0.8;
 			            //spr.offset.y = spr.offset.y * 0.8 + spr.width / 2;
 			            
@@ -378,7 +380,7 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-		    spr.screenCenter(X);
+		   // spr.screenCenter(X);
 			spr.updateHitbox();
 			//spr.centerOffsets();
 			
