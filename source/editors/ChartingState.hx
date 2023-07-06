@@ -1877,8 +1877,13 @@ class ChartingState extends MusicBeatState
 				}
 				else
 				{
+					
+					if (UI_box.selected_tab == 4) {
+					UI_box.selected_tab = 0;
+					}
+					else {
 					UI_box.selected_tab += 1;
-					if (UI_box.selected_tab > 4) UI_box.selected_tab = 0;
+					}
 				}
 			}
             
