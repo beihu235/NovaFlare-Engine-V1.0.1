@@ -67,8 +67,6 @@ class FunkinLua {
 	public static var Function_Stop:Dynamic = "##PSYCHLUA_FUNCTIONSTOP";
 	public static var Function_Continue:Dynamic = "##PSYCHLUA_FUNCTIONCONTINUE";
 	public static var Function_StopLua:Dynamic = "##PSYCHLUA_FUNCTIONSTOPLUA";
-	
-	public static var vocals:FlxSound = null;
 
 	//public var errorHandler:String->Void;
 	#if LUA_ALLOWED
@@ -122,10 +120,6 @@ class FunkinLua {
 		set('luaDeprecatedWarnings', true);
 		set('inChartEditor', false);
 
-        // choose num
-        set('FreeplayNum', PlayState.FreeplayCurSelected);
-        set('ExtraFreePlayNum', PlayState.ExtraFreeplayCurSelected);
-        
 		// Song/Week shit
 		set('curBpm', Conductor.bpm);
 		set('bpm', PlayState.SONG.bpm);
@@ -208,7 +202,6 @@ class FunkinLua {
 		set('downscroll', ClientPrefs.downScroll);
 		set('middlescroll', ClientPrefs.middleScroll);
 		set('framerate', ClientPrefs.framerate);
-		set('rainbowFPS', ClientPrefs.rainbowFPS);
 		set('ghostTapping', ClientPrefs.ghostTapping);
 		set('hideHud', ClientPrefs.hideHud);
 		set('timeBarType', ClientPrefs.timeBarType);
@@ -919,24 +912,15 @@ class FunkinLua {
 			PlayState.SONG = Song.loadFromJson(poop, name);
 			PlayState.storyDifficulty = difficultyNum;
 			PlayState.instance.persistentUpdate = false;
-		    	if ( PlayState.SONG.song == 'setting' || PlayState.SONG.song == 'source-FreeplayState' || PlayState.SONG.song == 'source-OptionsState' || PlayState.SONG.song == 'source-MainMenuState' || PlayState.SONG.song == 'source-StoryMenuState'  )
-			    {
-			    MusicBeatState.switchState(new PlayState());
-			    }
-			    else 
-			    {
-			    LoadingState.loadAndSwitchState(new PlayState());
-			    FlxG.sound.music.pause();
-			    FlxG.sound.music.volume = 0;
-			    
-			        if(PlayState.instance.vocals != null)
-			        {
-				    PlayState.instance.vocals.pause();
-				    PlayState.instance.vocals.volume = 0;
-			        }
-			    }
-			
-			
+			LoadingState.loadAndSwitchState(new PlayState());
+
+			FlxG.sound.music.pause();
+			FlxG.sound.music.volume = 0;
+			if(PlayState.instance.vocals != null)
+			{
+				PlayState.instance.vocals.pause();
+				PlayState.instance.vocals.volume = 0;
+			}
 		});
 
 		Lua_helper.add_callback(lua, "loadGraphic", function(variable:String, image:String, ?gridX:Int = 0, ?gridY:Int = 0) {
@@ -1276,8 +1260,6 @@ class FunkinLua {
 			}
 			return boobs;
 		});
-		
-		
 		Lua_helper.add_callback(lua, "noteTweenAngle", function(tag:String, note:Int, value:Dynamic, duration:Float, ease:String) {
 			cancelTween(tag);
 			if(note < 0) note = 0;
@@ -2207,12 +2189,10 @@ class FunkinLua {
 			return true;
 			#end
 		});
-		
-		
+
 		Lua_helper.add_callback(lua, "playMusic", function(sound:String, volume:Float = 1, loop:Bool = false) {
 			FlxG.sound.playMusic(Paths.music(sound), volume, loop);
 		});
-		
 		Lua_helper.add_callback(lua, "playSound", function(sound:String, volume:Float = 1, ?tag:String = null) {
 			if(tag != null && tag.length > 0) {
 				tag = tag.replace('.', '');
@@ -2314,7 +2294,7 @@ class FunkinLua {
 			if (text3 == null) text3 = '';
 			if (text4 == null) text4 = '';
 			if (text5 == null) text5 = '';
-			luaTrace('data1: ' +  text1 + ' data2: ' + text2 + ' data3: ' + text3 + ' data4: ' + text4 + ' data5: ' + text5, true, false);
+			luaTrace('' + text1 + text2 + text3 + text4 + text5, true, false);
 		});
 		
 		Lua_helper.add_callback(lua, "close", function() {
@@ -2773,92 +2753,6 @@ class FunkinLua {
 			#end
 			return list;
 		});
-		
-		//new extend
-		
-		Lua_helper.add_callback(lua, "androidBack", function()
-		{
-			return FlxG.android.justReleased.BACK;
-		});
-		
-		
-		Lua_helper.add_callback(lua, "getHighScore", function(songName:String, difficultysName:Int) {
-			var data = Highscore.getScore(songName,difficultysName);
-			 return data;
-		});
-				
-		Lua_helper.add_callback(lua, "getHighRating", function(songName:String, difficultysName:Int) {
-			var data =  Highscore.getRating(songName,difficultysName);
-			return data;
-		});
-
-	    Lua_helper.add_callback(lua, "playSongMusic", function(sound:String, volume:Float = 1, loop:Bool = false)
-	     {
-	        if(vocals != null) {
-			vocals.stop();
-			vocals.destroy();
-		    }
-		    vocals = null;
-		    
-				vocals = new FlxSound().loadEmbedded(Paths.voices(sound));
-				FlxG.sound.list.add(vocals);
-				FlxG.sound.playMusic(Paths.inst(sound), volume, loop);
-				vocals.play();
-				vocals.persist = true;
-				vocals.looped = loop;
-				vocals.volume = volume;
-				// instPlaying = curSelected;	  	        
-	  	 });
-	  	 
-	  	 Lua_helper.add_callback(lua, "playMenuMusic", function(sound:String, volume:Float = 1, loop:Bool = false) {
-		    vocals.stop();
-			vocals.destroy();
-			FlxG.sound.playMusic(Paths.menumusic(sound), volume, loop);
-		});
-		
-		Lua_helper.add_callback(lua, "openLink", function(browserlink:String) {
-		    CoolUtil.browserLoad(browserlink);
-		});
-		/*
-		Lua_helper.add_callback(lua, "jumpWndow", function(description:String) {
-		    SUtil.applicationToast(description);
-		});
-		*/
-		
-		Lua_helper.add_callback(lua, "parseJsonData", function(jsonStr:String, varName:String) {
-			var json = Paths.modFolders('data' + jsonStr + '.json');
-			var foundJson:Bool;
-
-			trace(Assets.exists(json));
-
-			#if sys
-				if (FileSystem.exists(json)) {
-					foundJson = true;
-				} else {
-					luaTrace('parseJsonData: Invalid json file path!', false, false, FlxColor.RED);
-					foundJson = false;
-					return;	
-				}
-			#else
-				if (Assets.exists(json)) {
-					foundJson = true;
-				} else {
-					luaTrace('parseJsonData: Invalid json file path!', false, false, FlxColor.RED);
-					foundJson = false;
-					return;	
-				}
-			#end
-
-			if (foundJson) {
-				var parsedJson = haxe.Json.parse(File.getContent(json));				
-				PlayState.instance.variables.set(varName, parsedJson);
-			}
-		});
-		// code from https://github.com/ShadowMario/FNF-PsychEngine/pull/12081
-		
-		
-		
-		//new extend
 
 		call('onCreate', []);
 		#end
@@ -2978,27 +2872,26 @@ class FunkinLua {
 	}
 	#end
 	
-
-	
-	
-
-	public function initLuaShader(name:String)
+	function initLuaShader(name:String)
 	{
 		if(!ClientPrefs.shaders) return false;
 
+		#if (!flash && sys)
 		if(PlayState.instance.runtimeShaders.exists(name))
 		{
-			FlxG.log.warn('Shader $name was already initialized!');
+			luaTrace('Shader $name was already initialized!');
 			return true;
 		}
 
-		var foldersToCheck:Array<String> = [Paths.mods('shaders/')];
+		var foldersToCheck:Array<String> = [SUtil.getPath() + Paths.getPreloadPath('shaders/')];
+
 		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
+
 			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/shaders/'));
 
 		for(mod in Paths.getGlobalMods())
 			foldersToCheck.insert(0, Paths.mods(mod + '/shaders/'));
-
+		
 		for (folder in foldersToCheck)
 		{
 			if(FileSystem.exists(folder))
@@ -3013,7 +2906,7 @@ class FunkinLua {
 				}
 				else frag = null;
 
-				if (FileSystem.exists(vert))
+				if(FileSystem.exists(vert))
 				{
 					vert = File.getContent(vert);
 					found = true;
@@ -3023,12 +2916,15 @@ class FunkinLua {
 				if(found)
 				{
 					PlayState.instance.runtimeShaders.set(name, [frag, vert]);
-					//trace('Finally Found shader $name!');
+					//trace('Found shader $name!');
 					return true;
 				}
 			}
 		}
-		FlxG.log.warn('Missing shader $name .frag AND .vert files!');
+		luaTrace('Missing shader $name .frag AND .vert files!', false, false, FlxColor.RED);
+		#else
+		luaTrace('This platform doesn\'t support Runtime Shaders!', false, false, FlxColor.RED);
+		#end
 		return false;
 	}
 
@@ -3205,7 +3101,6 @@ class FunkinLua {
 
 	function cameraFromString(cam:String):FlxCamera {
 		switch(cam.toLowerCase()) {
-		   
 			case 'camhud' | 'hud': return PlayState.instance.camHUD;
 			case 'camother' | 'other': return PlayState.instance.camOther;
 		}

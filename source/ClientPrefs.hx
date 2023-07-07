@@ -7,7 +7,7 @@ import flixel.graphics.FlxGraphic;
 import Controls;
 
 class ClientPrefs {
-	public static var downScroll:Bool = false;
+	public static var downScroll:Bool = true;
 	public static var middleScroll:Bool = false;
 	public static var opponentStrums:Bool = true;
 	public static var showFPS:Bool = true;
@@ -17,6 +17,7 @@ class ClientPrefs {
 	public static var lowQuality:Bool = false;
 	public static var shaders:Bool = true;
 	public static var framerate:Int = 60;
+	
 	public static var cursing:Bool = true;
 	public static var violence:Bool = true;
 	public static var camZooms:Bool = true;
@@ -34,8 +35,8 @@ class ClientPrefs {
 	public static var pauseMusic:String = 'Tea Time';
 	public static var checkForUpdates:Bool = true;
 	public static var comboStacking = true;
-	public static var hitboxmode:String = 'Classic';  //starting new way to change between hitboxes yay
-	public static var hitboxalpha:Float = 0.2; //someone request this lol
+	public static var hitboxmode:String = 'New';  //starting new way to change between hitboxes yay
+	public static var hitboxalpha:Float = 0; //someone request this lol
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -59,6 +60,7 @@ class ClientPrefs {
 
 	public static var comboOffset:Array<Int> = [0, 0, 0, 0];
 	public static var ratingOffset:Int = 0;
+	public static var marvelousWindow:Int = 15;
 	public static var sickWindow:Int = 45;
 	public static var goodWindow:Int = 90;
 	public static var badWindow:Int = 135;
@@ -89,6 +91,18 @@ class ClientPrefs {
 		'debug_1'		=> [SEVEN, NONE],
 		'debug_2'		=> [EIGHT, NONE]
 	];
+	
+	// new extend
+	
+	public static var rainbowFPS:Bool = true;
+	public static var NoteSkin:String = 'Stepmania';
+	
+	
+	
+	
+	
+	// new extend
+	
 	public static var defaultKeys:Map<String, Array<FlxKey>> = null;
 
 	public static function loadDefaultKeys() {
@@ -107,6 +121,7 @@ class ClientPrefs {
 		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.shaders = shaders;
 		FlxG.save.data.framerate = framerate;
+		FlxG.save.data.rainbowFPS = rainbowFPS;
 		//FlxG.save.data.cursing = cursing;
 		//FlxG.save.data.violence = violence;
 		FlxG.save.data.camZooms = camZooms;
@@ -124,6 +139,7 @@ class ClientPrefs {
 		FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
 
 		FlxG.save.data.ratingOffset = ratingOffset;
+		FlxG.save.data.marvelousWindow = marvelousWindow;
 		FlxG.save.data.sickWindow = sickWindow;
 		FlxG.save.data.goodWindow = goodWindow;
 		FlxG.save.data.badWindow = badWindow;
@@ -137,6 +153,13 @@ class ClientPrefs {
 		
 		FlxG.save.data.hitboxmode = hitboxmode;
 		FlxG.save.data.hitboxalpha = hitboxalpha;
+	
+	        // new extend
+	
+	FlxG.save.data.NoteSkin = NoteSkin;
+	
+	        // new extend
+	
 	
 	
 		FlxG.save.flush();
@@ -189,6 +212,7 @@ class ClientPrefs {
 				FlxG.updateFramerate = framerate;
 			}
 		}
+		
 		/*if(FlxG.save.data.cursing != null) {
 			cursing = FlxG.save.data.cursing;
 		}
@@ -232,6 +256,9 @@ class ClientPrefs {
 		if(FlxG.save.data.ratingOffset != null) {
 			ratingOffset = FlxG.save.data.ratingOffset;
 		}
+		if(FlxG.save.data.marvelousWindow != null) {
+			marvelousWindow = FlxG.save.data.marvelousWindow;
+		}
 		if(FlxG.save.data.sickWindow != null) {
 			sickWindow = FlxG.save.data.sickWindow;
 		}
@@ -267,6 +294,21 @@ class ClientPrefs {
 				gameplaySettings.set(name, value);
 			}
 		}
+		
+		
+		// new extend
+		
+		
+		if(FlxG.save.data.rainbowFPS != null) {
+			rainbowFPS = FlxG.save.data.rainbowFPS;
+		}
+		
+		if(FlxG.save.data.NoteSkin != null) {
+			NoteSkin = FlxG.save.data.NoteSkin;
+		}
+		
+		
+		// new extend
 		
 		// flixel automatically saves your volume!
 		if(FlxG.save.data.volume != null)
