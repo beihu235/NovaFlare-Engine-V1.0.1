@@ -162,7 +162,7 @@ class MainMenuState extends MusicBeatState
 			
 			//menuItem.x = menuItem.x - menuItem.width;
 			
-			menuItem.screenCenter(X);
+			//menuItem.screenCenter(X);
 			//menuItem.centerOrigin();
 			menuItems.add(menuItem);
 			var scr:Float = (optionShit.length - 4) * 0.135;
