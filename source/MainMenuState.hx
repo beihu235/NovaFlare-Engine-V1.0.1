@@ -3,6 +3,7 @@ package;
 #if desktop
 import Discord.DiscordClient;
 #end
+import flixel.addons.display.FlxBackdrop;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
@@ -46,6 +47,12 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
+	
+	var bgScroll:FlxBackdrop;
+	var bpm:Float = 0;
+	var crochet:Float = 0;
+	var SoundTime:Float = 0;
+	var BeatTime:Float = 0;
 
 	override function create()
 	{
@@ -84,6 +91,15 @@ class MainMenuState extends MusicBeatState
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
+		
+		bgScroll = new FlxBackdrop(Paths.image('mainmenu_sprite/backdrop'), 1, 1, true, true, 0, 0);
+		bgScroll.scrollFactor.set();
+		bgScroll.alpha = 0.3;
+		//bgScroll.color = ColorArray[currentColor];
+		bgScroll.screenCenter();
+		bgScroll.velocity.set(100, 70);
+		bgScroll.antialiasing = ClientPrefs.globalAntialiasing;
+		add(bgScroll);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		camFollowPos = new FlxObject(0, 0, 1, 1);
@@ -105,15 +121,15 @@ class MainMenuState extends MusicBeatState
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
-		var scale:Float = 1;
+		var scale:Float = 0.8;
 		/*if(optionShit.length > 6) {
 			scale = 6 / optionShit.length;
 		}*/
 
 		for (i in 0...optionShit.length)
 		{
-			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
-			var menuItem:FlxSprite = new FlxSprite(100, (i * 140)  + offset);
+			var offset:Float = 130 - (Math.max(optionShit.length, 4) - 4) * 80;
+			var menuItem:FlxSprite = new FlxSprite(100, (i * 130)  + offset);
 			menuItem.scale.x = scale;
 			menuItem.scale.y = scale;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[i]);
