@@ -160,6 +160,8 @@ class Controls extends FlxActionSet
 	var _pause = new FlxActionDigital(Action.PAUSE);
 	var _reset = new FlxActionDigital(Action.RESET);
 	var _space = new FlxActionDigital(Action.SPACE);
+	var _spaceP = new FlxActionDigital(Action.SPACE);
+	var _spaceR = new FlxActionDigital(Action.SPACE);
 
 	#if (haxe >= "4.0.0")
 	var byName:Map<String, FlxActionDigital> = [];
@@ -314,6 +316,16 @@ class Controls extends FlxActionSet
 
 	inline function get_SPACE()
 		return _space.check();		
+	
+	public var SPACE_R(get, never):Bool;
+
+	inline function get_SPACE_R()
+		return _spaceR.check();		
+		
+	public var SPACE_P(get, never):Bool;
+
+	inline function get_SPACE_P()
+		return _spaceP.check();			
 
 	#if (haxe >= "4.0.0")
 	public function new(name, scheme = None)
@@ -349,6 +361,8 @@ class Controls extends FlxActionSet
 		add(_pause);
 		add(_reset);
 		add(_space);
+		add(_spaceP);
+		add(_spaceR);
 
 		for (action in digitalActions)
 			byName[action.name] = action;
@@ -389,6 +403,8 @@ class Controls extends FlxActionSet
 		add(_pause);
 		add(_reset);
 		add(_space);
+		add(_spaceP);
+		add(_spaceR);
 
 		for (action in digitalActions)
 			byName[action.name] = action;
@@ -713,7 +729,9 @@ class Controls extends FlxActionSet
 			case RESET:
 				func(_reset, JUST_PRESSED);
 			case SPACE:
-				func(_space, JUST_PRESSED);	
+				func(_space, PRESSED);
+				func(_spaceP, JUST_PRESSED);
+				func(_spaceR, JUST_RELEASED);
 		}
 	}
 
