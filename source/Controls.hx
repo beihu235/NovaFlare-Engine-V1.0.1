@@ -403,7 +403,7 @@ class Controls extends FlxActionSet
 	public var trackedinputsUI:Array<FlxActionInput> = [];
 	public var trackedinputsNOTES:Array<FlxActionInput> = [];	
 
-	public function addbuttonuNOTES(action:FlxActionDigital, button:FlxButton, state:FlxInputState) 
+	public function addbuttonuNOTES(action:FlxActionDigital, button:FlxNewButton, state:FlxInputState) 
 	{
 		var input = new FlxActionInputDigitalIFlxInput(button, state);
 		trackedinputsNOTES.push(input);
@@ -440,7 +440,7 @@ class Controls extends FlxActionSet
 		inline forEachBound(Control.NOTE_LEFT, (action, state) -> addButtonNOTES(action, Hitbox.buttonLeft, state));
 		inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addButtonNOTES(action, Hitbox.buttonRight, state));
 		inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addButtonNOTES(action, Hitbox.buttonRight, state));
-		inline forEachBound(Control.SPACE, (action, state) -> addButtonNOTES(action, Hitbox.buttonSpace, state));
+		inline forEachBound(Control.SPACE, (action, state) -> addButtonUI(action, Hitbox.buttonSpace, state));
 	}
 	
 	public function setVirtualPadUI(virtualPad:FlxVirtualPad, ?DPad:FlxDPadMode, ?Action:FlxActionMode) 
