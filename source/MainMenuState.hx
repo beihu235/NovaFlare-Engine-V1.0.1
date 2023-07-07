@@ -377,15 +377,17 @@ class MainMenuState extends MusicBeatState
         test2.text = "beatTime: " + BeatTime;
         test3.text = "startbeat: " + ((SoundTime / BeatTime) % 4);
         
-		super.update(elapsed);
+		
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-		    spr.screenCenter(X);
+		    //spr.screenCenter(X);
 			spr.updateHitbox();
-			//spr.centerOffsets();
-			//spr.centerOrigin();
+			spr.centerOffsets();
+			spr.centerOrigin();
 		});
+		
+		super.update(elapsed);
 	}
     
 	
