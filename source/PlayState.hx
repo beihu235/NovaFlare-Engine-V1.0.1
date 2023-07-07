@@ -133,7 +133,7 @@ class PlayState extends MusicBeatState
 	public var songSpeedTween:FlxTween;
 	public var songSpeed(default, set):Float = 1;
 	public var songSpeedType:String = "multiplicative";
-	public var noteKillOffset:Float = 1500;
+	public var noteKillOffset:Float = 350;
 
 	public var playbackRate(default, set):Float = 1;
 
@@ -147,10 +147,7 @@ class PlayState extends MusicBeatState
 	public static var storyWeek:Int = 0;
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
-	
-	public static var FreeplayCurSelected:Int = 1;
-    public static var ExtraFreeplayCurSelected:Int = 1;
-    
+
 	public var spawnTime:Float = 2000;
 
 	public var vocals:FlxSound;
@@ -193,7 +190,6 @@ class PlayState extends MusicBeatState
 	public var timeBar:FlxBar;
 
 	public var ratingsData:Array<Rating> = [];
-	public var marvelouss:Int = 0;
 	public var sicks:Int = 0;
 	public var goods:Int = 0;
 	public var bads:Int = 0;
@@ -219,9 +215,7 @@ class PlayState extends MusicBeatState
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
 	public var camHUD:FlxCamera;
-
 	public var camGame:FlxCamera;
-
 	public var camOther:FlxCamera;
 	public var cameraSpeed:Float = 1;
 
@@ -336,11 +330,9 @@ class PlayState extends MusicBeatState
 	{
 		//trace('Playback Rate: ' + playbackRate);
 		Paths.clearStoredMemory();
-        Paths.clearUnusedMemory();
+
 		// for lua
 		instance = this;
-		
-		//vocals.volume = 1;
 
 		debugKeysChart = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 		debugKeysCharacter = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_2'));
@@ -362,13 +354,7 @@ class PlayState extends MusicBeatState
 		];
 
 		//Ratings
-		ratingsData.push(new Rating('marvelous')); //default rating
-		
-		var rating:Rating = new Rating('sick');
-		rating.ratingMod = 1;
-		rating.score = 350;
-		rating.noteSplash = true;
-		ratingsData.push(rating);
+		ratingsData.push(new Rating('sick')); //default rating
 
 		var rating:Rating = new Rating('good');
 		rating.ratingMod = 0.7;
@@ -394,16 +380,8 @@ class PlayState extends MusicBeatState
 			keysPressed.push(false);
 		}
 
-
-        if ( PlayState.SONG.song == 'setting' || PlayState.SONG.song == 'source-FreeplayState' || PlayState.SONG.song == 'source-OptionsState' || PlayState.SONG.song == 'source-MainMenuState' || PlayState.SONG.song == 'source-StoryMenuState'  )
-        {
-        
-        }
-        else
-        {
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
-		}	
 
 		// Gameplay settings
 		healthGain = ClientPrefs.getGameplaySetting('healthgain', 1);
@@ -414,19 +392,13 @@ class PlayState extends MusicBeatState
 
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
-		
 		camHUD = new FlxCamera();
-		
 		camOther = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
-		
-	
 		camOther.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camGame);
-		
 		FlxG.cameras.add(camHUD, false);
-		
 		FlxG.cameras.add(camOther, false);
 		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
 
@@ -1420,8 +1392,7 @@ class PlayState extends MusicBeatState
 		if(eventNotes.length < 1) checkEventNote();
 	}
 
-	
-		#if (!flash && sys)
+	#if (!flash && sys)
 	public var runtimeShaders:Map<String, Array<String>> = new Map<String, Array<String>>();
 	public function createRuntimeShader(name:String):FlxRuntimeShader
 	{
@@ -1494,8 +1465,6 @@ class PlayState extends MusicBeatState
 		return false;
 	}
 	#end
-	
-	
 
 	function set_songSpeed(value:Float):Float
 	{
@@ -1506,7 +1475,7 @@ class PlayState extends MusicBeatState
 			for (note in unspawnNotes) note.resizeByRatio(ratio);
 		}
 		songSpeed = value;
-		noteKillOffset = 1000 / songSpeed;
+		noteKillOffset = 350 / songSpeed;
 		return value;
 	}
 
@@ -2317,7 +2286,7 @@ class PlayState extends MusicBeatState
 		var i:Int = unspawnNotes.length - 1;
 		while (i >= 0) {
 			var daNote:Note = unspawnNotes[i];
-			if(daNote.strumTime - 600 < time)
+			if(daNote.strumTime - 350 < time)
 			{
 				daNote.active = false;
 				daNote.visible = false;
@@ -2333,7 +2302,7 @@ class PlayState extends MusicBeatState
 		i = notes.length - 1;
 		while (i >= 0) {
 			var daNote:Note = notes.members[i];
-			if(daNote.strumTime - 600 < time)
+			if(daNote.strumTime - 350 < time)
 			{
 				daNote.active = false;
 				daNote.visible = false;
@@ -2548,7 +2517,8 @@ class PlayState extends MusicBeatState
 				swagNote.scrollFactor.set();
 
 				var susLength:Float = swagNote.sustainLength;
-				susLength = (susLength / Conductor.stepCrochet) - 1;
+
+				susLength = susLength / Conductor.stepCrochet;
 				unspawnNotes.push(swagNote);
 
 				var floorSus:Int = Math.floor(susLength);
@@ -2914,7 +2884,6 @@ class PlayState extends MusicBeatState
 			iconP1.swapOldIcon();
 		}*/
 		callOnLuas('onUpdate', [elapsed]);
-		
 
 		switch (curStage)
 		{
@@ -3918,19 +3887,12 @@ class PlayState extends MusicBeatState
 
 	public function finishSong(?ignoreNoteOffset:Bool = false):Void
 	{
-	    openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 		var finishCallback:Void->Void = endSong; //In case you want to change it in a specific song.
 
 		updateTime = false;
-		if ( PlayState.SONG.song == 'setting' || PlayState.SONG.song == 'source-FreeplayState' || PlayState.SONG.song == 'source-OptionsState' || PlayState.SONG.song == 'source-MainMenuState' || PlayState.SONG.song == 'source-StoryMenuState'  )
-		{
-		}
-		else
-		{
 		FlxG.sound.music.volume = 0;
-		// vocals.volume = 0;
-		// vocals.pause();
-		}
+		vocals.volume = 0;
+		vocals.pause();
 		if(ClientPrefs.noteOffset <= 0 || ignoreNoteOffset) {
 			finishCallback();
 		} else {
@@ -3944,8 +3906,6 @@ class PlayState extends MusicBeatState
 	public var transitioning = false;
 	public function endSong():Void
 	{
-	    
-	    
 		//Should kill you if you tried to cheat
 		if(!startingSong) {
 			notes.forEach(function(daNote:Note) {
@@ -3979,7 +3939,20 @@ class PlayState extends MusicBeatState
 		deathCounter = 0;
 		seenCutscene = false;
 
-		
+		#if ACHIEVEMENTS_ALLOWED
+		if(achievementObj != null) {
+			return;
+		} else {
+			var achieve:String = checkForAchievement(['week1_nomiss', 'week2_nomiss', 'week3_nomiss', 'week4_nomiss',
+				'week5_nomiss', 'week6_nomiss', 'week7_nomiss', 'ur_bad',
+				'ur_good', 'hype', 'two_keys', 'toastie', 'debugger']);
+
+			if(achieve != null) {
+				startAchievement(achieve);
+				return;
+			}
+		}
+		#end
 
 		var ret:Dynamic = callOnLuas('onEndSong', [], false);
 		if(ret != FunkinLua.Function_Stop && !transitioning) {
@@ -4078,31 +4051,30 @@ class PlayState extends MusicBeatState
 				if(FlxTransitionableState.skipNextTransIn) {
 					CustomFadeTransition.nextCamera = null;
 				}
-				    if (PlayState.SONG.song == 'setting')
-				    {
-				    MusicBeatState.switchState(new ChooseOptionsState());
-				    }
-				    else
-				    {				    
-				     MusicBeatState.switchState(new FreeplayState());
-				     
-				    }
-				   if ( PlayState.SONG.song == 'setting' || PlayState.SONG.song == 'source-FreeplayState' || PlayState.SONG.song == 'source-OptionsState' || PlayState.SONG.song == 'source-MainMenuState' || PlayState.SONG.song == 'source-StoryMenuState'  )
-				    {
-				    
-				    }
-				    else
-				    {
-				    FlxG.sound.playMusic(Paths.music('freakyMenu'));
-				    }
-				    
+				MusicBeatState.switchState(new FreeplayState());
+				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				changedDifficulty = false;
 			}
 			transitioning = true;
 		}
 	}
 
-	
+	#if ACHIEVEMENTS_ALLOWED
+	var achievementObj:AchievementObject = null;
+	function startAchievement(achieve:String) {
+		achievementObj = new AchievementObject(achieve, camOther);
+		achievementObj.onFinish = achievementEnd;
+		add(achievementObj);
+		trace('Giving achievement ' + achieve);
+	}
+	function achievementEnd():Void
+	{
+		achievementObj = null;
+		if(endingSong && !inCutscene) {
+			endSong();
+		}
+	}
+	#end
 
 	public function KillNotes() {
 		while(notes.length > 0) {
@@ -4508,7 +4480,12 @@ class PlayState extends MusicBeatState
 			});
 
 			if (parsedHoldArray.contains(true) && !endingSong) {
-				
+				#if ACHIEVEMENTS_ALLOWED
+				var achieve:String = checkForAchievement(['oversinging']);
+				if (achieve != null) {
+					startAchievement(achieve);
+				}
+				#end
 			}
 			else if (boyfriend.animation.curAnim != null && boyfriend.holdTimer > Conductor.stepCrochet * (0.0011 / FlxG.sound.music.pitch) * boyfriend.singDuration && boyfriend.animation.curAnim.name.startsWith('sing') && !boyfriend.animation.curAnim.name.endsWith('miss'))
 			{
@@ -4661,10 +4638,9 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (SONG.needsVoices && songScore < 1)
-		{
+		if (SONG.needsVoices)
 			vocals.volume = 1;
-        }
+
 		var time:Float = 0.15;
 		if(note.isSustainNote && !note.animation.curAnim.name.endsWith('end')) {
 			time += 0.15;
@@ -4682,7 +4658,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-		function goodNoteHit(note:Note):Void
+	function goodNoteHit(note:Note):Void
 	{
 		if (!note.wasGoodHit)
 		{
@@ -4723,7 +4699,7 @@ class PlayState extends MusicBeatState
 			if (!note.isSustainNote)
 			{
 				combo += 1;
-				//if(combo > 9999) combo = 9999;
+				if(combo > 9999) combo = 9999;
 				popUpScore(note);
 			}
 			health += note.hitHealth * healthGain;
@@ -4774,10 +4750,7 @@ class PlayState extends MusicBeatState
 				}
 			}
 			note.wasGoodHit = true;
-			if (note.isSustainNote)
-			{
-			//vocals.volume = 1;
-			}
+			vocals.volume = 1;
 
 			var isSus:Bool = note.isSustainNote; //GET OUT OF MY HEAD, GET OUT OF MY HEAD, GET OUT OF MY HEAD
 			var leData:Int = Math.round(Math.abs(note.noteData));
@@ -4959,7 +4932,17 @@ class PlayState extends MusicBeatState
 				limoCorpseTwo.visible = false;
 				limoKillingState = 1;
 
-				
+				#if ACHIEVEMENTS_ALLOWED
+				Achievements.henchmenDeath++;
+				FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
+				var achieve:String = checkForAchievement(['roadkill_enthusiast']);
+				if (achieve != null) {
+					startAchievement(achieve);
+				} else {
+					FlxG.save.flush();
+				}
+				FlxG.log.add('Deaths: ' + Achievements.henchmenDeath);
+				#end
 			}
 		}
 	}
@@ -5290,7 +5273,7 @@ class PlayState extends MusicBeatState
 
 			// Rating FC
 			ratingFC = "";
-			if (sicks > 0 || marvelouss > 0) ratingFC = "SFC";
+			if (sicks > 0) ratingFC = "SFC";
 			if (goods > 0) ratingFC = "GFC";
 			if (bads > 0 || shits > 0) ratingFC = "FC";
 			if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
@@ -5302,7 +5285,75 @@ class PlayState extends MusicBeatState
 		setOnLuas('ratingFC', ratingFC);
 	}
 
-	
+	#if ACHIEVEMENTS_ALLOWED
+	private function checkForAchievement(achievesToCheck:Array<String> = null):String
+	{
+		if(chartingMode) return null;
+
+		var usedPractice:Bool = (ClientPrefs.getGameplaySetting('practice', false) || ClientPrefs.getGameplaySetting('botplay', false));
+		for (i in 0...achievesToCheck.length) {
+			var achievementName:String = achievesToCheck[i];
+			if(!Achievements.isAchievementUnlocked(achievementName) && !cpuControlled) {
+				var unlock:Bool = false;
+				
+				if (achievementName.contains(WeekData.getWeekFileName()) && achievementName.endsWith('nomiss')) // any FC achievements, name should be "weekFileName_nomiss", e.g: "weekd_nomiss";
+				{
+					if(isStoryMode && campaignMisses + songMisses < 1 && CoolUtil.difficultyString() == 'HARD'
+						&& storyPlaylist.length <= 1 && !changedDifficulty && !usedPractice)
+						unlock = true;
+				}
+				switch(achievementName)
+				{
+					case 'ur_bad':
+						if(ratingPercent < 0.2 && !practiceMode) {
+							unlock = true;
+						}
+					case 'ur_good':
+						if(ratingPercent >= 1 && !usedPractice) {
+							unlock = true;
+						}
+					case 'roadkill_enthusiast':
+						if(Achievements.henchmenDeath >= 100) {
+							unlock = true;
+						}
+					case 'oversinging':
+						if(boyfriend.holdTimer >= 10 && !usedPractice) {
+							unlock = true;
+						}
+					case 'hype':
+						if(!boyfriendIdled && !usedPractice) {
+							unlock = true;
+						}
+					case 'two_keys':
+						if(!usedPractice) {
+							var howManyPresses:Int = 0;
+							for (j in 0...keysPressed.length) {
+								if(keysPressed[j]) howManyPresses++;
+							}
+
+							if(howManyPresses <= 2) {
+								unlock = true;
+							}
+						}
+					case 'toastie':
+						if(/*ClientPrefs.framerate <= 60 &&*/ !ClientPrefs.shaders && ClientPrefs.lowQuality && !ClientPrefs.globalAntialiasing) {
+							unlock = true;
+						}
+					case 'debugger':
+						if(Paths.formatToSongPath(SONG.song) == 'test' && !usedPractice) {
+							unlock = true;
+						}
+				}
+
+				if(unlock) {
+					Achievements.unlockAchievement(achievementName);
+					return achievementName;
+				}
+			}
+		}
+		return null;
+	}
+	#end
 
 	var curLight:Int = -1;
 	var curLightEvent:Int = -1;
