@@ -54,7 +54,7 @@ class MainMenuState extends MusicBeatState
 	var test3:FlxText;
 	var test2:FlxText;
 	*/
-	var bgScroll:FlxBackdrop;
+	var bgMove:FlxBackdrop;
 	var bpm:Float = 0;
 	var crochet:Float = 0;
 	var SoundTime:Float = 0;
@@ -72,7 +72,7 @@ class MainMenuState extends MusicBeatState
 	    ];
 	public static var currentColor:Int = 2;    
 	public static var currentColorAgain:Int = 1;    
-	var allowColorChange:Bool = true;
+	//var allowColorChange:Bool = true;
 
 	override function create()
 	{
@@ -115,14 +115,14 @@ class MainMenuState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 		
-	    bgScroll = new FlxBackdrop(Paths.image('mainmenu_sprite/backdrop'), 1, 1, true, true, 0, 0);
-		bgScroll.scrollFactor.set();
-		bgScroll.alpha = 0.3;
-		bgScroll.color = ColorArray[currentColor];
-		bgScroll.screenCenter();
-		bgScroll.velocity.set(100, 70);
-		bgScroll.antialiasing = ClientPrefs.globalAntialiasing;
-		add(bgScroll);
+	    bgMove = new FlxBackdrop(Paths.image('mainmenu_sprite/backdrop'), 1, 1, true, true, 0, 0);
+		//bgMove.scrollFactor.set();
+		bgMove.alpha = 0.3;
+		bgMove.color = ColorArray[currentColor];
+		bgMove.screenCenter();
+		bgMove.velocity.set(100, 70);
+		//bgMove.antialiasing = ClientPrefs.globalAntialiasing;
+		add(bgMove);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		camFollowPos = new FlxObject(0, 0, 1, 1);
@@ -271,7 +271,7 @@ class MainMenuState extends MusicBeatState
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
 		
-		bgScroll.alpha = 0.3;
+		bgMove.alpha = 0.3;
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 			if (usingMouse)
@@ -351,7 +351,7 @@ class MainMenuState extends MusicBeatState
             currentColorAgain = currentColor - 1;
             if (currentColorAgain <= 0) currentColorAgain = 7;
             
-            FlxTween.color(bgScroll, 0.6, ColorArray[currentColorAgain], ColorArray[currentColor], { ease: FlxEase.cubeOut});
+            FlxTween.color(bgMove, 0.6, ColorArray[currentColorAgain], ColorArray[currentColor], {ease: FlxEase.cubeOut});
            
 			camGame.zoom = 1 + 0.03;
 			//camGame.scale.y = 1 + 0.015;
@@ -383,7 +383,9 @@ class MainMenuState extends MusicBeatState
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
-		    //spr.screenCenter(X);
+		    spr.updateHitbox();
+		    spr.centerOffsets();
+		    spr.centerOrigin();
 		});
 		
 		super.update(elapsed);
