@@ -225,7 +225,7 @@ class TitleState extends MusicBeatState
 		}
 		#end
 		
-		bpm == titleJSON.bpm;
+		bpm = titleJSON.bpm;
 	}
 
 	var logoBl:FlxSprite;

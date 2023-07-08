@@ -83,8 +83,8 @@ class MainMenuState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 		
-        Mainbpm == TitleState.bpm;
-        bpm == TitleState.bpm;
+        Mainbpm = TitleState.bpm;
+        bpm = TitleState.bpm;
         
 		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
