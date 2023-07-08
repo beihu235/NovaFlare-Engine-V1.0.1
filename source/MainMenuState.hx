@@ -55,7 +55,7 @@ class MainMenuState extends MusicBeatState
 	var test3:FlxText;
 	var test2:FlxText;
 	*/
-	var titleJSON:TitleData;
+	
 	
 	
 	var bgMove:FlxBackdrop;

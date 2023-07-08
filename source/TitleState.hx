@@ -223,8 +223,8 @@ class TitleState extends MusicBeatState
 		}
 		#end
 		
-		MainMenuState.Mainbpm == titleJSON.bpm;
-		MainMenuState.bpm == titleJSON.bpm;
+		MainMenuState.instance.Mainbpm == titleJSON.bpm;
+		MainMenuState.instance.bpm == titleJSON.bpm;
 		
 	}
 
