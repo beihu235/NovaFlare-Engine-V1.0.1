@@ -1052,9 +1052,9 @@ class PlayState extends MusicBeatState
 		add(timeTxt);
 		timeBarBG.sprTracker = timeBar;
 		var wawa = [];
-        for (i in game.dad.healthColorArray) wawa.push(StringTools.hex(i, 2));
+        for (i in dad.healthColorArray) wawa.push(StringTools.hex(i, 2));
         var wawa2 = [];
-        for (i in game.boyfriend.healthColorArray) wawa2.push(StringTools.hex(i, 2));
+        for (i in boyfriend.healthColorArray) wawa2.push(StringTools.hex(i, 2));
         timeBar.createGradientBar([0x0], [Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]);
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
@@ -2616,9 +2616,9 @@ class PlayState extends MusicBeatState
 				addCharacterToList(newCharacter, charType);
 				
 				var wawa = [];
-                for (i in game.dad.healthColorArray) wawa.push(StringTools.hex(i, 2));
+                for (i in dad.healthColorArray) wawa.push(StringTools.hex(i, 2));
                 var wawa2 = [];
-                for (i in game.boyfriend.healthColorArray) wawa2.push(StringTools.hex(i, 2));
+                for (i in boyfriend.healthColorArray) wawa2.push(StringTools.hex(i, 2));
                 timeBar.createGradientBar([0x0], [Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]);
 
 			case 'Dadbattle Spotlight':
@@ -3791,9 +3791,9 @@ class PlayState extends MusicBeatState
 				reloadHealthBarColors();
 				
 			    var wawa = [];
-                for (i in game.dad.healthColorArray) wawa.push(StringTools.hex(i, 2));
+                for (i in dad.healthColorArray) wawa.push(StringTools.hex(i, 2));
                 var wawa2 = [];
-                for (i in game.boyfriend.healthColorArray) wawa2.push(StringTools.hex(i, 2));
+                for (i in boyfriend.healthColorArray) wawa2.push(StringTools.hex(i, 2));
                 timeBar.createGradientBar([0x0], [Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]);	
 
 			case 'BG Freaks Expression':
