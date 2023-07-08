@@ -298,8 +298,7 @@ class MainMenuState extends MusicBeatState
 					    		
 					    if (spr.animation.curAnim.name == 'idle') FlxG.sound.play(Paths.sound('scrollMenu'));	    
 					    spr.animation.play('selected');						    
-					    spr.centerOffsets();
-					    spr.updateHitbox();
+					   
 					    //spr.offset.x = spr.offset.x * 0.8;
 			            //spr.offset.y = spr.offset.y * 0.8 + spr.width / 2;
 			            
@@ -369,7 +368,7 @@ class MainMenuState extends MusicBeatState
 				spr.scale.y = 0.83;
 				    FlxTween.tween(spr.scale, {x: 0.8}, 0.6, {ease: FlxEase.cubeOut});
 				    FlxTween.tween(spr.scale, {y: 0.8}, 0.6, {ease: FlxEase.cubeOut});
-				spr.updateHitbox();    
+			
 				
             });
             
@@ -385,9 +384,6 @@ class MainMenuState extends MusicBeatState
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 		    //spr.screenCenter(X);
-			spr.updateHitbox();
-			spr.centerOffsets();
-			spr.centerOrigin();
 		});
 		
 		super.update(elapsed);
