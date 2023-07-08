@@ -83,6 +83,8 @@ class TitleState extends MusicBeatState
 	var titleJSON:TitleData;
 
 	public static var updateVersion:String = '';
+	
+	public static var bpm:Float = 0;
 
 	override public function create():Void
 	{
@@ -223,9 +225,7 @@ class TitleState extends MusicBeatState
 		}
 		#end
 		
-		MainMenuState.instance.Mainbpm == titleJSON.bpm;
-		MainMenuState.instance.bpm == titleJSON.bpm;
-		
+		bpm == titleJSON.bpm;
 	}
 
 	var logoBl:FlxSprite;
