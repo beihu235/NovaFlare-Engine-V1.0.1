@@ -8,7 +8,6 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxCamera;
-import haxe.Json;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.effects.FlxFlicker;
 import flixel.graphics.frames.FlxAtlasFrames;
@@ -26,18 +25,6 @@ import flixel.input.keyboard.FlxKey;
 
 using StringTools;
 
-typedef TitleData =
-{
-
-	titlex:Float,
-	titley:Float,
-	startx:Float,
-	starty:Float,
-	gfx:Float,
-	gfy:Float,
-	backgroundSprite:String,
-	bpm:Int
-}
 
 class MainMenuState extends MusicBeatState
 {
@@ -72,8 +59,8 @@ class MainMenuState extends MusicBeatState
 	
 	
 	var bgMove:FlxBackdrop;
-	var bpm:Float = 0;
-	var crochet:Float = 0;
+	public static var Mainbpm:Float = 0;
+	public static var bpm:Float = 0;
 	var SoundTime:Float = 0;
 	var BeatTime:Float = 0;
 	
@@ -96,7 +83,6 @@ class MainMenuState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 		
-        titleJSON = Json.parse(Paths.getTextFromFile('images/gfDanceTitle.json'));
         
 		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
@@ -356,7 +342,7 @@ class MainMenuState extends MusicBeatState
 		}
        
         SoundTime = FlxG.sound.music.time / 1000;
-        BeatTime = 60 / titleJSON.bpm;
+        BeatTime = 60 / bpm;
         
         if ( Math.floor(SoundTime/BeatTime + 0.5) % 4  == 0 && canClick && canBeat) {
         
@@ -371,13 +357,7 @@ class MainMenuState extends MusicBeatState
            
 			camGame.zoom = 1 + 0.03;
 			//camGame.scale.y = 1 + 0.015;
-			FlxTween.tween(camGame, {zoom: 1}, 0.6, {
-			ease: FlxEase.cubeOut,
-			onComplete: function(twn:FlxTween)
-					{
-					    canBeat = true;
-					}
-		    });
+			FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
 			
 			menuItems.forEach(function(spr:FlxSprite)	{
 				spr.scale.x = 0.83;
@@ -389,6 +369,8 @@ class MainMenuState extends MusicBeatState
             });
             
         }
+        if ( Math.floor(SoundTime/BeatTime + 0.5) % 4  == 2) canBeat = true;        
+        
         
         /*
         test1.text = "time: " + SoundTime;
