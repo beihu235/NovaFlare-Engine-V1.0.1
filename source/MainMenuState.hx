@@ -69,7 +69,7 @@ class MainMenuState extends MusicBeatState
 	var test2:FlxText;
 	*/
 	var titleJSON:TitleData;
-	titleJSON = Json.parse(Paths.getTextFromFile('images/gfDanceTitle.json'));
+	
 	
 	var bgMove:FlxBackdrop;
 	var bpm:Float = 0;
@@ -96,6 +96,7 @@ class MainMenuState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 		
+        titleJSON = Json.parse(Paths.getTextFromFile('images/gfDanceTitle.json'));
         
 		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
