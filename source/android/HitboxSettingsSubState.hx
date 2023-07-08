@@ -46,7 +46,7 @@ class HitboxSettingsSubState extends BaseOptionsMenu
 			true);
 		  addOption(option);
 		  
-		var option:Option = new Option('Hitbox Location:',
+		var option:Option = new Option('Space Location:',
 			"Choose Space Control Location",
 			'hitboxLocation',
 			'string',
