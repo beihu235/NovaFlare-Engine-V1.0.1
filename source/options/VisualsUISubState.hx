@@ -96,6 +96,13 @@ class VisualsUISubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 		option.onChange = onChangeFPSCounter;
+		
+		var option:Option = new Option('FPS Rainbow',
+			'If unchecked, FPS not change color',
+			'rainbowFPS',
+			'bool',
+			true);
+		addOption(option);
 
 		var option:Option = new Option('Pause Screen Song:',
 			"What song do you prefer for the Pause Screen?",
