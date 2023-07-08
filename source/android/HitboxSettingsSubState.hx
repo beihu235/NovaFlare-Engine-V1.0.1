@@ -39,16 +39,23 @@ class HitboxSettingsSubState extends BaseOptionsMenu
 		title = 'Hitbox Settings';
 		rpcTitle = 'Hitbox Settings Menu'; //hi, you can ask what is that, i will answer it's all what you needed lol.
 
-		var option:Option = new Option('Hitbox Mode:',
-			"Choose your Hitbox Style!  -mariomaster",
-			'hitboxmode',
-			'string',
-			'Classic',
-			['Classic', 'New']);
+		var option:Option = new Option('Hitbox Extend',
+			"Allow Hitbox Extend Space Control --Make by NF|Beihu",
+			'hitboxExtend',
+			'bool',
+			true);
 		  addOption(option);
 		  
-		var option:Option = new Option('Hitbox Opacity', //mariomaster was here again
-			'Changes opacity -omg',
+		var option:Option = new Option('Hitbox Location:',
+			"Choose Space Control Location",
+			'hitboxLocation',
+			'string',
+			'Bottom',
+			['Bottom', 'Top']);
+		  addOption(option);  
+		  
+		var option:Option = new Option('Hitbox Alpha:', //mariomaster was here again
+			'Changes Hitbox Alpha',
 			'hitboxalpha',
 			'float',
 			0.2);
