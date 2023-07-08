@@ -1051,6 +1051,11 @@ class PlayState extends MusicBeatState
 		add(timeBar);
 		add(timeTxt);
 		timeBarBG.sprTracker = timeBar;
+		var wawa = [];
+        for (i in game.dad.healthColorArray) wawa.push(StringTools.hex(i, 2));
+        var wawa2 = [];
+        for (i in game.boyfriend.healthColorArray) wawa2.push(StringTools.hex(i, 2));
+        timeBar.createGradientBar([0x0], [Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]);
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		add(strumLineNotes);
@@ -2609,6 +2614,12 @@ class PlayState extends MusicBeatState
 
 				var newCharacter:String = event.value2;
 				addCharacterToList(newCharacter, charType);
+				
+				var wawa = [];
+                for (i in game.dad.healthColorArray) wawa.push(StringTools.hex(i, 2));
+                var wawa2 = [];
+                for (i in game.boyfriend.healthColorArray) wawa2.push(StringTools.hex(i, 2));
+                timeBar.createGradientBar([0x0], [Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]);
 
 			case 'Dadbattle Spotlight':
 				dadbattleBlack = new BGSprite(null, -800, -400, 0, 0);
@@ -3778,6 +3789,12 @@ class PlayState extends MusicBeatState
 						}
 				}
 				reloadHealthBarColors();
+				
+			    var wawa = [];
+                for (i in game.dad.healthColorArray) wawa.push(StringTools.hex(i, 2));
+                var wawa2 = [];
+                for (i in game.boyfriend.healthColorArray) wawa2.push(StringTools.hex(i, 2));
+                timeBar.createGradientBar([0x0], [Std.parseInt('0xFF' + wawa2.join('')), Std.parseInt('0xFF' + wawa.join(''))]);	
 
 			case 'BG Freaks Expression':
 				if(bgGirls != null) bgGirls.swapDanceType();
@@ -5273,7 +5290,7 @@ class PlayState extends MusicBeatState
 
 			// Rating FC
 			ratingFC = "";
-			if (sicks > 0) ratingFC = "SFC";
+			if (sicks > 0) ratingFC = "MFC";
 			if (goods > 0) ratingFC = "GFC";
 			if (bads > 0 || shits > 0) ratingFC = "FC";
 			if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
