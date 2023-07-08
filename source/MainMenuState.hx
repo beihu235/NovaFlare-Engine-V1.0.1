@@ -8,6 +8,7 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxCamera;
+import haxe.Json;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.effects.FlxFlicker;
 import flixel.graphics.frames.FlxAtlasFrames;
@@ -24,6 +25,19 @@ import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
 
 using StringTools;
+
+typedef TitleData =
+{
+
+	titlex:Float,
+	titley:Float,
+	startx:Float,
+	starty:Float,
+	gfx:Float,
+	gfy:Float,
+	backgroundSprite:String,
+	bpm:Int
+}
 
 class MainMenuState extends MusicBeatState
 {
@@ -54,6 +68,9 @@ class MainMenuState extends MusicBeatState
 	var test3:FlxText;
 	var test2:FlxText;
 	*/
+	var titleJSON:TitleData;
+	titleJSON = Json.parse(Paths.getTextFromFile('images/gfDanceTitle.json'));
+	
 	var bgMove:FlxBackdrop;
 	var bpm:Float = 0;
 	var crochet:Float = 0;
@@ -70,8 +87,8 @@ class MainMenuState extends MusicBeatState
 		0xFFFF0000
 	                                
 	    ];
-	public static var currentColor:Int = 2;    
-	public static var currentColorAgain:Int = 1;    
+	public static var currentColor:Int = 1;    
+	public static var currentColorAgain:Int = 0;    
 	//var allowColorChange:Bool = true;
 
 	override function create()
@@ -79,8 +96,6 @@ class MainMenuState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 		
-		bpm == Conductor.bpm;
-        crochet == 60 / bpm;
         
 		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
@@ -339,17 +354,17 @@ class MainMenuState extends MusicBeatState
 			#end 
 		}
        
-        SoundTime = FlxG.sound.music.time / 100 / 10;
-        BeatTime = 60 / Conductor.bpm * 10 / 10;
+        SoundTime = FlxG.sound.music.time / 1000;
+        BeatTime = 60 / titleJSON.bpm;
         
         if ( Math.floor(SoundTime/BeatTime + 0.5) % 4  == 0 && canClick && canBeat) {
         
             canBeat = false;
            
             currentColor++;            
-            if (currentColor > 7) currentColor = 1;
+            if (currentColor > 6) currentColor = 1;
             currentColorAgain = currentColor - 1;
-            if (currentColorAgain <= 0) currentColorAgain = 7;
+            if (currentColorAgain <= 0) currentColorAgain = 6;
             
             FlxTween.color(bgMove, 0.6, ColorArray[currentColorAgain], ColorArray[currentColor], {ease: FlxEase.cubeOut});
            
@@ -403,7 +418,7 @@ class MainMenuState extends MusicBeatState
 		{
 			if (curSelected != spr.ID)
 			{
-				FlxTween.tween(spr, {x: -800}, 0.6 + 0.15 * spr.ID, {
+				FlxTween.tween(spr, {x: -800}, 0.6 + 0.15 * Math.abs(curSelected - spr.ID), {
 					ease: FlxEase.backInOut,
 					onComplete: function(twn:FlxTween)
 					{
