@@ -48,11 +48,12 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
+	/*
 	
 	var test1:FlxText;
 	var test3:FlxText;
 	var test2:FlxText;
-	
+	*/
 	var bgScroll:FlxBackdrop;
 	var bpm:Float = 0;
 	var crochet:Float = 0;
