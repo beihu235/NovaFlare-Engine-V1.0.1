@@ -17,6 +17,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.net.curl.CURLCode;
 import flixel.graphics.FlxGraphic;
+import openfl.utils.Assets;
 import WeekData;
 
 using StringTools;
@@ -61,21 +62,24 @@ class StoryMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
 
 		scoreText = new FlxText(FlxG.width * 0.5, 5, 1280, "SCORE: 49324858", 36);
-		scoreText.setFormat(Paths.font("montserrat.ttf"), 32);
+		scoreText.setFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 32);
 		scoreText.alignment = CENTER;
         scoreText.screenCenter(X);
+        scoreText.antialiasing = ClientPrefs.globalAntialiasing;
         
 		txtWeekTitle = new FlxText(FlxG.width * 0.5, 50, 1280, "", 32);
-		txtWeekTitle.setFormat(Paths.font("montserrat.ttf"), 20);
+		txtWeekTitle.setFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName 20);
 		txtWeekTitle.alignment = CENTER;
 		txtWeekTitle.screenCenter(X);
+		txtWeekTitle.antialiasing = ClientPrefs.globalAntialiasing;
 		// txtWeekTitle.alpha = 0.7;
 
 		var rankText:FlxText = new FlxText(0, 10);
 		rankText.text = 'RANK: GREAT';
-		rankText.setFormat(Paths.font("montserrat.ttf"), 32);
+		rankText.setFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 32);
 		rankText.size = scoreText.size;
 		rankText.screenCenter(X);
+		rankText.antialiasing = ClientPrefs.globalAntialiasing;
 
 		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
 		var bgGray:FlxSprite = new FlxSprite(0, 45).makeGraphic(FlxG.width, 40, 0xFF2B2B2B);
@@ -176,6 +180,9 @@ class StoryMenuState extends MusicBeatState
 
 		var tracksSprite:FlxSprite = new FlxSprite(FlxG.width * 0.07, bgSprite.y + 425).loadGraphic(Paths.image('Menu_Tracks'));
 		tracksSprite.antialiasing = ClientPrefs.globalAntialiasing;
+		tracksSprite.updateHitbox();
+		tracksSprite.centerOffsets();
+		tracksSprite.centerOrigin();
 		add(tracksSprite);
 
 		txtTracklist = new FlxText(FlxG.width * 0.05, tracksSprite.y + 60, 500, "", 20);
