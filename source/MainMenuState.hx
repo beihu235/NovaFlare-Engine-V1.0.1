@@ -108,6 +108,7 @@ class MainMenuState extends MusicBeatState
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camAchievement, false);
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
+		CustomFadeTransition.nextCamera = camHUD;
 
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
@@ -203,12 +204,12 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "NF Engine v" + '1.0.0' + '(PSYCH v0.6.3)', 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "NF Engine v" + '1.0.0' + ' (PSYCH v0.6.3)', 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 		versionShit.cameras = [camHUD];
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + '2.8.0', 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -352,7 +353,7 @@ class MainMenuState extends MusicBeatState
         SoundTime = FlxG.sound.music.time / 1000;
         BeatTime = 60 / bpm;
         
-        if ( Math.floor(SoundTime/BeatTime + 0.5) % 4  == 0 && canClick && canBeat) {
+        if ( Math.floor(SoundTime/BeatTime) % 4  == 0 && canClick && canBeat) {
         
             canBeat = false;
            
@@ -437,7 +438,8 @@ class MainMenuState extends MusicBeatState
 		
 		
 		FlxTween.tween(camGame, {zoom: 2}, 1.2, {ease: FlxEase.cubeInOut});
-		FlxG.camera.fade(FlxColor.BLACK, 1.2, false);
+		camGame.fade(FlxColor.BLACK, 1.2, false);
+		camHUD.fade(FlxColor.BLACK, 1.2, false);
 		FlxTween.tween(camGame, {angle: 0}, 1.2, {
 		ease: FlxEase.cubeInOut,
 		onComplete: function(twn:FlxTween)
