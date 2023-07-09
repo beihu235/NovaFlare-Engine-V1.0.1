@@ -79,7 +79,8 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool',
 			false);
 		addOption(option);
-
+		
+        /*
 		#if android
 		var option:Option = new Option('Vibrations',
 			"If unchecked, your phone will not vibrate.",
@@ -89,7 +90,8 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		addOption(option);
 		option.onChange = onChangeVibration;
 		#end
-
+        */
+        
 		var option:Option = new Option('Hitsound Volume',
 			'Funny notes does \"Tick!\" when you hit them."',
 			'hitsoundVolume',
@@ -114,16 +116,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.maxValue = 30;
 		addOption(option);
 		
-		var option:Option = new Option('Marvelous! Hit Window',
-			'Changes the amount of time you have\nfor hitting a "Marvelous" in milliseconds.',
-			'marvelousWindow',
-			'int',
-			15);
-		option.displayFormat = '%vms';
-		option.scrollSpeed = 15;
-		option.minValue = 1;
-		option.maxValue = 15;
-		addOption(option);
+		
 
 		var option:Option = new Option('Sick! Hit Window',
 			'Changes the amount of time you have\nfor hitting a "Sick!" in milliseconds.',
