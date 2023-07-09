@@ -200,8 +200,10 @@ class FreeplayState extends MusicBeatState
 		var size:Int = 18;
 		#end
 		var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, leText, size);
-		text.setFormat(Paths.font("vcr.ttf"), size, FlxColor.WHITE, RIGHT);
+		text.setFormat("VCR OSD Mono", size, FlxColor.WHITE, RIGHT);
 		text.scrollFactor.set();
+		text.screenCenter(X);
+		test.antialiasing = ClientPrefs.globalAntialiasing;
 		add(text);
 
                 #if android

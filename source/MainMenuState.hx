@@ -109,7 +109,7 @@ class MainMenuState extends MusicBeatState
 		FlxG.cameras.add(camAchievement, false);
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 		
-        CustomFadeTransition.nextCamera = camHUD;
+        CustomFadeTransition.nextCamera = camAchievement;
         
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
@@ -210,12 +210,14 @@ class MainMenuState extends MusicBeatState
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "NF Engine v" + '1.0.0' + ' (PSYCH v0.6.3)', 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.antialiasing = ClientPrefs.globalAntialiasing;
 		add(versionShit);
 		versionShit.cameras = [camHUD];
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + '2.8.0', 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
+		versionShit.antialiasing = ClientPrefs.globalAntialiasing;
         versionShit.cameras = [camHUD];
 		// NG.core.calls.event.logEvent('swag').send();
 
@@ -255,7 +257,7 @@ class MainMenuState extends MusicBeatState
 		_virtualpad.cameras = [camHUD];
 		#end
 		
-		CustomFadeTransition.nextCamera = camHUD;
+		CustomFadeTransition.nextCamera = camAchievement;
 
 		super.create();
 	}
@@ -427,7 +429,7 @@ class MainMenuState extends MusicBeatState
 			{				
 				//
 			
-			    FlxTween.tween(spr, {y: 360 - spr.height / 2}, 0.7, {
+			    FlxTween.tween(spr, {y: 360 - spr.height / 2}, 0.6, {
 					ease: FlxEase.backInOut,
 					onComplete: function(twn:FlxTween)
 					{
@@ -435,7 +437,7 @@ class MainMenuState extends MusicBeatState
 					}
 			    });
 			
-			    FlxTween.tween(spr, {x: 640 - spr.width / 2}, 0.7, {
+			    FlxTween.tween(spr, {x: 640 - spr.width / 2}, 0.6, {
 					ease: FlxEase.backInOut				
 				});													
 			}
