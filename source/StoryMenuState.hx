@@ -68,7 +68,7 @@ class StoryMenuState extends MusicBeatState
         scoreText.antialiasing = ClientPrefs.globalAntialiasing;
         
 		txtWeekTitle = new FlxText(FlxG.width * 0.5, 50, 1280, "", 32);
-		txtWeekTitle.setFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName 20);
+		txtWeekTitle.setFormat(Assets.getFont("assets/fonts/montserrat.ttf").fontName, 20);
 		txtWeekTitle.alignment = CENTER;
 		txtWeekTitle.screenCenter(X);
 		txtWeekTitle.antialiasing = ClientPrefs.globalAntialiasing;
