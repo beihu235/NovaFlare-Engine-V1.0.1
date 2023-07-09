@@ -121,7 +121,7 @@ class MainMenuState extends MusicBeatState
 		
 	    bgMove = new FlxBackdrop(Paths.image('mainmenu_sprite/backdrop'), 1, 1, true, true, 0, 0);
 		//bgMove.scrollFactor.set();
-		bgMove.alpha = 0.3;
+		bgMove.alpha = 0.1;
 		bgMove.color = ColorArray[currentColor];
 		bgMove.screenCenter();
 		bgMove.velocity.set(100, 70);
@@ -199,7 +199,7 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "NF Engine v" + '1.0.0', 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "NF Engine v" + '1.0.0' + '(PSYCH v0.6.3)', 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -275,7 +275,7 @@ class MainMenuState extends MusicBeatState
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
 		
-		bgMove.alpha = 0.3;
+		
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 			if (usingMouse)
@@ -373,7 +373,7 @@ class MainMenuState extends MusicBeatState
         }
         if ( Math.floor(SoundTime/BeatTime + 0.5) % 4  == 2) canBeat = true;        
         
-        
+        bgMove.alpha = 0.1;
         /*
         test1.text = "time: " + SoundTime;
         test2.text = "beatTime: " + BeatTime;
