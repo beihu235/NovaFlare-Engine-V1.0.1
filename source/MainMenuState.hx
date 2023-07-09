@@ -77,7 +77,7 @@ class MainMenuState extends MusicBeatState
 	    ];
 	public static var currentColor:Int = 1;    
 	public static var currentColorAgain:Int = 0;    
-	//var allowColorChange:Bool = true;
+	
 
 	override function create()
 	{

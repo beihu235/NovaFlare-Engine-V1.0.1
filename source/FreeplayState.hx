@@ -49,6 +49,25 @@ class FreeplayState extends MusicBeatState
 	var bg:FlxSprite;
 	var intendedColor:Int;
 	var colorTween:FlxTween;
+	
+	var bgMove:FlxBackdrop;
+	public static var Mainbpm:Float = 0;
+	public static var bpm:Float = 0;
+	var SoundTime:Float = 0;
+	var BeatTime:Float = 0;
+	
+	var ColorArray:Array<Int> = [
+		0xFF9400D3,
+		0xFF4B0082,
+		0xFF0000FF,
+		0xFF00FF00,
+		0xFFFFFF00,
+		0xFFFF7F00,
+		0xFFFF0000
+	                                
+	    ];
+	public static var currentColor:Int = 1;    
+	public static var currentColorAgain:Int = 0;
 
 	override function create()
 	{
@@ -106,6 +125,20 @@ class FreeplayState extends MusicBeatState
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 		bg.screenCenter();
+		
+		currentColor = MainMenuState.currentColor;
+		currentColorAgain = MainMenuState.currentColorAgain;
+		bpm = MainMenuState.bpm;
+		Mainbpm = MainMenuState.Mainbpm;
+		
+		bgMove = new FlxBackdrop(Paths.image('mainmenu_sprite/backdrop'), 1, 1, true, true, 0, 0);
+		//bgMove.scrollFactor.set();
+		bgMove.alpha = 0.1;
+		bgMove.color = ColorArray[currentColor];
+		bgMove.screenCenter();
+		bgMove.velocity.set(100, 70);
+		//bgMove.antialiasing = ClientPrefs.globalAntialiasing;
+		add(bgMove);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
@@ -203,7 +236,7 @@ class FreeplayState extends MusicBeatState
 		text.setFormat("VCR OSD Mono", size, FlxColor.WHITE, RIGHT);
 		text.scrollFactor.set();
 		text.screenCenter(X);
-		test.antialiasing = ClientPrefs.globalAntialiasing;
+		text.antialiasing = ClientPrefs.globalAntialiasing;
 		add(text);
 
                 #if android
