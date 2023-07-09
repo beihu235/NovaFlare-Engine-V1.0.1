@@ -99,7 +99,7 @@ class ClientPrefs {
 	
 	public static var rainbowFPS:Bool = true;
 	public static var NoteSkin:String = 'Stepmania';
-	
+	public static var filpChart:Bool = false;
 	
 	
 	
@@ -160,8 +160,8 @@ class ClientPrefs {
 	    FlxG.save.data.hitboxLocation = hitboxLocation;
 	        // new extend
 	
-	FlxG.save.data.NoteSkin = NoteSkin;
-	
+	    FlxG.save.data.NoteSkin = NoteSkin;
+	    FlxG.save.data.filpChart = filpChart;
 	        // new extend
 	
 	
@@ -315,6 +315,10 @@ class ClientPrefs {
 		
 		if(FlxG.save.data.NoteSkin != null) {
 			NoteSkin = FlxG.save.data.NoteSkin;
+		}
+		
+		if(FlxG.save.data.filpChart != null) {
+			filpChart = FlxG.save.data.filpChart;
 		}
 		
 		

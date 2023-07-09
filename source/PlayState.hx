@@ -2498,6 +2498,21 @@ class PlayState extends MusicBeatState
 			{
 				var daStrumTime:Float = songNotes[0];
 				var daNoteData:Int = Std.int(songNotes[1] % 4);
+				if (ClientPrefs.filpChart) {
+				    if (daNoteData == 0) {
+				        daNoteData = 3;
+				    }    
+				    else if (daNoteData == 1) {
+				        daNoteData = 2;
+				    }    
+				    else if (daNoteData == 2) {
+				        daNoteData = 1;
+				    }   
+				    else if (daNoteData == 3) {
+				        daNoteData = 0;
+				    } 
+				}
+				
 
 				var gottaHitNote:Bool = section.mustHitSection;
 
