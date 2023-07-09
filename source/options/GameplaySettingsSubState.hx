@@ -65,6 +65,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool',
 			true);
 		addOption(option);
+		
+		var option:Option = new Option('Filp Chart',
+			'If checked, filp chart for playing',
+			'filpChart',
+			'bool',
+			true);
+		addOption(option);
 
 		var option:Option = new Option('Ghost Tapping',
 			"If checked, you won't get misses from pressing keys\nwhile there are no notes able to be hit.",
