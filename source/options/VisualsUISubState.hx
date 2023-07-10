@@ -31,18 +31,19 @@ using StringTools;
 
 typedef NoteSkinData =
 {
-	Skin1:string,
-	Skin2:string,
-	Skin3:string,
-	Skin4:string,
-	Skin5:string,
-	Skin6:string,
-	Skin7:string,
-	Skin8:string,
-	Skin9:string,
-	Skin10:string
+	Skin1:String,
+	Skin2:String,
+	Skin3:String,
+	Skin4:String,
+	Skin5:String,
+	Skin6:String,
+	Skin7:String,
+	Skin8:String,
+	Skin9:String,
+	Skin10:String
 
 }
+
 
 class VisualsUISubState extends BaseOptionsMenu
 {
