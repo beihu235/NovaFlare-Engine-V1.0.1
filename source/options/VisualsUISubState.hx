@@ -23,9 +23,26 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
+import haxe.Json;
+import haxe.format.JsonParser;
 import Controls;
 
 using StringTools;
+
+typedef NoteSkinData =
+{
+	Skin1:string,
+	Skin2:string,
+	Skin3:string,
+	Skin4:string,
+	Skin5:string,
+	Skin6:string,
+	Skin7:string,
+	Skin8:string,
+	Skin9:string,
+	Skin10:string
+
+}
 
 class VisualsUISubState extends BaseOptionsMenu
 {
@@ -40,6 +57,17 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool',
 			true);
 		addOption(option);
+		
+		var option:Option = new Option('Note Skin',
+			"Choose Note Skin",
+			'NoteSkin',
+			'string',
+			'original',
+			['original', 'Skin1', 'Skin2', 'Skin3', 'Skin4', 'Skin5', 'Skin6', 'Skin7', 'Skin8', 'Skin9', 'Skin10']);
+			option.onChange = onChangeNoteSkin;
+			//option.showNoteSkin = true;
+		addOption(option);
+		
 
 		var option:Option = new Option('Hide HUD',
 			'If checked, hides most HUD elements.',
@@ -154,4 +182,35 @@ class VisualsUISubState extends BaseOptionsMenu
 		if(Main.fpsVar != null)
 			Main.fpsVar.visible = ClientPrefs.showFPS;
 	}
+	
+	var NoteSkin:NoteSkinData;
+	function onChangeNoteSkin()
+	{
+		NoteSkin = Json.parse(Paths.getTextFromFile('images/NoteSkin/SkinData.json'));
+		if (ClientPrefs.NoteSkin == 'original') FlxG.save.data.ChangeSkin = false;
+		else {
+		     FlxG.save.data.ChangeSkin = true;
+		     if (ClientPrefs.NoteSkin == 'Skin1') FlxG.save.data.NoteSkinName = NoteSkinData.Skin1;
+		     if (ClientPrefs.NoteSkin == 'Skin2') FlxG.save.data.NoteSkinName = NoteSkinData.Skin2;
+		     if (ClientPrefs.NoteSkin == 'Skin3') FlxG.save.data.NoteSkinName = NoteSkinData.Skin3;
+		     if (ClientPrefs.NoteSkin == 'Skin4') FlxG.save.data.NoteSkinName = NoteSkinData.Skin4;
+		     if (ClientPrefs.NoteSkin == 'Skin5') FlxG.save.data.NoteSkinName = NoteSkinData.Skin5;
+		     if (ClientPrefs.NoteSkin == 'Skin6') FlxG.save.data.NoteSkinName = NoteSkinData.Skin6;
+		     if (ClientPrefs.NoteSkin == 'Skin7') FlxG.save.data.NoteSkinName = NoteSkinData.Skin7;
+		     if (ClientPrefs.NoteSkin == 'Skin8') FlxG.save.data.NoteSkinName = NoteSkinData.Skin8;
+		     if (ClientPrefs.NoteSkin == 'Skin9') FlxG.save.data.NoteSkinName = NoteSkinData.Skin9;
+		     if (ClientPrefs.NoteSkin == 'Skin10') FlxG.save.data.NoteSkinName = NoteSkinData.Skin10;     
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
