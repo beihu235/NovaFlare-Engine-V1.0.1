@@ -65,10 +65,10 @@ class VisualsUISubState extends BaseOptionsMenu
 			'string',
 			'original',
 			['original', 'Skin1', 'Skin2', 'Skin3', 'Skin4', 'Skin5', 'Skin6', 'Skin7', 'Skin8', 'Skin9', 'Skin10']);
-			option.onChange = onChangeNoteSkin;
+			
 			//option.showNoteSkin = true;
 		addOption(option);
-		
+		option.onChange = onChangeNoteSkin;
 
 		var option:Option = new Option('Hide HUD',
 			'If checked, hides most HUD elements.',
