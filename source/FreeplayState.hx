@@ -487,7 +487,7 @@ class FreeplayState extends MusicBeatState
 				    FlxTween.tween(spr.scale, {x: 1}, 0.6, {ease: FlxEase.cubeOut});
 				    FlxTween.tween(spr.scale, {y: 1}, 0.6, {ease: FlxEase.cubeOut});
             
-            }
+            });
         }
         if ( Math.floor(SoundTime/BeatTime + 0.5) % 4  == 2) canBeat = true;        
         
