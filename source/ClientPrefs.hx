@@ -98,11 +98,12 @@ class ClientPrefs {
 	// new extend
 	
 	public static var rainbowFPS:Bool = true;
-	public static var NoteSkin:String = 'Stepmania';
+	//public static var NoteSkin:String = 'Stepmania';
 	public static var filpChart:Bool = false;
 	
-	
-	
+	public static var ChangeSkin:Bool = false;
+	public static var NoteSkin:String = 'original';
+	public static var NoteSkinName:String = 'original';
 	
 	// new extend
 	
@@ -161,6 +162,8 @@ class ClientPrefs {
 	        // new extend
 	
 	    FlxG.save.data.NoteSkin = NoteSkin;
+	    FlxG.save.data.NoteSkinName = NoteSkinName;
+	     FlxG.save.data.ChangeSkin = ChangeSkin;
 	    FlxG.save.data.filpChart = filpChart;
 	        // new extend
 	
@@ -317,8 +320,16 @@ class ClientPrefs {
 			NoteSkin = FlxG.save.data.NoteSkin;
 		}
 		
+		if(FlxG.save.data.NoteSkinName != null) {
+			NoteSkinName = FlxG.save.data.NoteSkinName;
+		}
+		
 		if(FlxG.save.data.filpChart != null) {
 			filpChart = FlxG.save.data.filpChart;
+		}
+		
+		if(FlxG.save.data.ChangeSkin != null) {
+			ChangeSkin = FlxG.save.data.ChangeSkin;
 		}
 		
 		
