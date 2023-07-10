@@ -187,7 +187,7 @@ class VisualsUISubState extends BaseOptionsMenu
 	var Skin:NoteSkinData;
 	function onChangeNoteSkin()
 	{
-		Skin = Json.parse(Paths.getTextFromFile('images/NoteSkin/SkinData.json'));
+		Skin = Json.parse(Paths.getTextFromFile('images/NoteSkin/DataSet/SkinData.json'));
 		if (ClientPrefs.NoteSkin == 'original') FlxG.save.data.ChangeSkin = false;
 		else {
 		     FlxG.save.data.ChangeSkin = true;
@@ -201,6 +201,8 @@ class VisualsUISubState extends BaseOptionsMenu
 		     if (ClientPrefs.NoteSkin == 'Skin8') FlxG.save.data.NoteSkinName = Skin.Skin8;
 		     if (ClientPrefs.NoteSkin == 'Skin9') FlxG.save.data.NoteSkinName = Skin.Skin9;
 		     if (ClientPrefs.NoteSkin == 'Skin10') FlxG.save.data.NoteSkinName = Skin.Skin10;     
+		     
+		     if (FlxG.save.data.NoteSkinName == null) FlxG.save.data.ChangeSkin = false;
 		}
 	}
 }
