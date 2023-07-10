@@ -207,7 +207,6 @@ class VisualsUISubState extends BaseOptionsMenu
 		     if (FlxG.save.data.NoteSkinName == null) FlxG.save.data.ChangeSkin = false;
 		     
 		    ClientPrefs.ChangeSkin = FlxG.save.data.ChangeSkin;
-		    ClientPrefs.saveSettings();
 		    ClientPrefs.NoteSkinName = FlxG.save.data.NoteSkinName;
 		    ClientPrefs.saveSettings();
 		}
