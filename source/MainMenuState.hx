@@ -132,7 +132,7 @@ class MainMenuState extends MusicBeatState
 		bgMove.alpha = 0.1;
 		bgMove.color = ColorArray[currentColor];
 		bgMove.screenCenter();
-		bgMove.velocity.set(100, 70);
+		bgMove.velocity.set(FlxG.random.bool(50) ? 90 : -90, FlxG.random.bool(50) ? 90 : -90);
 		//bgMove.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bgMove);
 
@@ -257,7 +257,7 @@ class MainMenuState extends MusicBeatState
 		_virtualpad.cameras = [camHUD];
 		#end
 		
-		CustomFadeTransition.nextCamera = camAchievement;
+		CustomFadeTransition.nextCamera = camHUD;
 
 		super.create();
 	}
