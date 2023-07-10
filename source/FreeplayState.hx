@@ -14,6 +14,7 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 import lime.utils.Assets;
 import flixel.system.FlxSound;
 import openfl.utils.Assets as OpenFlAssets;
@@ -469,9 +470,9 @@ class FreeplayState extends MusicBeatState
             
             FlxTween.color(bgMove, 0.6, ColorArray[currentColorAgain], ColorArray[currentColor], {ease: FlxEase.cubeOut});
            
-			camGame.zoom = 1 + 0.03;
+			//camGame.zoom = 1 + 0.03;
 			//camGame.scale.y = 1 + 0.015;
-			FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
+			//FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
 			
 		    for (i in 0...iconArray.length)
 		    {
@@ -481,7 +482,7 @@ class FreeplayState extends MusicBeatState
 		    FlxTween.tween(iconArray[i].scale, {y: 1}, 0.6, {ease: FlxEase.cubeOut});
 		    }
             
-            menuItems.forEach(function(spr:Alphabet)	{
+            grpSongs.forEach(function(spr:Alphabet)	{
                 spr.scale.x = 1.03;
 				spr.scale.y = 1.03;
 				    FlxTween.tween(spr.scale, {x: 1}, 0.6, {ease: FlxEase.cubeOut});
