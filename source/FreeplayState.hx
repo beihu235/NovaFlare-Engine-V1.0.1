@@ -137,7 +137,7 @@ class FreeplayState extends MusicBeatState
 		bgMove.alpha = 0.1;
 		bgMove.color = ColorArray[currentColor];
 		bgMove.screenCenter();
-		bgMove.velocity.set(100, 70);
+		bgMove.velocity.set(FlxG.random.bool(50) ? 90 : -90, FlxG.random.bool(50) ? 90 : -90);
 		//bgMove.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bgMove);
 
@@ -451,6 +451,45 @@ class FreeplayState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('scrollMenu'));
 		}
 		super.update(elapsed);
+		
+		SoundTime = FlxG.sound.music.time / 1000;
+        BeatTime = 60 / bpm;
+        
+        if ( Math.floor(SoundTime/BeatTime) % 4  == 0 && canClick && canBeat) {
+        
+            canBeat = false;
+           
+            currentColor++;            
+            if (currentColor > 6) currentColor = 1;
+            currentColorAgain = currentColor - 1;
+            if (currentColorAgain <= 0) currentColorAgain = 6;
+            
+            FlxTween.color(bgMove, 0.6, ColorArray[currentColorAgain], ColorArray[currentColor], {ease: FlxEase.cubeOut});
+           
+			camGame.zoom = 1 + 0.03;
+			//camGame.scale.y = 1 + 0.015;
+			FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
+			
+		    for (i in 0...iconArray.length)
+		    {
+			iconArray[i].scale.x = 1 + 0.03;
+			iconArray[i].scale.y = 1 + 0.03;
+			FlxTween.tween(iconArray[i].scale, {x: 1}, 0.6, {ease: FlxEase.cubeOut});
+		    FlxTween.tween(iconArray[i].scale, {y: 1}, 0.6, {ease: FlxEase.cubeOut});
+		    }
+            
+            menuItems.forEach(function(spr:Alphabet)	{
+                spr.scale.x = 1.03;
+				spr.scale.y = 1.03;
+				    FlxTween.tween(spr.scale, {x: 1}, 0.6, {ease: FlxEase.cubeOut});
+				    FlxTween.tween(spr.scale, {y: 1}, 0.6, {ease: FlxEase.cubeOut});
+            
+            }
+        }
+        if ( Math.floor(SoundTime/BeatTime + 0.5) % 4  == 2) canBeat = true;        
+        
+        bgMove.alpha = 0.1;
+        
 	}
 
 	public static function destroyFreeplayVocals() {
