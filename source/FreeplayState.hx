@@ -56,6 +56,7 @@ class FreeplayState extends MusicBeatState
 	public static var bpm:Float = 0;
 	var SoundTime:Float = 0;
 	var BeatTime:Float = 0;
+	var canBeat:Bool = true;
 	
 	var ColorArray:Array<Int> = [
 		0xFF9400D3,
@@ -69,6 +70,8 @@ class FreeplayState extends MusicBeatState
 	    ];
 	public static var currentColor:Int = 1;    
 	public static var currentColorAgain:Int = 0;
+	
+	
 
 	override function create()
 	{
@@ -455,7 +458,7 @@ class FreeplayState extends MusicBeatState
 		SoundTime = FlxG.sound.music.time / 1000;
         BeatTime = 60 / bpm;
         
-        if ( Math.floor(SoundTime/BeatTime) % 4  == 0 && canClick && canBeat) {
+        if ( Math.floor(SoundTime/BeatTime) % 4  == 0  && canBeat) {
         
             canBeat = false;
            
