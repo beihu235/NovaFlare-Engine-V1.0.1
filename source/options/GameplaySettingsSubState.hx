@@ -70,7 +70,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'If checked, filp chart for playing',
 			'filpChart',
 			'bool',
-			true);
+			false);
 		addOption(option);
 
 		var option:Option = new Option('Ghost Tapping',
