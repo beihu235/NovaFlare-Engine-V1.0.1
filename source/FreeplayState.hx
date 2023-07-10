@@ -476,15 +476,15 @@ class FreeplayState extends MusicBeatState
 			
 		    for (i in 0...iconArray.length)
 		    {
-			iconArray[i].scale.x = 1 + 0.03;
-			iconArray[i].scale.y = 1 + 0.03;
+			iconArray[i].scale.x = 1 + 0.1;
+			iconArray[i].scale.y = 1 + 0.1;
 			FlxTween.tween(iconArray[i].scale, {x: 1}, 0.6, {ease: FlxEase.cubeOut});
 		    FlxTween.tween(iconArray[i].scale, {y: 1}, 0.6, {ease: FlxEase.cubeOut});
 		    }
             
             grpSongs.forEach(function(spr:Alphabet)	{
-                spr.scale.x = 1.03;
-				spr.scale.y = 1.03;
+                spr.scale.x = 1.1;
+				spr.scale.y = 1.1;
 				    FlxTween.tween(spr.scale, {x: 1}, 0.6, {ease: FlxEase.cubeOut});
 				    FlxTween.tween(spr.scale, {y: 1}, 0.6, {ease: FlxEase.cubeOut});
             
