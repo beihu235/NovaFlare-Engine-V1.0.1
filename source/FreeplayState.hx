@@ -453,7 +453,7 @@ class FreeplayState extends MusicBeatState
 			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
 			FlxG.sound.play(Paths.sound('scrollMenu'));
 		}
-		super.update(elapsed);
+		
 		
 		SoundTime = FlxG.sound.music.time / 1000;
         BeatTime = 60 / bpm;
@@ -493,6 +493,7 @@ class FreeplayState extends MusicBeatState
         
         bgMove.alpha = 0.1;
         
+        super.update(elapsed);
 	}
 
 	public static function destroyFreeplayVocals() {
