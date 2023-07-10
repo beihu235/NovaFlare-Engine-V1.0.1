@@ -162,8 +162,8 @@ class ClientPrefs {
 	        // new extend
 	
 	    FlxG.save.data.NoteSkin = NoteSkin;
-	    //FlxG.save.data.NoteSkinName = NoteSkinName;
-	    //FlxG.save.data.ChangeSkin = ChangeSkin;
+	    FlxG.save.data.NoteSkinName = NoteSkinName;
+	    FlxG.save.data.ChangeSkin = ChangeSkin;
 	    FlxG.save.data.filpChart = filpChart;
 	        // new extend
 	
