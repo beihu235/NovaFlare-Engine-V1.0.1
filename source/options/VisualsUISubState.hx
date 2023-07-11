@@ -221,8 +221,8 @@ class VisualsUISubState extends BaseOptionsMenu
 		
 		for (i in 0...ClientPrefs.arrowHSV.length) {
 				var notes:FlxSprite = new FlxSprite((i * 125), 100);
-				if {
-				    (ClientPrefs.ChangeSkin) notes.frames = Paths.getSparrowAtlas('NoteSkin/' + ClientPrefs.NoteSkinName);
+				if (ClientPrefs.ChangeSkin)  {
+				notes.frames = Paths.getSparrowAtlas('NoteSkin/' + ClientPrefs.NoteSkinName);
 				}    
 				else{
 				    notes.frames = Paths.getSparrowAtlas('NOTE_assets');
