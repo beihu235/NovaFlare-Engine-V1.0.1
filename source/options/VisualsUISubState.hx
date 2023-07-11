@@ -237,11 +237,11 @@ class VisualsUISubState extends BaseOptionsMenu
 				grpNote.add(notes);
 				
 				var newShader:ColorSwap = new ColorSwap();
-			    note.shader = newShader.shader;
+			    notes.shader = newShader.shader;
 			    newShader.hue = ClientPrefs.arrowHSV[i][0] / 360;
 			    newShader.saturation = ClientPrefs.arrowHSV[i][1] / 100;
 			    newShader.brightness = ClientPrefs.arrowHSV[i][2] / 100;
-			    shaderArray.push(newShader);
+			    
 		}
 		
 	}
