@@ -212,7 +212,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		ClientPrefs.ChangeSkin = FlxG.save.data.ChangeSkin;
 		ClientPrefs.NoteSkinName = FlxG.save.data.NoteSkinName;		
 		
-
+        remove(grpNote);
 		
 		grpNote = new FlxTypedGroup<FlxSprite>();
 		add(grpNote);
