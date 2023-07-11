@@ -185,6 +185,8 @@ class VisualsUISubState extends BaseOptionsMenu
 	}
 	
 	var Skin:NoteSkinData;
+	private var grpNote:FlxTypedGroup<FlxSprite>;
+	
 	function onChangeNoteSkin()
 	{
 		Skin = Json.parse(Paths.getTextFromFile('images/NoteSkin/DataSet/SkinData.json'));
@@ -209,6 +211,38 @@ class VisualsUISubState extends BaseOptionsMenu
 		    
 		ClientPrefs.ChangeSkin = FlxG.save.data.ChangeSkin;
 		ClientPrefs.NoteSkinName = FlxG.save.data.NoteSkinName;		
+		
+
+		
+		grpNote = new FlxTypedGroup<FlxSprite>();
+		add(grpNote);
+		
+		
+		
+		for (i in 0...ClientPrefs.arrowHSV.length) {
+				var notes:FlxSprite = new FlxSprite((i * 125), 100);
+				if {
+				    (ClientPrefs.ChangeSkin) notes.frames = Paths.getSparrowAtlas('NoteSkin/' + ClientPrefs.NoteSkinName);
+				}    
+				else{
+				    notes.frames = Paths.getSparrowAtlas('NOTE_assets');
+				}
+				var animations:Array<String> = ['purple0', 'blue0', 'green0', 'red0'];
+				notes.animation.addByPrefix('idle', animations[i]);
+				notes.animation.play('idle');
+				//showNotes = notes.visible;
+				notes.scale.set(0.8, 0.8);
+				notes.x += 700;
+				notes.antialiasing = ClientPrefs.globalAntialiasing;
+				grpNote.add(notes);
+				
+				var newShader:ColorSwap = new ColorSwap();
+			    note.shader = newShader.shader;
+			    newShader.hue = ClientPrefs.arrowHSV[i][0] / 360;
+			    newShader.saturation = ClientPrefs.arrowHSV[i][1] / 100;
+			    newShader.brightness = ClientPrefs.arrowHSV[i][2] / 100;
+			    shaderArray.push(newShader);
+		}
 		
 	}
 }
