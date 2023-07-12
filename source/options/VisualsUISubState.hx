@@ -187,7 +187,7 @@ class VisualsUISubState extends BaseOptionsMenu
 	}
 	
 	var Skin:NoteSkinData;
-	private var grpNote:FlxTypedGroup<FlxSprite>;
+	// private var grpNote:FlxTypedGroup<FlxSprite>;
 	
 	function onChangeNoteSkin()
 	{
@@ -219,7 +219,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		grpNote = new FlxTypedGroup<FlxSprite>();
 		add(grpNote);
 		
-		option.showNote = false;
+		//option.showNote = false;
 		
 		for (i in 0...ClientPrefs.arrowHSV.length) {
 				var notes:FlxSprite = new FlxSprite((i * 125), 100);
