@@ -67,7 +67,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'original',
 			['original', 'Skin1', 'Skin2', 'Skin3', 'Skin4', 'Skin5', 'Skin6', 'Skin7', 'Skin8', 'Skin9', 'Skin10']);
 			
-			//option.showNoteSkin = true;
+		option.showNote = true;
 		addOption(option);
 		option.onChange = onChangeNoteSkin;
 
@@ -219,7 +219,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		grpNote = new FlxTypedGroup<FlxSprite>();
 		add(grpNote);
 		
-		
+		option.showNote = false;
 		
 		for (i in 0...ClientPrefs.arrowHSV.length) {
 				var notes:FlxSprite = new FlxSprite((i * 125), 100);

@@ -8,7 +8,6 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.addons.transition.FlxTransitionableState;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
@@ -33,10 +32,12 @@ class BaseOptionsMenu extends MusicBeatSubstate
 	private var curOption:Option = null;
 	private var curSelected:Int = 0;
 	private var optionsArray:Array<Option>;
-
+	
+	private var grpNote:FlxTypedGroup<FlxSprite>;
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private var checkboxGroup:FlxTypedGroup<CheckboxThingie>;
 	private var grpTexts:FlxTypedGroup<AttachedText>;
+	public var showNotes:Bool = false;
 
 	private var boyfriend:Character = null;
 	private var descBox:FlxSprite;
@@ -71,6 +72,9 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 		checkboxGroup = new FlxTypedGroup<CheckboxThingie>();
 		add(checkboxGroup);
+
+		grpNote = new FlxTypedGroup<FlxSprite>();
+		add(grpNote);
 
 		descBox = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
 		descBox.alpha = 0.6;
@@ -119,16 +123,15 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			{
 				reloadBoyfriend();
 			}
+			if(optionsArray[i].showNote)
+			{
+				reloadNotes();
+			}
 			updateTextFrom(optionsArray[i]);
 		}
 
 		changeSelection();
 		reloadCheckboxes();
-
-                #if android
-                addVirtualPad(FULL, A_B_C);
-                #end
-
 	}
 
 	public function addOption(option:Option) {
@@ -151,12 +154,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		}
 
 		if (controls.BACK) {
-			#if android
-			FlxTransitionableState.skipNextTransOut = true;
-			FlxG.resetState();
-			#else
 			close();
-			#end
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 		}
 
@@ -249,7 +247,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 				}
 			}
 
-			if(controls.RESET #if android || _virtualpad.buttonC.justPressed #end)
+			if(controls.RESET)
 			{
 				for (i in 0...optionsArray.length)
 				{
@@ -354,6 +352,26 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		boyfriend.dance();
 		insert(1, boyfriend);
 		boyfriend.visible = wasVisible;
+	}
+	public function reloadNotes()
+		{
+			for (i in 0...ClientPrefs.arrowHSV.length) {
+				var notes:FlxSprite = new FlxSprite((i * 125), 100);
+				if (ClientPrefs.ChangeSkin)  {
+				notes.frames = Paths.getSparrowAtlas('NoteSkin/' + ClientPrefs.NoteSkinName);
+				}    
+				else{
+				    notes.frames = Paths.getSparrowAtlas('NOTE_assets');
+				}
+				var animations:Array<String> = ['purple0', 'blue0', 'green0', 'red0'];
+				notes.animation.addByPrefix('idle', animations[i]);
+				notes.animation.play('idle');
+				showNotes = notes.visible;
+				notes.scale.set(0.8, 0.8);
+				notes.x += 700;
+				notes.antialiasing = ClientPrefs.globalAntialiasing;
+				grpNote.add(notes);
+		}
 	}
 
 	function reloadCheckboxes() {
