@@ -332,6 +332,9 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		{
 			boyfriend.visible = optionsArray[curSelected].showBoyfriend;
 		}
+		
+		if (optionsArray[curSelected].showNote == false) remove(grpNote);
+		
 		curOption = optionsArray[curSelected]; //shorter lol
 		FlxG.sound.play(Paths.sound('scrollMenu'));
 	}
@@ -358,7 +361,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			for (i in 0...ClientPrefs.arrowHSV.length) {
 				var notes:FlxSprite = new FlxSprite((i * 125), 100);
 				if (ClientPrefs.ChangeSkin)  {
-				notes.frames = Paths.getSparrowAtlas('NoteSkin/' + ClientPrefs.NoteSkinName);
+				    notes.frames = Paths.getSparrowAtlas('NoteSkin/' + ClientPrefs.NoteSkinName);
 				}    
 				else{
 				    notes.frames = Paths.getSparrowAtlas('NOTE_assets');
