@@ -377,7 +377,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 				var animations:Array<String> = ['purple0', 'blue0', 'green0', 'red0'];
 				notes.animation.addByPrefix('idle', animations[i]);
 				notes.animation.play('idle');
-				showNotes = notes.visible;
+				//notes.visible = true;
 				notes.scale.set(0.8, 0.8);
 				notes.x += 700;
 				notes.antialiasing = ClientPrefs.globalAntialiasing;
