@@ -130,7 +130,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
                 #if android
                 addVirtualPad(FULL, A_B_C);
                 #end
-
+        grpNote = new FlxTypedGroup<FlxSprite>();
+		add(grpNote);
 	}
 
 	public function addOption(option:Option) {
