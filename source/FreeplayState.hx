@@ -462,14 +462,14 @@ class FreeplayState extends MusicBeatState
         if ( Math.floor(SoundTime/BeatTime) % 4  == 0  && canBeat) {
         
             canBeat = false;
-           
+            /*
             currentColor++;            
             if (currentColor > 6) currentColor = 1;
             currentColorAgain = currentColor - 1;
             if (currentColorAgain <= 0) currentColorAgain = 6;
             
             FlxTween.color(bgMove, 0.6, ColorArray[currentColorAgain], ColorArray[currentColor], {ease: FlxEase.cubeOut});
-           
+           */
 			//camGame.zoom = 1 + 0.03;
 			//camGame.scale.y = 1 + 0.015;
 			//FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
