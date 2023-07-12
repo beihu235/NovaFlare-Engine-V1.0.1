@@ -58,6 +58,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool',
 			true);
 		addOption(option);
+		option.onChange = CloseSkin;
 		
 		var option:Option = new Option('Note Skin',
 			"Choose Note Skin",
@@ -76,6 +77,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool',
 			false);
 		addOption(option);
+		option.onChange = CloseSkin;
 		
 		var option:Option = new Option('Time Bar:',
 			"What should the Time Bar display?",
@@ -244,6 +246,11 @@ class VisualsUISubState extends BaseOptionsMenu
 			    
 		}
 		
+	}
+	
+	function CloseSkin()
+	{
+	    remove(grpNote);
 	}
 }
 
