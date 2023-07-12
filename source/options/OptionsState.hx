@@ -108,8 +108,8 @@ class OptionsState extends MusicBeatState
 		bgMove.velocity.set(FlxG.random.bool(50) ? 90 : -90, FlxG.random.bool(50) ? 90 : -90);
 		//bgMove.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bgMove);
-		
-		tipText = new FlxText(150, FlxG.height - 24, 0, 'Press X to customize your android controls!', 16);
+		#if android
+		tipText = new FlxText(150, FlxG.height - 24, 0, 'Press X to Go In Android Controls Menu', 16);
 			tipText.setFormat("VCR OSD Mono", 17, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			tipText.borderSize = 1.25;
 			tipText.scrollFactor.set();
@@ -121,7 +121,7 @@ class OptionsState extends MusicBeatState
 			tipText.scrollFactor.set();
 			tipText.antialiasing = ClientPrefs.globalAntialiasing;
 			add(tipText);
-			
+		#end	
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);	
 

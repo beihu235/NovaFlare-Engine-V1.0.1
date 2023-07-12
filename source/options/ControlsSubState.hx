@@ -24,6 +24,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
+import flixel.addons.display.FlxBackdrop;
 import Controls;
 
 using StringTools;
@@ -34,6 +35,18 @@ class ControlsSubState extends MusicBeatSubstate {
 
 	private static var defaultKey:String = 'Reset to Default Keys';
 	private var bindLength:Int = 0;
+	
+	var bgMove:FlxBackdrop;
+	var ColorArray:Array<Int> = [
+		0xFF9400D3,
+		0xFF4B0082,
+		0xFF0000FF,
+		0xFF00FF00,
+		0xFFFFFF00,
+		0xFFFF7F00,
+		0xFFFF0000
+	                                
+	    ];
 
 	var optionShit:Array<Dynamic> = [
 		['NOTES'],
@@ -77,6 +90,15 @@ class ControlsSubState extends MusicBeatSubstate {
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
+		
+		bgMove = new FlxBackdrop(Paths.image('mainmenu_sprite/backdrop'), 1, 1, true, true, 0, 0);
+		//bgMove.scrollFactor.set();
+		bgMove.alpha = 0.1;
+		bgMove.color = ColorArray[MainMenuState.currentColor];
+		bgMove.screenCenter();
+		bgMove.velocity.set(FlxG.random.bool(50) ? 90 : -90, FlxG.random.bool(50) ? 90 : -90);
+		//bgMove.antialiasing = ClientPrefs.globalAntialiasing;
+		add(bgMove);
 
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);

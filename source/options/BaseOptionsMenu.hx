@@ -161,7 +161,12 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		}
 
 		if (controls.BACK) {
+		    #if android
+			FlxTransitionableState.skipNextTransOut = true;
+			FlxG.resetState();
+			#else
 			close();
+			#end
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 		}
 
@@ -254,7 +259,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 				}
 			}
 
-			if(controls.RESET)
+			if(controls.RESET  #if android || _virtualpad.buttonC.justPressed #end)
 			{
 				for (i in 0...optionsArray.length)
 				{
@@ -340,8 +345,12 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			boyfriend.visible = optionsArray[curSelected].showBoyfriend;
 		}
 		
-		if (optionsArray[curSelected].showNote == false) remove(grpNote);
-		
+		if (optionsArray[curSelected].showNote == false){
+		 remove(grpNote);
+		}
+		else{
+		reloadNotes();
+		}
 		curOption = optionsArray[curSelected]; //shorter lol
 		FlxG.sound.play(Paths.sound('scrollMenu'));
 	}
