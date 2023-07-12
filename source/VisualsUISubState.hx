@@ -23,9 +23,27 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
+import haxe.Json;
+import haxe.format.JsonParser;
 import Controls;
 
 using StringTools;
+
+typedef NoteSkinData =
+{
+	Skin1:String,
+	Skin2:String,
+	Skin3:String,
+	Skin4:String,
+	Skin5:String,
+	Skin6:String,
+	Skin7:String,
+	Skin8:String,
+	Skin9:String,
+	Skin10:String
+
+}
+
 
 class VisualsUISubState extends BaseOptionsMenu
 {
@@ -40,6 +58,18 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool',
 			true);
 		addOption(option);
+		option.onChange = CloseSkin;
+		
+		var option:Option = new Option('Note Skin',
+			"Choose Note Skin",
+			'NoteSkin',
+			'string',
+			'original',
+			['original', 'Skin1', 'Skin2', 'Skin3', 'Skin4', 'Skin5', 'Skin6', 'Skin7', 'Skin8', 'Skin9', 'Skin10']);
+			
+		option.showNote = true;
+		addOption(option);
+		option.onChange = onChangeNoteSkin;
 
 		var option:Option = new Option('Hide HUD',
 			'If checked, hides most HUD elements.',
@@ -47,6 +77,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool',
 			false);
 		addOption(option);
+		option.onChange = CloseSkin;
 		
 		var option:Option = new Option('Time Bar:',
 			"What should the Time Bar display?",
@@ -154,4 +185,82 @@ class VisualsUISubState extends BaseOptionsMenu
 		if(Main.fpsVar != null)
 			Main.fpsVar.visible = ClientPrefs.showFPS;
 	}
+	
+	var Skin:NoteSkinData;
+	//private var grpNote:FlxTypedGroup<FlxSprite>;
+	
+	function onChangeNoteSkin()
+	{
+		Skin = Json.parse(Paths.getTextFromFile('images/NoteSkin/DataSet/SkinData.json'));
+		if (ClientPrefs.NoteSkin == 'original') {
+		    FlxG.save.data.ChangeSkin = false;
+		}
+		else {
+		     FlxG.save.data.ChangeSkin = true;
+		     if (ClientPrefs.NoteSkin == 'Skin1') FlxG.save.data.NoteSkinName = Skin.Skin1;
+		     if (ClientPrefs.NoteSkin == 'Skin2') FlxG.save.data.NoteSkinName = Skin.Skin2;
+		     if (ClientPrefs.NoteSkin == 'Skin3') FlxG.save.data.NoteSkinName = Skin.Skin3;
+		     if (ClientPrefs.NoteSkin == 'Skin4') FlxG.save.data.NoteSkinName = Skin.Skin4;
+		     if (ClientPrefs.NoteSkin == 'Skin5') FlxG.save.data.NoteSkinName = Skin.Skin5;
+		     if (ClientPrefs.NoteSkin == 'Skin6') FlxG.save.data.NoteSkinName = Skin.Skin6;
+		     if (ClientPrefs.NoteSkin == 'Skin7') FlxG.save.data.NoteSkinName = Skin.Skin7;
+		     if (ClientPrefs.NoteSkin == 'Skin8') FlxG.save.data.NoteSkinName = Skin.Skin8;
+		     if (ClientPrefs.NoteSkin == 'Skin9') FlxG.save.data.NoteSkinName = Skin.Skin9;
+		     if (ClientPrefs.NoteSkin == 'Skin10') FlxG.save.data.NoteSkinName = Skin.Skin10;     		     
+		}
+		    
+		if (FlxG.save.data.NoteSkinName == "") FlxG.save.data.ChangeSkin = false;
+		    
+		ClientPrefs.ChangeSkin = FlxG.save.data.ChangeSkin;
+		ClientPrefs.NoteSkinName = FlxG.save.data.NoteSkinName;		
+		
+        remove(grpNote);
+		
+		grpNote = new FlxTypedGroup<FlxSprite>();
+		add(grpNote);
+		
+		//option.showNote = false;
+		
+		for (i in 0...ClientPrefs.arrowHSV.length) {
+				var notes:FlxSprite = new FlxSprite((i * 125), 100);
+				if (ClientPrefs.ChangeSkin)  {
+				notes.frames = Paths.getSparrowAtlas('NoteSkin/' + ClientPrefs.NoteSkinName);
+				}    
+				else{
+				    notes.frames = Paths.getSparrowAtlas('NOTE_assets');
+				}
+				var animations:Array<String> = ['purple0', 'blue0', 'green0', 'red0'];
+				notes.animation.addByPrefix('idle', animations[i]);
+				notes.animation.play('idle');
+				//showNotes = notes.visible;
+				notes.scale.set(0.8, 0.8);
+				notes.x += 700;
+				notes.antialiasing = ClientPrefs.globalAntialiasing;
+				grpNote.add(notes);
+				
+				var newShader:ColorSwap = new ColorSwap();
+			    notes.shader = newShader.shader;
+			    newShader.hue = ClientPrefs.arrowHSV[i][0] / 360;
+			    newShader.saturation = ClientPrefs.arrowHSV[i][1] / 100;
+			    newShader.brightness = ClientPrefs.arrowHSV[i][2] / 100;
+			    
+		}
+		
+	}
+	
+	function CloseSkin()
+	{
+	    remove(grpNote);
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
