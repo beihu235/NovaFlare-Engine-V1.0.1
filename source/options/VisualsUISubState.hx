@@ -29,6 +29,7 @@ import Controls;
 
 using StringTools;
 
+
 typedef NoteSkinData =
 {
 	Skin1:String,
