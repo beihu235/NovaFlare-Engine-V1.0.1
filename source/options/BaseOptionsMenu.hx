@@ -342,6 +342,9 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		 remove(grpNote);
 		}
 		else{
+		remove(grpNote);		
+		grpNote = new FlxTypedGroup<FlxSprite>();
+		add(grpNote);
 		reloadNotes();
 		}
 		curOption = optionsArray[curSelected]; //shorter lol
