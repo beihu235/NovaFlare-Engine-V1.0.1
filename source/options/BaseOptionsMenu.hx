@@ -74,9 +74,6 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		checkboxGroup = new FlxTypedGroup<CheckboxThingie>();
 		add(checkboxGroup);
 
-		grpNote = new FlxTypedGroup<FlxSprite>();
-		add(grpNote);
-
 		descBox = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
 		descBox.alpha = 0.6;
 		add(descBox);
@@ -124,22 +121,16 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			{
 				reloadBoyfriend();
 			}
-			if(optionsArray[i].showNote)
-			{
-				reloadNotes();
-			}
 			updateTextFrom(optionsArray[i]);
 		}
-	
 
 		changeSelection();
 		reloadCheckboxes();
-		
-			
-		#if android
-        addVirtualPad(FULL, A_B_C);
-        #end
-                
+
+                #if android
+                addVirtualPad(FULL, A_B_C);
+                #end
+
 	}
 
 	public function addOption(option:Option) {
