@@ -1,17 +1,17 @@
 package openfl.display;
 
 import haxe.Timer;
-import openfl.events.Event;
-import openfl.text.TextField;
-import openfl.text.TextFormat;
+import flash.events.Event;
+import flash.text.TextField;
+import flash.text.TextFormat;
 import flixel.math.FlxMath;
 import flixel.util.FlxTimer;
 
-import openfl.utils.Assets;
+import flash.utils.Assets;
 
 #if gl_stats
-import openfl.display._internal.stats.Context3DStats;
-import openfl.display._internal.stats.DrawCallContext;
+import flash.display._internal.stats.Context3DStats;
+import flash.display._internal.stats.DrawCallContext;
 #end
 #if flash
 import flash.Lib;
