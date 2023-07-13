@@ -1,31 +1,31 @@
-package flash;
+package openfl.display;
 
 import haxe.Timer;
-import flash.events.Event;
-import flash.text.TextField;
-import flash.text.TextFormat;
+import openfl.events.Event;
+import openfl.text.TextField;
+import openfl.text.TextFormat;
 import flixel.math.FlxMath;
 import flixel.util.FlxTimer;
 
-import flash.utils.Assets;
+import openfl.utils.Assets;
 
 #if gl_stats
-import flash.display._internal.stats.Context3DStats;
-import flash.display._internal.stats.DrawCallContext;
+import openfl.display._internal.stats.Context3DStats;
+import openfl.display._internal.stats.DrawCallContext;
 #end
 #if flash
-import flash.Lib;
+import openfl.Lib;
 #end
 
-//#if openfl
-//import openfl.system.System;
-//#end
+#if openfl
+import openfl.system.System;
+#end
 import flash.system.System;
 /**
 	The FPS class provides an easy-to-use monitor to display
 	the current frame rate of an OpenFL project
 **/
-#if !flash_debug
+#if !openfl_debug
 @:fileXml('tags="haxe,release"')
 @:noDebug
 #end
@@ -192,10 +192,10 @@ class FPS extends TextField
 						
             text += "\nNF Engine V1.0.0\n"  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
             
-            text += "\nfreeMemory: " + System.freeMemory;
-            text += "\nprivateMemory: " + System.privateMemory;
-            text += "\nprocessCPUUsage: " + System.processCPUUsage;
-            text += "\ntotalMemoryNumber: " + System.totalMemoryNumber;
+            text += "\nfreeMemory: " + freeMemory;
+            text += "\nprivateMemory: " + privateMemory;
+            text += "\nprocessCPUUsage: " + processCPUUsage;
+            text += "\ntotalMemoryNumber: " + totalMemoryNumber;
             
         /*
 			#if (gl_stats && !disable_cffi && (!html5 || !canvas))
