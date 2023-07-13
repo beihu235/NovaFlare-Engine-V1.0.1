@@ -257,7 +257,7 @@ class MainMenuState extends MusicBeatState
 		_virtualpad.cameras = [camHUD];
 		#end
 		
-		CustomFadeTransition.nextCamera = camHUD;
+		
 
 		super.create();
 	}
@@ -401,6 +401,8 @@ class MainMenuState extends MusicBeatState
 		    spr.centerOffsets();
 		    spr.centerOrigin();
 		});
+		
+		CustomFadeTransition.nextCamera = camHUD;
 		
 		super.update(elapsed);
 	}
