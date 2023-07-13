@@ -176,7 +176,7 @@ class FPS extends TextField
 		
 			text = "FPS: " + DisplayFPS + "/" + ClientPrefs.framerate;
 			var memoryMegas:Float = 0;
-						
+			//memoryMegas = Math.round(actualMem / 1024 / 1024 * 100) / 100;			
 			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
 			text += "\nMemory: " + memoryMegas + " MB";
 						
@@ -191,6 +191,11 @@ class FPS extends TextField
 			}
 						
             text += "\nNF Engine V1.0.0\n"  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
+            
+            text += "\nfreeMemory: " + System.freeMemory;
+            text += "\nprivateMemory: " + System.privateMemory;
+            text += "\nprocessCPUUsage: " + System.processCPUUsage;
+            text += "\ntotalMemoryNumber: " + System.totalMemoryNumber;
             
         /*
 			#if (gl_stats && !disable_cffi && (!html5 || !canvas))
