@@ -18,9 +18,9 @@ import openfl.Lib;
 #end
 
 #if openfl
-import openfl.system.System;
+//import openfl.system.System;
 #end
-
+import flash.system.System;
 /**
 	The FPS class provides an easy-to-use monitor to display
 	the current frame rate of an OpenFL project
