@@ -17,15 +17,15 @@ import flash.display._internal.stats.DrawCallContext;
 import flash.Lib;
 #end
 
-#if openfl
+//#if openfl
 //import openfl.system.System;
-#end
+//#end
 import flash.system.System;
 /**
 	The FPS class provides an easy-to-use monitor to display
 	the current frame rate of an OpenFL project
 **/
-#if !openfl_debug
+#if !flash_debug
 @:fileXml('tags="haxe,release"')
 @:noDebug
 #end
