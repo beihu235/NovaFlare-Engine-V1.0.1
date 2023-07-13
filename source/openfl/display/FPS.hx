@@ -191,12 +191,12 @@ class FPS extends TextField
 			}
 						
             text += "\nNF Engine V1.0.0\n"  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
-            
+            /*
             text += "\nfreeMemory: " + flash.system.System.freeMemory;
             text += "\nprivateMemory: " + flash.system.System.privateMemory;
             text += "\nprocessCPUUsage: " + flash.system.System.processCPUUsage;
             text += "\ntotalMemoryNumber: " + flash.system.System.totalMemoryNumber;
-            
+            */
         /*
 			#if (gl_stats && !disable_cffi && (!html5 || !canvas))
 			text += "\ntotalDC: " + Context3DStats.totalDrawCalls();
