@@ -1,4 +1,4 @@
-package openfl.display;
+package flash;
 
 import haxe.Timer;
 import flash.events.Event;
