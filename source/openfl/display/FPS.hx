@@ -14,7 +14,7 @@ import openfl.display._internal.stats.Context3DStats;
 import openfl.display._internal.stats.DrawCallContext;
 #end
 #if flash
-import openfl.Lib;
+import flash.Lib;
 #end
 
 #if openfl
