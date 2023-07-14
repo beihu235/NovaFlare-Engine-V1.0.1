@@ -52,6 +52,8 @@ enum abstract Action(String) to String from String
 	var PAUSE = "pause";
 	var RESET = "reset";
 	var SPACE = 'space';
+	var SPACE_R = 'space-press';
+	var SPACE-P = 'space-release';
 }
 #else
 @:enum
@@ -160,8 +162,8 @@ class Controls extends FlxActionSet
 	var _pause = new FlxActionDigital(Action.PAUSE);
 	var _reset = new FlxActionDigital(Action.RESET);
 	var _space = new FlxActionDigital(Action.SPACE);
-	var _spaceP = new FlxActionDigital(Action.SPACE);
-	var _spaceR = new FlxActionDigital(Action.SPACE);
+	var _spaceP = new FlxActionDigital(Action.SPACE_P);
+	var _spaceR = new FlxActionDigital(Action.SPACE_R);
 
 	#if (haxe >= "4.0.0")
 	var byName:Map<String, FlxActionDigital> = [];
