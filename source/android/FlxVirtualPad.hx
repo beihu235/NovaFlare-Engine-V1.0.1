@@ -48,7 +48,7 @@ class FlxVirtualPad extends FlxSpriteGroup {
 	public var orgAlpha:Float = 0.75;
 	public var orgAntialiasing:Bool = true;
 
-	public function new(?DPad:FlxDPadMode, ?Action:FlxActionMode, ?alphaAlt:Float = 0.75, ?antialiasingAlt:Bool = true) {
+	public function new(?DPad:FlxDPadMode, ?Action:FlxActionMode, ?alphaAlt:Float = ClientPrefs.VirtualPadAlpha, ?antialiasingAlt:Bool = true) {
 		super();
 
 		orgAntialiasing = antialiasingAlt;

@@ -40,7 +40,7 @@ class HitboxSettingsSubState extends BaseOptionsMenu
 		rpcTitle = 'Hitbox Settings Menu'; //hi, you can ask what is that, i will answer it's all what you needed lol.
 
 		var option:Option = new Option('Space Extend',
-			"Allow Hitbox Extend Space Control --Made by NF|Beihu",
+			"Allow Extend Space Control --Made by NF|Beihu",
 			'hitboxExtend',
 			'bool',
 			true);
@@ -63,6 +63,18 @@ class HitboxSettingsSubState extends BaseOptionsMenu
 		option.minValue = 0.0;
 		option.maxValue = 1;
 		option.changeValue = 0.1;
+		option.decimals = 1;
+		addOption(option);
+		
+		var option:Option = new Option('VirtualPad Alpha:', //mariomaster was here again
+			'Changes VirtualPad Alpha',
+			'VirtualPadAlpha',
+			'float',
+			0.75);
+		option.scrollSpeed = 1.6;
+		option.minValue = 0.1;
+		option.maxValue = 1;
+		option.changeValue = 0.01;
 		option.decimals = 1;
 		addOption(option);
 
