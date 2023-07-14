@@ -41,6 +41,7 @@ class ClientPrefs {
 	public static var hitboxExtend = true;
 	public static var hitboxLocation:String = 'Bottom';
 	public static var hitboxalpha:Float = 0; //someone request this lol
+	public static var VirtualPadAlpha:Float = 0.75;
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
 		'scrolltype' => 'multiplicative', 
@@ -159,6 +160,7 @@ class ClientPrefs {
 		
 		FlxG.save.data.hitboxmode = hitboxmode;
 		FlxG.save.data.hitboxalpha = hitboxalpha;
+		FlxG.save.data.VirtualPadAlpha = VirtualPadAlpha;
 	    FlxG.save.data.hitboxExtend = hitboxExtend;
 	    FlxG.save.data.hitboxLocation = hitboxLocation;
 	        // new extend
@@ -300,6 +302,9 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.hitboxalpha != null) {
 			hitboxalpha = FlxG.save.data.hitboxalpha;
+		}
+		if(FlxG.save.data.VirtualPadAlpha != null) {
+			VirtualPadAlpha = FlxG.save.data.VirtualPadAlpha;
 		}
 		if(FlxG.save.data.pauseMusic != null) {
 			pauseMusic = FlxG.save.data.pauseMusic;
