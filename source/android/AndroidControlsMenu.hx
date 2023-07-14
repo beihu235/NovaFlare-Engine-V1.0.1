@@ -160,20 +160,20 @@ class AndroidControlsMenu extends MusicBeatState
 		{
 				case 'Pad-Right':
 					remove(vpad);
-					vpad = new FlxVirtualPad(RIGHT_FULL, PLAY_SPACE, 0.75, ClientPrefs.globalAntialiasing);
+					vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, ClientPrefs.globalAntialiasing);
 					add(vpad);
 				case 'Pad-Left':
 					remove(vpad);
-					vpad = new FlxVirtualPad(FULL, PLAY_SPACE, 0.75, ClientPrefs.globalAntialiasing);
+					vpad = new FlxVirtualPad(FULL, NONE, 0.75, ClientPrefs.globalAntialiasing);
 					add(vpad);
 				case 'Pad-Custom':
 					remove(vpad);
-					vpad = new FlxVirtualPad(RIGHT_FULL, PLAY_SPACE, 0.75, ClientPrefs.globalAntialiasing);
+					vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, ClientPrefs.globalAntialiasing);
 					add(vpad);
 					loadcustom();
 				case 'Duo':
 					remove(vpad);
-					vpad = new FlxVirtualPad(DUO, PLAY_SPACE, 0.75, ClientPrefs.globalAntialiasing);
+					vpad = new FlxVirtualPad(DUO, NONE, 0.75, ClientPrefs.globalAntialiasing);
 					add(vpad);
 				case 'Hitbox':
 					vpad.alpha = 0;
@@ -246,10 +246,6 @@ class AndroidControlsMenu extends MusicBeatState
 				}
 			}
 		}
-		if (vpad.buttonA.justPressed) {
-			movebutton(touch, vpad.buttonA);
-			
-	    }
 	}
 
 	function movebutton(touch:flixel.input.touch.FlxTouch, button:flixel.ui.FlxButton) {
