@@ -534,7 +534,7 @@ class Controls extends FlxActionSet
 			case B_E:
 				//inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonuUI(action, virtualPad.buttonA, state));
 				inline forEachBound(Control.BACK, (action, state) -> addbuttonuUI(action, virtualPad.buttonB, state));
-			case SPACE:	
+			case PLAY_SPACE:	
 			    inline forEachBound(Control.SPACE, (action, state) -> addbuttonuUI(action, virtualPad.buttonA, state));			
 			case NONE:
 		}
@@ -607,7 +607,7 @@ class Controls extends FlxActionSet
 			case B_E:
 				//inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonuNOTES(action, virtualPad.buttonA, state));
 				inline forEachBound(Control.BACK, (action, state) -> addbuttonuNOTES(action, virtualPad.buttonB, state));
-			case SPACE:
+			case PLAY_SPACE:
 				inline forEachBound(Control.SPACE, (action, state) -> addbuttonuUI(action, virtualPad.buttonA, state));			              
 			case NONE:
 		}
