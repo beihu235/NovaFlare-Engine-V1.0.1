@@ -194,6 +194,8 @@ class FlxVirtualPad extends FlxSpriteGroup {
 			case B_E:
 				actions.add(add(buttonE = createButton(FlxG.width - 44 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "e", 0xFF7D00)));  
 				actions.add(add(buttonB = createButton(FlxG.width - 86 * 3, FlxG.height - 45 * 3, 44 * 3, 127, "b", 0xFFCB00)));					
+            case SPACE:
+				actions.add(add(buttonA = createButton(ClientPrefs.VirtualPadSPACE[0], ClientPrefs.VirtualPadSPACE[1], 44 * 3, 127, "a", 0xFF0000)));
 			case NONE:
 		}
 	}
@@ -283,5 +285,6 @@ enum FlxActionMode {
 	FULL;
 	CHART_EDITOR;
 	B_E;
+	SPACE;
 	NONE;
 }
