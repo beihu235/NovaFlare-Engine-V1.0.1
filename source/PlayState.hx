@@ -1191,9 +1191,7 @@ class PlayState extends MusicBeatState
 			botplayTxt.y = timeBarBG.y - 78;
 		}
 
-		strumLineNotes.cameras = [camHUD];
-		grpNoteSplashes.cameras = [camHUD];
-		notes.cameras = [camHUD];
+		
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
 		iconP1.cameras = [camHUD];
@@ -1204,6 +1202,9 @@ class PlayState extends MusicBeatState
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
+		strumLineNotes.cameras = [camHUD];
+		grpNoteSplashes.cameras = [camHUD];
+		notes.cameras = [camHUD];
 
 		#if android
 		addAndroidControls();
@@ -2910,7 +2911,7 @@ class PlayState extends MusicBeatState
 			iconP1.swapOldIcon();
 		}*/
 		callOnLuas('onUpdate', [elapsed]);
-        /*
+        
 		switch (curStage)
 		{
 			case 'tank':
@@ -3040,7 +3041,7 @@ class PlayState extends MusicBeatState
 					}
 				}
 		}
-        */
+        
 		if(!inCutscene) {
 			var lerpVal:Float = CoolUtil.boundTo(elapsed * 2.4 * cameraSpeed * playbackRate, 0, 1);
 			camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
@@ -4159,10 +4160,11 @@ class PlayState extends MusicBeatState
 		vocals.volume = 1;
 
 		var placement:String = Std.string(combo);
-
+        /*
 		var coolText:FlxText = new FlxText(0, 0, 0, placement, 32);
 		coolText.screenCenter();
 		coolText.x = FlxG.width * 0.35;
+		*/
 		//
 
 		var rating:FlxSprite = new FlxSprite();
@@ -4204,7 +4206,7 @@ class PlayState extends MusicBeatState
 		rating.loadGraphic(Paths.image(pixelShitPart1 + daRating.image + pixelShitPart2));
 		rating.cameras = [camHUD];
 		rating.screenCenter();
-		rating.x = coolText.x - 40;
+		rating.x = FlxG.width * 0.35; - 40;
 		rating.y -= 60;
 		rating.acceleration.y = 550 * playbackRate * playbackRate;
 		rating.velocity.y -= FlxG.random.int(140, 175) * playbackRate;
@@ -4216,7 +4218,7 @@ class PlayState extends MusicBeatState
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
 		comboSpr.cameras = [camHUD];
 		comboSpr.screenCenter();
-		comboSpr.x = coolText.x;
+		comboSpr.x = FlxG.width * 0.35;;
 		comboSpr.acceleration.y = FlxG.random.int(200, 300) * playbackRate * playbackRate;
 		comboSpr.velocity.y -= FlxG.random.int(140, 160) * playbackRate;
 		comboSpr.visible = (!ClientPrefs.hideHud && showCombo);
@@ -4282,7 +4284,7 @@ class PlayState extends MusicBeatState
 			var numScore:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'num' + Std.int(i) + pixelShitPart2));
 			numScore.cameras = [camHUD];
 			numScore.screenCenter();
-			numScore.x = coolText.x + (43 * daLoop) - 90;
+			numScore.x = FlxG.width * 0.35; + (43 * daLoop) - 90;
 			numScore.y += 80;
 
 			numScore.x += ClientPrefs.comboOffset[2];
@@ -4328,7 +4330,7 @@ class PlayState extends MusicBeatState
 			trace(seperatedScore);
 		 */
 
-		coolText.text = Std.string(seperatedScore);
+		//coolText.text = Std.string(seperatedScore);
 		// add(coolText);
 
 		FlxTween.tween(rating, {alpha: 0}, 0.2 / playbackRate, {
@@ -4338,7 +4340,7 @@ class PlayState extends MusicBeatState
 		FlxTween.tween(comboSpr, {alpha: 0}, 0.2 / playbackRate, {
 			onComplete: function(tween:FlxTween)
 			{
-				coolText.destroy();
+				//coolText.destroy();
 				comboSpr.destroy();
 
 				rating.destroy();
