@@ -38,7 +38,7 @@ class LoadingState extends MusicBeatState
 		super();
 		this.target = target;
 		this.stopMusic = stopMusic;
-		this.directory = directory;
+		this.directory = '';
 	}
 
 	var funkay:FlxSprite;
