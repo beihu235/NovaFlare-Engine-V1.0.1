@@ -38,7 +38,7 @@ class LoadingState extends MusicBeatState
 		super();
 		this.target = target;
 		this.stopMusic = stopMusic;
-		this.directory = directory;
+		//this.directory = directory;
 	}
 
 	var funkay:FlxSprite;
@@ -72,10 +72,11 @@ class LoadingState extends MusicBeatState
 						checkLoadSong(getVocalPath());
 				}*/
 				checkLibrary("shared");
+				/*
 				if(directory != null && directory.length > 0 && directory != 'shared') {
 					checkLibrary(directory);
 				}
-
+                */
 				var fadeTime = 0.5;
 				FlxG.camera.fade(FlxG.camera.bgColor, fadeTime, true);
 				new FlxTimer().start(fadeTime + MIN_TIME, function(_) introComplete());
@@ -155,23 +156,24 @@ class LoadingState extends MusicBeatState
 	
 	static function getNextState(target:FlxState, stopMusic = false):FlxState
 	{
-		var directory:String = 'shared';
-		var weekDir:String = StageData.forceNextDirectory;
-		StageData.forceNextDirectory = null;
+	/*
+		//var directory:String = 'shared';
+		//var weekDir:String = StageData.forceNextDirectory;
+		//StageData.forceNextDirectory = null;
 
-		if(weekDir != null && weekDir.length > 0 && weekDir != '') directory = weekDir;
+		//if(weekDir != null && weekDir.length > 0 && weekDir != '') directory = weekDir;
 
-		Paths.setCurrentLevel(directory);
-		trace('Setting asset folder to ' + directory);
+		//Paths.setCurrentLevel(directory);
+		//trace('Setting asset folder to ' + directory);
 
 		
 		var loaded:Bool = false;
 		if (PlayState.SONG != null) {
 			loaded = isSoundLoaded(getSongPath()) && (!PlayState.SONG.needsVoices || isSoundLoaded(getVocalPath())) && isLibraryLoaded("shared") && isLibraryLoaded(directory);
-		}
+		}*/
 		
 		if (!loaded)
-			return new LoadingState(target, stopMusic, directory);
+			//return new LoadingState(target, stopMusic, directory);
 		
 		if (stopMusic && FlxG.sound.music != null)
 			FlxG.sound.music.stop();
@@ -219,7 +221,7 @@ class LoadingState extends MusicBeatState
 		if (libraryPaths.exists(id))
 		{
 			path = libraryPaths[id];
-			rootPath = Path.directory(path);
+			//rootPath = Path.directory(path);
 		}
 		else
 		{
@@ -230,7 +232,7 @@ class LoadingState extends MusicBeatState
 			}
 			else
 			{
-				rootPath = Path.directory(path);
+				//rootPath = Path.directory(path);
 			}
 			@:privateAccess
 			path = LimeAssets.__cacheBreak(path);
