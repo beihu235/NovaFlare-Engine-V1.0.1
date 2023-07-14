@@ -77,8 +77,15 @@ class HitboxSettingsSubState extends BaseOptionsMenu
 		option.changeValue = 0.01;
 		option.decimals = 2;
 		addOption(option);
-
+        option.onChange = onChangePadAlpha;
 		super();
+	}
+	
+	
+	function onChangePadAlpha()
+	{
+	ClientPrefs.saveSettings();
+	_virtualpad.alpha = ClientPrefs.VirtualPadAlpha;
 	}
 
 /*
