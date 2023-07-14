@@ -426,6 +426,7 @@ class Controls extends FlxActionSet
 		action.add(input);
 	}
 	
+	
 	//rework later
 	public function addButtonNOTES(action:FlxActionDigital, button:FlxNewButton, state:FlxInputState)
 	{
@@ -532,7 +533,9 @@ class Controls extends FlxActionSet
 				inline forEachBound(Control.BACK, (action, state) -> addbuttonuUI(action, virtualPad.buttonB, state));
 			case B_E:
 				//inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonuUI(action, virtualPad.buttonA, state));
-				inline forEachBound(Control.BACK, (action, state) -> addbuttonuUI(action, virtualPad.buttonB, state));			
+				inline forEachBound(Control.BACK, (action, state) -> addbuttonuUI(action, virtualPad.buttonB, state));
+			case SPACE:	
+			    inline forEachBound(Control.SPACE, (action, state) -> addbuttonuUI(action, virtualPad.buttonA, state));			
 			case NONE:
 		}
 	}
@@ -603,7 +606,9 @@ class Controls extends FlxActionSet
 				inline forEachBound(Control.BACK, (action, state) -> addbuttonuNOTES(action, virtualPad.buttonB, state));
 			case B_E:
 				//inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonuNOTES(action, virtualPad.buttonA, state));
-				inline forEachBound(Control.BACK, (action, state) -> addbuttonuNOTES(action, virtualPad.buttonB, state));		              
+				inline forEachBound(Control.BACK, (action, state) -> addbuttonuNOTES(action, virtualPad.buttonB, state));
+			case SPACE:
+				inline forEachBound(Control.SPACE, (action, state) -> addbuttonuUI(action, virtualPad.buttonA, state));			              
 			case NONE:
 		}
 	}
