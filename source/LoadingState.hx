@@ -33,12 +33,12 @@ class LoadingState extends MusicBeatState
 	var callbacks:MultiCallback;
 	var targetShit:Float = 0;
 
-	function new(target:FlxState, stopMusic:Bool)
+	function new(target:FlxState, stopMusic:Bool, directory:String)
 	{
 		super();
 		this.target = target;
 		this.stopMusic = stopMusic;
-		//this.directory = directory;
+		this.directory = directory;
 	}
 
 	var funkay:FlxSprite;
@@ -72,10 +72,11 @@ class LoadingState extends MusicBeatState
 						checkLoadSong(getVocalPath());
 				}*/
 				checkLibrary("shared");
+				/*
 				if(directory != null && directory.length > 0 && directory != 'shared') {
 					checkLibrary(directory);
 				}
-
+                */
 				var fadeTime = 0.5;
 				FlxG.camera.fade(FlxG.camera.bgColor, fadeTime, true);
 				new FlxTimer().start(fadeTime + MIN_TIME, function(_) introComplete());
@@ -171,7 +172,7 @@ class LoadingState extends MusicBeatState
 		}
 		
 		if (!loaded)
-			return new LoadingState(target, stopMusic);
+			return new LoadingState(target, stopMusic, directory);
 		
 		if (stopMusic && FlxG.sound.music != null)
 			FlxG.sound.music.stop();
