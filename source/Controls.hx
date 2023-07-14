@@ -52,8 +52,8 @@ enum abstract Action(String) to String from String
 	var PAUSE = "pause";
 	var RESET = "reset";
 	var SPACE = 'space';
-	var SPACE_R = 'space-press';
-	var SPACE-P = 'space-release';
+	var SPACE_P = 'space-press';
+	var SPACE_R = 'space-release';
 }
 #else
 @:enum
