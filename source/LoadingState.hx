@@ -33,12 +33,12 @@ class LoadingState extends MusicBeatState
 	var callbacks:MultiCallback;
 	var targetShit:Float = 0;
 
-	function new(target:FlxState, stopMusic:Bool, directory:String)
+	function new(target:FlxState, stopMusic:Bool)
 	{
 		super();
 		this.target = target;
 		this.stopMusic = stopMusic;
-		this.directory = directory;
+		//this.directory = directory;
 	}
 
 	var funkay:FlxSprite;
@@ -171,7 +171,7 @@ class LoadingState extends MusicBeatState
 		}
 		
 		if (!loaded)
-			return new LoadingState(target, stopMusic, directory);
+			return new LoadingState(target, stopMusic);
 		
 		if (stopMusic && FlxG.sound.music != null)
 			FlxG.sound.music.stop();
