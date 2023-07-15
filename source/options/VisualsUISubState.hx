@@ -181,11 +181,7 @@ class VisualsUISubState extends BaseOptionsMenu
 	function onChangePauseMusic()
 	{
 	
-	if(vocals != null) {
-			vocals.stop();
-			vocals.destroy();
-		}
-	vocals = null;
+
 		
 		if(ClientPrefs.pauseMusic == 'None')
 			FlxG.sound.music.volume = 0;
