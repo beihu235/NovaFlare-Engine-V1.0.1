@@ -51,7 +51,7 @@ class HitboxSettingsSubState extends BaseOptionsMenu
 			'hitboxLocation',
 			'string',
 			'Bottom',
-			['Bottom', 'Top']);
+			['Bottom', 'Middle', 'Top']);
 		  addOption(option);  
 		  
 		var option:Option = new Option('Hitbox Alpha:', //mariomaster was here again
