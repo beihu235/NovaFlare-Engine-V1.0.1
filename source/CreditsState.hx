@@ -106,6 +106,7 @@ class CreditsState extends MusicBeatState
 		
 		    ['NF Engine Team'],
 			['beihu',		'beihu',		'Main Programmer',							'https://b23.tv/LVj0JVk',	'FFC0CB'],
+			['TieGuo',		'TieGuo',		'Programmer',							'https://b23.tv/OiK1Ssh',	'5DE7FF'],
 			//['Nuno Filipe Studios',	'nuno',				'Android Porter',							'https://www.youtube.com/channel/UCq7G3p4msVN5SX2CpJ86tTw',	'989c99'],
 			//['M.A. Jigsaw', 		'saw',				'AndroidTools Creator/Vpad Designer',		'https://www.youtube.com/channel/UC2Sk7vtPzOvbVzdVTWrribQ', '444444'],
 			[''],
