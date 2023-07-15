@@ -181,7 +181,7 @@ class OptionsState extends MusicBeatState
 		}
 
 		if (controls.BACK) {
-			if (PauseSubState.optionMenu) {
+			if (PauseSubState.MoveOption) {
 				MusicBeatState.switchState(new PlayState());
 				PauseSubState.MoveOption = false;
 			} else {
