@@ -36,6 +36,8 @@ class ClientPrefs {
 	public static var pauseMusic:String = 'Tea Time';
 	public static var checkForUpdates:Bool = true;
 	public static var comboStacking = true;
+	public static var showComboNum = true;
+	public static var showRating = true;
 	public static var hitboxmode:String = 'New';  //starting new way to change between hitboxes yay
     
 	public static var hitboxExtend = true;
@@ -158,7 +160,8 @@ class ClientPrefs {
 		FlxG.save.data.pauseMusic = pauseMusic;
 		FlxG.save.data.checkForUpdates = checkForUpdates;
 		FlxG.save.data.comboStacking = comboStacking;
-		
+		FlxG.save.data.showRating = showRating;
+		FlxG.save.data.showComboNum = showComboNum;
 		FlxG.save.data.hitboxmode = hitboxmode;
 		FlxG.save.data.hitboxalpha = hitboxalpha;
 		FlxG.save.data.VirtualPadAlpha = VirtualPadAlpha;
@@ -364,6 +367,11 @@ class ClientPrefs {
 		}
 		if (FlxG.save.data.comboStacking != null)
 			comboStacking = FlxG.save.data.comboStacking;
+		if (FlxG.save.data.showRating != null)
+			showRating = FlxG.save.data.showRating;
+		if (FlxG.save.data.showComboNum != null)
+			showComboNum = FlxG.save.data.showComboNum;		
+			
 
 		var save:FlxSave = new FlxSave();
 		save.bind('controls_v2' , CoolUtil.getSavePath());
