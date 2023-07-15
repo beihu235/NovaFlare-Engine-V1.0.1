@@ -40,7 +40,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		add(loadRight);
 
 		if(!isTransIn) {
-			FlxG.sound.play(Paths.sound('shutter_close'));
+			FlxG.sound.play(Paths.sound('loading_close'));
 			loadLeftTween = FlxTween.tween(loadLeft, {x: 0}, duration, {
 				onComplete: function(twn:FlxTween) {
 					if(finishCallback != null) {
@@ -57,7 +57,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 				},
 			ease: FlxEase.smoothStepInOut});
 		} else {
-			FlxG.sound.play(Paths.sound('shutter_open'));
+			FlxG.sound.play(Paths.sound('loading_open'));
 			loadLeftTween = FlxTween.tween(loadLeft, {x: -1280}, duration, {
 				onComplete: function(twn:FlxTween) {
 					close();
