@@ -2911,6 +2911,7 @@ class PlayState extends MusicBeatState
 			iconP1.swapOldIcon();
 		}*/
 		callOnLuas('onUpdate', [elapsed]);
+        if (ClientPrefs.optimize){
         
 		switch (curStage)
 		{
@@ -3040,6 +3041,7 @@ class PlayState extends MusicBeatState
 						heyTimer = 0;
 					}
 				}
+		}
 		}
         
 		if(!inCutscene) {
