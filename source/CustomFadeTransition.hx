@@ -64,13 +64,13 @@ class CustomFadeTransition extends MusicBeatSubstate {
 				onComplete: function(twn:FlxTween) {
 					close();
 				},
-			ease: FlxEase.cubeInOut});
+			ease: FlxEase.quintInOut});
 			
 			loadRightTween = FlxTween.tween(loadRight, {x: 1280}, duration, {
 				onComplete: function(twn:FlxTween) {
 					close();
 				},
-			ease: FlxEase.cubeInOut});
+			ease: FlxEase.quintInOut});
 		}
 
 		if(nextCamera != null) {
