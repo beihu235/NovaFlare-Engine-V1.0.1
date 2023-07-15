@@ -453,6 +453,9 @@ class MainMenuState extends MusicBeatState
 		ease: FlxEase.cubeInOut,
 		onComplete: function(twn:FlxTween)
 				{
+				
+				CustomFadeTransition.nextCamera = camGame;
+				
 			    var daChoice:String = optionShit[curSelected];
 
 				    switch (daChoice)
