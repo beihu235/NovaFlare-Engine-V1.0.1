@@ -371,6 +371,21 @@ class ChartingState extends MusicBeatState
 		\nQ/E - Decrease/Increase Note Sustain Length
 		\nSpace - Stop/Resume song";
 		
+		#if android
+		text =
+		"Open AutoSave can save chart every minute(At Song UI)
+		\nOpen Close Tips to close those tips (At Charting UI)
+		\nG - Change chart UI
+		\nUP/Down - Change Conductor's strum time
+		\nC + Left/Right - Go to the previous/next section
+		\nLeft/Right - Change Snap
+		\nZ - Reset Song Playback Rate
+		\nHold C to move 4x faster,Hold X to move 10x faster
+		\nV/D - Zoom in/out
+		\nB - Test your chart inside Chart Editor
+		\nUP/Down(Right Side) - Decrease/Increase Note Sustain Length
+		\nY - Stop/Resume song";
+		#end
 
         tipTextGroup = new FlxTypedGroup<FlxText>();
         add(tipTextGroup);
@@ -482,7 +497,7 @@ class ChartingState extends MusicBeatState
 		});
 		
 		check_AutoSaveChart = new FlxUICheckBox(110, reloadSongJson.y + 30, null, null, "AutoSave", 100);
-		if (FlxG.save.data.chart_AutoSaveChart == null) FlxG.save.data.chart_AutoSaveChart = false;
+		if (FlxG.save.data.chart_AutoSaveChart == null) FlxG.save.data.chart_AutoSaveChart = true;
 		check_AutoSaveChart.checked = FlxG.save.data.chart_AutoSaveChart;
 
 		check_AutoSaveChart.callback = function()
