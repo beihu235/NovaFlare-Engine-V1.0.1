@@ -376,11 +376,11 @@ class MainMenuState extends MusicBeatState
 			//FlxTween.tween(camGame, {zoom: 1}, 0.6, {ease: FlxEase.cubeOut});
 			
 			menuItems.forEach(function(spr:FlxSprite)	{
-				spr.scale.x = 0.83;
+			/*	spr.scale.x = 0.83;
 				spr.scale.y = 0.83;
 				    FlxTween.tween(spr.scale, {x: 0.8}, 0.6, {ease: FlxEase.cubeOut});
 				    FlxTween.tween(spr.scale, {y: 0.8}, 0.6, {ease: FlxEase.cubeOut});
-			
+			*/
 				
             });
             
