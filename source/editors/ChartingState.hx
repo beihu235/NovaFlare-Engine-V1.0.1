@@ -209,6 +209,7 @@ class ChartingState extends MusicBeatState
 	var text:String = "";
 	public static var vortex:Bool = false;
 	public static var tipsClose:Bool = true;
+	public static var MouseControl:Bool = true;
 	public static var AutoSaveChart:Bool = true;
 	public var mouseQuant:Bool = false;
 	override function create()
@@ -253,6 +254,7 @@ class ChartingState extends MusicBeatState
 
 		vortex = FlxG.save.data.chart_vortex;
 		tipsClose = FlxG.save.data.chart_tipsClose;
+		MouseControl = FlxG.save.data.chart_MouseControl;
 		AutoSaveChart = FlxG.save.data.chart_AutoSaveChart;
 		ignoreWarnings = FlxG.save.data.ignoreWarnings;
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
@@ -450,6 +452,7 @@ class ChartingState extends MusicBeatState
 	var check_vortex:FlxUICheckBox = null;
 	var check_warnings:FlxUICheckBox = null;
 	var check_tipsClose:FlxUICheckBox = null;
+	var check_MouseControl:FlxUICheckBox = null;
 	var check_AutoSaveChart:FlxUICheckBox = null;
 	var playSoundBf:FlxUICheckBox = null;
 	var playSoundDad:FlxUICheckBox = null;
@@ -1324,6 +1327,17 @@ class ChartingState extends MusicBeatState
 			tipsClose = FlxG.save.data.chart_tipsClose;
 			reloadGridLayer();
 		};
+		
+		MouseControl = new FlxUICheckBox(130, 200 + 60, null, null, "Mouse Control", 100);
+		if (FlxG.save.data.chart_MouseControl == null) FlxG.save.data.chart_MouseControl = false;
+		MouseControl.checked = FlxG.save.data.chart_MouseControl;
+
+		MouseControl.callback = function()
+		{
+			FlxG.save.data.chart_MouseControl = MouseControl.checked;
+			MouseControl = FlxG.save.data.chart_MouseControl;
+			reloadGridLayer();
+		};
 
 		check_warnings = new FlxUICheckBox(10, 120, null, null, "Ignore Progress Warnings", 100);
 		if (FlxG.save.data.ignoreWarnings == null) FlxG.save.data.ignoreWarnings = false;
@@ -1422,7 +1436,7 @@ class ChartingState extends MusicBeatState
 		tab_group_chart.add(playSoundBf);
 		tab_group_chart.add(playSoundDad);
 		tab_group_chart.add(check_tipsClose);
-		
+		tab_group_chart.add(check_MouseControl);
 		UI_box.addGroup(tab_group_chart);
 	}
 
@@ -1676,6 +1690,7 @@ class ChartingState extends MusicBeatState
 		FlxG.watch.addQuick('daStep', curStep);
 
 		#if android
+		if  (MouseControl){
 		for (touch in FlxG.touches.list)
 		{
 			if (touch.x > gridBG.x
@@ -1721,6 +1736,66 @@ class ChartingState extends MusicBeatState
 					}
 				}
 			}
+		}
+		}
+		else{
+		if (FlxG.mouse.x > gridBG.x
+			&& FlxG.mouse.x < gridBG.x + gridBG.width
+			&& FlxG.mouse.y > gridBG.y
+			&& FlxG.mouse.y < gridBG.y + (GRID_SIZE * getSectionBeats() * 4) * zoomList[curZoom])
+		{
+			dummyArrow.visible = true;
+			dummyArrow.x = Math.floor(FlxG.mouse.x / GRID_SIZE) * GRID_SIZE;
+			if (FlxG.keys.pressed.SHIFT)
+				dummyArrow.y = FlxG.mouse.y;
+			else
+			{
+				var gridmult = GRID_SIZE / (quantization / 16);
+				dummyArrow.y = Math.floor(FlxG.mouse.y / gridmult) * gridmult;
+			}
+		} else {
+			dummyArrow.visible = false;
+		}
+
+		if (FlxG.mouse.justPressed)
+		{
+			if (FlxG.mouse.overlaps(curRenderedNotes))
+			{
+				curRenderedNotes.forEachAlive(function(note:Note)
+				{
+					if (FlxG.mouse.overlaps(note))
+					{
+						if (FlxG.keys.pressed.CONTROL)
+						{
+							selectNote(note);
+						}
+						else if (FlxG.keys.pressed.ALT)
+						{
+							selectNote(note);
+							curSelectedNote[3] = noteTypeIntMap.get(currentType);
+							updateGrid();
+						}
+						else
+						{
+							//trace('tryin to delete note...');
+							deleteNote(note);
+						}
+					}
+				});
+			}
+			else
+			{
+				if (FlxG.mouse.x > gridBG.x
+					&& FlxG.mouse.x < gridBG.x + gridBG.width
+					&& FlxG.mouse.y > gridBG.y
+					&& FlxG.mouse.y < gridBG.y + (GRID_SIZE * getSectionBeats() * 4) * zoomList[curZoom])
+				{
+					FlxG.log.add('added note');
+					addNote();
+				}
+			}
+		}
+		
 		}
 		#else
 
