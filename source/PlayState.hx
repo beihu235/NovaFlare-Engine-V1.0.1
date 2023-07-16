@@ -2913,7 +2913,7 @@ class PlayState extends MusicBeatState
 			iconP1.swapOldIcon();
 		}*/
 		callOnLuas('onUpdate', [elapsed]);
-        if (ClientPrefs.optimize){
+        if (ClientPrefs.optimize == false){
         
 		switch (curStage)
 		{
