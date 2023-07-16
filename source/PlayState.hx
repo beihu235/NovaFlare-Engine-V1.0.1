@@ -4231,7 +4231,7 @@ class PlayState extends MusicBeatState
 		comboSpr.velocity.x += FlxG.random.int(1, 10) * playbackRate;
         }
         else{ 
-        var comboSpr:FlxSprite;
+        var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
         }
 		insert(members.indexOf(strumLineNotes), rating);
 		
