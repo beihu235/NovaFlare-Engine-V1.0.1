@@ -3059,8 +3059,8 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
-		setOnLuas('curDecStep', curDecStep);
-		setOnLuas('curDecBeat', curDecBeat);
+		//setOnLuas('curDecStep', curDecStep);
+		//setOnLuas('curDecBeat', curDecBeat);
 
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
