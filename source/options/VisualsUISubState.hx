@@ -86,6 +86,13 @@ class VisualsUISubState extends BaseOptionsMenu
 			'Time Left',
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
 		addOption(option);
+		
+		var option:Option = new Option('GradientColor TimeBar ',
+			"If chacked timebar will have gradient color\nbut maybe will have bug when you change timebar color again",
+			'gradientTimeBar',
+			'bool',
+			true);
+		addOption(option);
 
 		var option:Option = new Option('Flashing Lights',
 			"Uncheck this if you're sensitive to flashing lights!",
