@@ -3170,9 +3170,9 @@ class PlayState extends MusicBeatState
 			camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
 		}
 
-		//FlxG.watch.addQuick("secShit", curSection);
-		//FlxG.watch.addQuick("beatShit", curBeat);
-		//FlxG.watch.addQuick("stepShit", curStep);
+		FlxG.watch.addQuick("secShit", curSection);
+		FlxG.watch.addQuick("beatShit", curBeat);
+		FlxG.watch.addQuick("stepShit", curStep);
 
 		// RESET = Quick Game Over Screen
 		if (!ClientPrefs.noReset && controls.RESET && canReset && !inCutscene && startedCountdown && !endingSong)
