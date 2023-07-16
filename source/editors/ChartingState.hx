@@ -1328,13 +1328,13 @@ class ChartingState extends MusicBeatState
 			reloadGridLayer();
 		};
 		
-		MouseControl = new FlxUICheckBox(130, 200 + 60, null, null, "Mouse Control", 100);
+		check_MouseControl = new FlxUICheckBox(130, 200 + 60, null, null, "Mouse Control", 100);
 		if (FlxG.save.data.chart_MouseControl == null) FlxG.save.data.chart_MouseControl = false;
-		MouseControl.checked = FlxG.save.data.chart_MouseControl;
+		check_MouseControl.checked = FlxG.save.data.chart_MouseControl;
 
-		MouseControl.callback = function()
+		check_MouseControl.callback = function()
 		{
-			FlxG.save.data.chart_MouseControl = MouseControl.checked;
+			FlxG.save.data.chart_MouseControl = check_MouseControl.checked;
 			MouseControl = FlxG.save.data.chart_MouseControl;
 			reloadGridLayer();
 		};
