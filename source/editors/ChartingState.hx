@@ -3115,9 +3115,14 @@ class ChartingState extends MusicBeatState
 		var noteStrum = getStrumTime(dummyArrow.y, false) + sectionStartTime();
 		var noteData = 0;
 		#if android
+		if  (MouseControl){
 		for (touch in FlxG.touches.list)
 		{
 			noteData = Math.floor((touch.x - GRID_SIZE) / GRID_SIZE);
+		}
+		}
+		else{
+		noteData = Math.floor((FlxG.mouse.x - GRID_SIZE) / GRID_SIZE);
 		}
 		#else
 		noteData = Math.floor((FlxG.mouse.x - GRID_SIZE) / GRID_SIZE);
