@@ -43,7 +43,7 @@ class ClientPrefs {
     
 	public static var hitboxExtend = true;
 	public static var hitboxLocation:String = 'Bottom';
-	public static var hitboxalpha:Float = 0; //someone request this lol
+	public static var hitboxalpha:Float = 0.2; //someone request this lol
 	public static var VirtualPadAlpha:Float = 0.75;
 	public static var VirtualPadSPACE:Array<Float> = [FlxG.width - 44 * 3, FlxG.height - 45 * 3];
 	public static var gameplaySettings:Map<String, Dynamic> = [
