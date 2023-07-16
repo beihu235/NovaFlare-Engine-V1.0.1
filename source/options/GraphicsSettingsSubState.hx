@@ -54,7 +54,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		addOption(option);
 		
 		var option:Option = new Option('Optimize',
-			'If checked, Game wil optimize, But you cant use original fnf stage',
+			'If checked, Game will optimize, But you cant use original fnf stage',
 			'optimize',
 			'bool',
 			true);
