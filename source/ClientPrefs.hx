@@ -104,6 +104,8 @@ class ClientPrefs {
 	// new extend
 	
 	public static var rainbowFPS:Bool = true;
+	
+	public static var gradientTimeBar:Bool = true;
 	//public static var NoteSkin:String = 'Stepmania';
 	public static var filpChart:Bool = false;
 	
@@ -133,6 +135,7 @@ class ClientPrefs {
 		FlxG.save.data.shaders = shaders;
 		FlxG.save.data.framerate = framerate;
 		FlxG.save.data.rainbowFPS = rainbowFPS;
+		FlxG.save.data.gradientTimeBar = gradientTimeBar;
 		//FlxG.save.data.cursing = cursing;
 		//FlxG.save.data.violence = violence;
 		FlxG.save.data.camZooms = camZooms;
@@ -336,6 +339,9 @@ class ClientPrefs {
 		
 		if(FlxG.save.data.rainbowFPS != null) {
 			rainbowFPS = FlxG.save.data.rainbowFPS;
+		}
+		if(FlxG.save.data.gradientTimeBar != null) {
+			gradientTimeBar = FlxG.save.data.gradientTimeBar;
 		}
 		
 		if(FlxG.save.data.NoteSkin != null) {
