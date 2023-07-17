@@ -1210,7 +1210,8 @@ class PlayState extends MusicBeatState
 
 		#if android
 		addAndroidControls();
-		androidc.visible = false;
+		androidc.alpha = 0;
+		//androidc.visible = false;
 		#end
 
 		// if (SONG.song == 'South')
@@ -2119,7 +2120,8 @@ class PlayState extends MusicBeatState
 		if(ret != FunkinLua.Function_Stop) {
 			if (skipCountdown || startOnTime > 0) skipArrowStartTween = true;
 			#if android
-			androidc.visible = true;
+			//androidc.visible = true;
+			androidc.alpha = 1;
 			#end
 			generateStaticArrows(0);
 			generateStaticArrows(1);
@@ -3173,7 +3175,7 @@ class PlayState extends MusicBeatState
 		FlxG.watch.addQuick("secShit", curSection);
 		FlxG.watch.addQuick("beatShit", curBeat);
 		FlxG.watch.addQuick("stepShit", curStep);
-
+        /*
 		// RESET = Quick Game Over Screen
 		if (!ClientPrefs.noReset && controls.RESET && canReset && !inCutscene && startedCountdown && !endingSong)
 		{
@@ -3181,7 +3183,7 @@ class PlayState extends MusicBeatState
 			trace("RESET = True");
 		}
 		doDeathCheck();
-
+        */
 		if (unspawnNotes[0] != null)
 		{
 			var time:Float = spawnTime;
@@ -4580,7 +4582,7 @@ class PlayState extends MusicBeatState
 		
 		if(instakillOnMiss)
 		{
-			vocals.volume = 0;
+			//vocals.volume = 0;
 			doDeathCheck(true);
 		}
 
