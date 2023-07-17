@@ -4706,9 +4706,10 @@ class PlayState extends MusicBeatState
 	}
 
 	function goodNoteHit(note:Note):Void
-	{
+	{/*
 		if (!note.wasGoodHit)
 		{
+		*/
 			if(cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
 
 			if (ClientPrefs.hitsoundVolume > 0 && !note.hitsoundDisabled)
@@ -4809,7 +4810,7 @@ class PlayState extends MusicBeatState
 				notes.remove(note, true);
 				note.destroy();
 			}
-		}
+		//}
 	}
 
 	public function spawnNoteSplashOnNote(note:Note) {
