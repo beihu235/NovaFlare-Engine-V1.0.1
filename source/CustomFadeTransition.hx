@@ -13,6 +13,7 @@ import flixel.util.FlxGradient;
 import flixel.FlxSubState;
 import flixel.FlxSprite;
 import flixel.FlxCamera;
+import openfl.utils.Assets;
 
 class CustomFadeTransition extends MusicBeatSubstate {
 	public static var finishCallback:Void->Void;
@@ -40,7 +41,19 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		loadRight.scrollFactor.set();
 		loadRight.antialiasing = ClientPrefs.globalAntialiasing;
 		add(loadRight);
-
+		
+		var WaterMark:FlxText = new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 120 * 2, 0, 'NF ENGINE V1.0.0', 110);
+		WaterMark.scrollFactor.set();
+		WaterMark.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 113, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		WaterMark.antialiasing = ClientPrefs.globalAntialiasing;
+		add(WaterMark);
+        
+        var EventText:FlxText = new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 110, 0, 'LOADING . . . . . . ', 110);
+		EventText.scrollFactor.set();
+		EventText.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 113, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		EventText.antialiasing = ClientPrefs.globalAntialiasing;
+		add(EventText);
+		
 		if(!isTransIn) {
 			FlxG.sound.play(Paths.sound('loading_close'));
 			loadLeftTween = FlxTween.tween(loadLeft, {x: 0}, duration, {
@@ -58,6 +71,23 @@ class CustomFadeTransition extends MusicBeatSubstate {
 					}
 				},
 			ease: FlxEase.smoothStepInOut});
+			
+			loadTextTween = FlxTween.tween(WaterMark, {x: 50}, duration, {
+				onComplete: function(twn:FlxTween) {
+					if(finishCallback != null) {
+						finishCallback();
+					}
+				},
+			ease: FlxEase.smoothStepInOut});
+			
+			EventTextTween = FlxTween.tween(EventText, {x: 50}, duration, {
+				onComplete: function(twn:FlxTween) {
+					if(finishCallback != null) {
+						finishCallback();
+					}
+				},
+			ease: FlxEase.smoothStepInOut});
+			
 		} else {
 			FlxG.sound.play(Paths.sound('loading_open'));
 			loadLeftTween = FlxTween.tween(loadLeft, {x: -1280}, duration, {
@@ -71,6 +101,20 @@ class CustomFadeTransition extends MusicBeatSubstate {
 					close();
 				},
 			ease: FlxEase.quintInOut});
+			
+			loadTextTween = FlxTween.tween(WaterMark, {x: -1230}, duration, {
+				onComplete: function(twn:FlxTween) {
+					close();
+				},
+			ease: FlxEase.smoothStepInOut});
+			
+			EventTextTween = FlxTween.tween(EventText, {x: -1230}, duration, {
+				onComplete: function(twn:FlxTween) {
+					close();
+				},
+			ease: FlxEase.smoothStepInOut});
+			
+			EventText.text = 'COMPLETED !';
 		}
 
 		if(nextCamera != null) {
@@ -86,6 +130,8 @@ class CustomFadeTransition extends MusicBeatSubstate {
 			leTween.cancel();
 			loadLeftTween.cancel();
 			loadRightTween.cancel();
+			loadTextTween.cancel();
+			EventTextTween.cancel();
 		}
 		super.destroy();
 	}
