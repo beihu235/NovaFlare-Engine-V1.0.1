@@ -153,6 +153,7 @@ class FreeplayState extends MusicBeatState
 			var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
 			songText.isMenuItem = true;
 			songText.targetY = i - curSelected;
+			songText.screenCenter(X);
 			grpSongs.add(songText);
 
 			var maxWidth = 980;
@@ -483,11 +484,13 @@ class FreeplayState extends MusicBeatState
 		    }
             
             grpSongs.forEach(function(spr:Alphabet)	{
+            if (spr.scale.x >= 0.99){
+            
                 spr.scale.x = 1.1;
 				spr.scale.y = 1.1;
 				    FlxTween.tween(spr.scale, {x: 1}, 0.6, {ease: FlxEase.cubeOut});
 				    FlxTween.tween(spr.scale, {y: 1}, 0.6, {ease: FlxEase.cubeOut});
-            
+            }
             });
         }
         if ( Math.floor(SoundTime/BeatTime + 0.5) % 4  == 2) canBeat = true;        
