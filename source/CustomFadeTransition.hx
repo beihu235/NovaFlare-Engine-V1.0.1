@@ -127,6 +127,8 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		if(nextCamera != null) {
 			loadRight.cameras = [nextCamera];
 			loadLeft.cameras = [nextCamera];
+			WaterMark.cameras = [nextCamera];
+			EventText.cameras = [nextCamera];
 		}
 		nextCamera = null;
 	}
