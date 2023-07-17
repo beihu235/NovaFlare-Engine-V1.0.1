@@ -4113,6 +4113,7 @@ class PlayState extends MusicBeatState
 	}
 	#end
     */
+    /*
 	public function KillNotes() {
 		while(notes.length > 0) {
 			var daNote:Note = notes.members[0];
@@ -4126,7 +4127,7 @@ class PlayState extends MusicBeatState
 		unspawnNotes = [];
 		eventNotes = [];
 	}
-
+    */
 	public var totalPlayed:Int = 0;
 	public var totalNotesHit:Float = 0.0;
 
@@ -4143,7 +4144,7 @@ class PlayState extends MusicBeatState
 			pixelShitPart1 = 'pixelUI/';
 			pixelShitPart2 = '-pixel';
 		}
-
+        /*
 		Paths.image(pixelShitPart1 + "sick" + pixelShitPart2);
 		Paths.image(pixelShitPart1 + "good" + pixelShitPart2);
 		Paths.image(pixelShitPart1 + "bad" + pixelShitPart2);
@@ -4153,6 +4154,7 @@ class PlayState extends MusicBeatState
 		for (i in 0...10) {
 			Paths.image(pixelShitPart1 + 'num' + i + pixelShitPart2);
 		}
+		*/
 	}
 
 	private function popUpScore(note:Note = null):Void
