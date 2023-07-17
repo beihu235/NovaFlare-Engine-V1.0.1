@@ -45,7 +45,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		loadRight.antialiasing = ClientPrefs.globalAntialiasing;
 		add(loadRight);
 		
-		var WaterMark:FlxText = new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 120 * 2, 0, 'NF ENGINE V1.0.0', 110);
+		var WaterMark:FlxText = new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 110 * 2, 0, 'NF ENGINE V1.0.0', 110);
 		WaterMark.scrollFactor.set();
 		WaterMark.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 113, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		WaterMark.antialiasing = ClientPrefs.globalAntialiasing;
@@ -65,7 +65,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 						finishCallback();
 					}
 				},
-			ease: FlxEase.smoothStepInOut});
+			ease: FlxEase.quintInOut});
 			
 			loadRightTween = FlxTween.tween(loadRight, {x: 0}, duration, {
 				onComplete: function(twn:FlxTween) {
@@ -73,7 +73,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 						finishCallback();
 					}
 				},
-			ease: FlxEase.smoothStepInOut});
+			ease: FlxEase.quintInOut});
 			
 			loadTextTween = FlxTween.tween(WaterMark, {x: 50}, duration, {
 				onComplete: function(twn:FlxTween) {
@@ -81,7 +81,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 						finishCallback();
 					}
 				},
-			ease: FlxEase.smoothStepInOut});
+			ease: FlxEase.quintInOut});
 			
 			EventTextTween = FlxTween.tween(EventText, {x: 50}, duration, {
 				onComplete: function(twn:FlxTween) {
@@ -89,10 +89,12 @@ class CustomFadeTransition extends MusicBeatSubstate {
 						finishCallback();
 					}
 				},
-			ease: FlxEase.smoothStepInOut});
+			ease: FlxEase.quintInOut});
 			
 		} else {
 			FlxG.sound.play(Paths.sound('loading_open'));
+			EventText.text = 'COMPLETED !';
+			
 			loadLeftTween = FlxTween.tween(loadLeft, {x: -1280}, duration, {
 				onComplete: function(twn:FlxTween) {
 					close();
@@ -109,15 +111,15 @@ class CustomFadeTransition extends MusicBeatSubstate {
 				onComplete: function(twn:FlxTween) {
 					close();
 				},
-			ease: FlxEase.smoothStepInOut});
+			ease: FlxEase.quintInOut});
 			
 			EventTextTween = FlxTween.tween(EventText, {x: -1230}, duration, {
 				onComplete: function(twn:FlxTween) {
 					close();
 				},
-			ease: FlxEase.smoothStepInOut});
+			ease: FlxEase.quintInOut});
 			
-			EventText.text = 'COMPLETED !';
+			
 		}
 
 		if(nextCamera != null) {
