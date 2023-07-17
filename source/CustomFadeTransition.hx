@@ -45,13 +45,13 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		loadRight.antialiasing = ClientPrefs.globalAntialiasing;
 		add(loadRight);
 		
-		var WaterMark:FlxText = new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 110 * 2, 0, 'NF ENGINE V1.0.0', 110);
+		WaterMark = new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 100 * 2, 0, 'NF ENGINE V1.0.0', 110);
 		WaterMark.scrollFactor.set();
 		WaterMark.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 113, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		WaterMark.antialiasing = ClientPrefs.globalAntialiasing;
 		add(WaterMark);
         
-        var EventText:FlxText = new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 110, 0, 'LOADING . . . . . . ', 110);
+        EventText= new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 110, 0, 'LOADING . . . . . . ', 110);
 		EventText.scrollFactor.set();
 		EventText.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 113, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		EventText.antialiasing = ClientPrefs.globalAntialiasing;
