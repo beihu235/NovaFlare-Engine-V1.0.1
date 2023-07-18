@@ -78,7 +78,7 @@ class LoadingState extends MusicBeatState
 				}
                 */
 				var fadeTime = 0.5;
-				FlxG.camera.fade(FlxG.camera.bgColor, fadeTime, true);
+				//FlxG.camera.fade(FlxG.camera.bgColor, fadeTime, true);
 				new FlxTimer().start(fadeTime + MIN_TIME, function(_) introComplete());
 			}
 		);
@@ -151,7 +151,7 @@ class LoadingState extends MusicBeatState
 	inline static public function loadAndSwitchState(target:FlxState, stopMusic = false)
 	{
 		MusicBeatState.switchState(getNextState(target, stopMusic));
-		FlxTransitionableState.skipNextTransIn = true;
+		//FlxTransitionableState.skipNextTransIn = true;
 	}
 	
 	static function getNextState(target:FlxState, stopMusic = false):FlxState
