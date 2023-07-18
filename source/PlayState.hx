@@ -5110,7 +5110,7 @@ class PlayState extends MusicBeatState
 		{
 			dad.dance();
 		}
-
+        /*
 		switch (curStage)
 		{
 			case 'tank':
@@ -5165,6 +5165,7 @@ class PlayState extends MusicBeatState
 		{
 			lightningStrikeShit();
 		}
+		*/
 		lastBeatHit = curBeat;
 
 		setOnLuas('curBeat', curBeat); //DAWGG?????
