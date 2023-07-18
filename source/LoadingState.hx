@@ -80,7 +80,11 @@ class LoadingState extends MusicBeatState
         var fadeTime = 0.6;
 		var curState:Dynamic = FlxG.state;
 		var leState:MusicBeatState = curState;
-		leState.openSubState(new CustomFadeTransition(0.6, false));			
+		leState.openSubState(new CustomFadeTransition(0.6, true));			
+		CustomFadeTransition.finishCallback = function() {
+					FlxG.resetState();
+				};
+		
 				
 				//FlxG.camera.fade(FlxG.camera.bgColor, fadeTime, true);
 				new FlxTimer().start(fadeTime + MIN_TIME, function(_) introComplete());
