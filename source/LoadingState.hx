@@ -77,7 +77,11 @@ class LoadingState extends MusicBeatState
 					checkLibrary(directory);
 				}
                 */
-				var fadeTime = 0.5;
+        var fadeTime = 0.6;
+		var curState:Dynamic = FlxG.state;
+		var leState:MusicBeatState = curState;
+		leState.openSubState(new CustomFadeTransition(0.6, false));			
+				
 				//FlxG.camera.fade(FlxG.camera.bgColor, fadeTime, true);
 				new FlxTimer().start(fadeTime + MIN_TIME, function(_) introComplete());
 			}
