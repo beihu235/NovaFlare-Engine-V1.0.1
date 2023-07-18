@@ -3173,8 +3173,7 @@ class PlayState extends MusicBeatState
 		FlxG.watch.addQuick("secShit", curSection);
 		FlxG.watch.addQuick("beatShit", curBeat);
 		FlxG.watch.addQuick("stepShit", curStep);
-		*/
-        /*
+        
 		// RESET = Quick Game Over Screen
 		if (!ClientPrefs.noReset && controls.RESET && canReset && !inCutscene && startedCountdown && !endingSong)
 		{
@@ -3325,8 +3324,8 @@ class PlayState extends MusicBeatState
 								noteMiss(daNote);
 							}
 
-							//daNote.active = false;
-							//daNote.visible = false;
+							daNote.active = false;
+							daNote.visible = false;
 
 							daNote.kill();
 							notes.remove(daNote, true);
