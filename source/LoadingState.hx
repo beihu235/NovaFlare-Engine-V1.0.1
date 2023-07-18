@@ -19,7 +19,7 @@ import haxe.io.Path;
 
 class LoadingState extends MusicBeatState
 {
-	inline static var MIN_TIME = 1.0;
+	inline static var MIN_TIME = 2.0;
 
 	// Browsers will load create(), you can make your song load a custom directory there
 	// If you're compiling to desktop (or something that doesn't use NO_PRELOAD_ALL), search for getNextState instead
