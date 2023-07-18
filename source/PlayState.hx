@@ -1211,7 +1211,6 @@ class PlayState extends MusicBeatState
 		#if android
 		addAndroidControls();
 		androidc.visible = false;
-		//androidc.alpha = 0.000001;
 		#end
 
 		// if (SONG.song == 'South')
@@ -3181,8 +3180,9 @@ class PlayState extends MusicBeatState
 			health = 0;
 			trace("RESET = True");
 		}
+		*/
 		doDeathCheck();
-        */
+        
 		if (unspawnNotes[0] != null)
 		{
 			var time:Float = spawnTime;
@@ -3965,8 +3965,7 @@ class PlayState extends MusicBeatState
 		}
 
 		#if android
-		androidc.alpha = 0.000001;
-		//androidc.visible = false;
+		androidc.visible = false;
 		#end
 		timeBarBG.visible = false;
 		timeBar.visible = false;
