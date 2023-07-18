@@ -47,7 +47,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 		loadRight.antialiasing = ClientPrefs.globalAntialiasing;
 		add(loadRight);
 		
-		WaterMark = new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 100 * 2, 0, 'NF ENGINE V1.0.0', 110);
+		WaterMark = new FlxText(isTransIn ? 50 : -1230, 720 - 50 - 100 * 2, 0, 'NF ENGINE V1.0.1', 110);
 		WaterMark.scrollFactor.set();
 		WaterMark.setFormat(Assets.getFont("assets/fonts/loadText.ttf").fontName, 113, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		WaterMark.antialiasing = ClientPrefs.globalAntialiasing;
