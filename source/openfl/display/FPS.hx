@@ -190,7 +190,7 @@ class FPS extends TextField
 				text += "\nMemory: " + newmemoryMegas + " GB";            
 			}
 						
-            text += "\nNF Engine V1.0.0\n"  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
+            text += "\nNF Engine V1.0.1\n"  + Math.floor(1 / DisplayFPS * 10000 + 0.5) / 10 + "ms";
             /*
             text += "\nfreeMemory: " + flash.system.System.freeMemory;
             text += "\nprivateMemory: " + flash.system.System.privateMemory;
