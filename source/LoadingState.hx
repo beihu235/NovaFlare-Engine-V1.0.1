@@ -8,7 +8,6 @@ import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.util.FlxTimer;
 import flixel.math.FlxMath;
-import flixel.addons.transition.FlxTransitionableState;
 
 import openfl.utils.Assets;
 import lime.utils.Assets as LimeAssets;
@@ -19,7 +18,7 @@ import haxe.io.Path;
 
 class LoadingState extends MusicBeatState
 {
-	inline static var MIN_TIME = 2.0;
+	inline static var MIN_TIME = 1.0;
 
 	// Browsers will load create(), you can make your song load a custom directory there
 	// If you're compiling to desktop (or something that doesn't use NO_PRELOAD_ALL), search for getNextState instead
@@ -38,16 +37,16 @@ class LoadingState extends MusicBeatState
 		super();
 		this.target = target;
 		this.stopMusic = stopMusic;
-		this.directory = '';
+		this.directory = directory;
 	}
 
 	var funkay:FlxSprite;
 	var loadBar:FlxSprite;
 	override function create()
 	{
-		/*var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, 0xffcaff4d);
-		add(bg);*/
-		funkay = new FlxSprite(0, 0).loadGraphic(Paths.image('funkay'));
+		var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, 0xffcaff4d);
+		add(bg);
+		funkay = new FlxSprite(0, 0).loadGraphic(Paths.getPath('images/funkay.png', IMAGE));
 		funkay.setGraphicSize(0, FlxG.height);
 		funkay.updateHitbox();
 		funkay.antialiasing = ClientPrefs.globalAntialiasing;
@@ -72,21 +71,12 @@ class LoadingState extends MusicBeatState
 						checkLoadSong(getVocalPath());
 				}*/
 				checkLibrary("shared");
-				/*
 				if(directory != null && directory.length > 0 && directory != 'shared') {
 					checkLibrary(directory);
 				}
-                */
-        var fadeTime = 0.6;
-		var curState:Dynamic = FlxG.state;
-		var leState:MusicBeatState = curState;
-		leState.openSubState(new CustomFadeTransition(0.6, true));			
-		CustomFadeTransition.finishCallback = function() {
-					FlxG.resetState();
-				};
-		
-				
-				//FlxG.camera.fade(FlxG.camera.bgColor, fadeTime, true);
+
+				var fadeTime = 0.5;
+				FlxG.camera.fade(FlxG.camera.bgColor, fadeTime, true);
 				new FlxTimer().start(fadeTime + MIN_TIME, function(_) introComplete());
 			}
 		);
@@ -123,13 +113,13 @@ class LoadingState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
-		/*funkay.setGraphicSize(Std.int(0.88 * FlxG.width + 0.9 * (funkay.width - 0.88 * FlxG.width)));
+		funkay.setGraphicSize(Std.int(0.88 * FlxG.width + 0.9 * (funkay.width - 0.88 * FlxG.width)));
 		funkay.updateHitbox();
 		if(controls.ACCEPT)
 		{
 			funkay.setGraphicSize(Std.int(funkay.width + 60));
 			funkay.updateHitbox();
-		}*/
+		}
 
 		if(callbacks != null) {
 			targetShit = FlxMath.remapToRange(callbacks.numRemaining / callbacks.length, 1, 0, 0, 1);
@@ -141,7 +131,6 @@ class LoadingState extends MusicBeatState
 	{
 		if (stopMusic && FlxG.sound.music != null)
 			FlxG.sound.music.stop();
-			
 		
 		MusicBeatState.switchState(target);
 	}
@@ -159,7 +148,6 @@ class LoadingState extends MusicBeatState
 	inline static public function loadAndSwitchState(target:FlxState, stopMusic = false)
 	{
 		MusicBeatState.switchState(getNextState(target, stopMusic));
-		//FlxTransitionableState.skipNextTransIn = true;
 	}
 	
 	static function getNextState(target:FlxState, stopMusic = false):FlxState
@@ -173,7 +161,7 @@ class LoadingState extends MusicBeatState
 		Paths.setCurrentLevel(directory);
 		trace('Setting asset folder to ' + directory);
 
-		
+		#if NO_PRELOAD_ALL
 		var loaded:Bool = false;
 		if (PlayState.SONG != null) {
 			loaded = isSoundLoaded(getSongPath()) && (!PlayState.SONG.needsVoices || isSoundLoaded(getVocalPath())) && isLibraryLoaded("shared") && isLibraryLoaded(directory);
@@ -181,15 +169,14 @@ class LoadingState extends MusicBeatState
 		
 		if (!loaded)
 			return new LoadingState(target, stopMusic, directory);
-		
+		#end
 		if (stopMusic && FlxG.sound.music != null)
 			FlxG.sound.music.stop();
-			
 		
 		return target;
 	}
 	
-	
+	#if NO_PRELOAD_ALL
 	static function isSoundLoaded(path:String):Bool
 	{
 		return Assets.cache.hasSound(path);
@@ -199,7 +186,7 @@ class LoadingState extends MusicBeatState
 	{
 		return Assets.getLibrary(library) != null;
 	}
-	
+	#end
 	
 	override function destroy()
 	{

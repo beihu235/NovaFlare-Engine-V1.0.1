@@ -241,7 +241,6 @@ class Note extends FlxSprite
 			}
 		} else if(!isSustainNote) {
 			earlyHitMult = 1;
-			if (hitCausesMiss) earlyHitMult = 0.5;
 		}
 		x += offsetX;
 	}
