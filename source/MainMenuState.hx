@@ -195,7 +195,7 @@ class MainMenuState extends MusicBeatState
 			//menuItem.offset.y = menuItem.offset.y * 0.8 + menuItem.width / 2;
 			}
 			
-			FlxTween.tween(menuItem, {x: 100}, (0.6 + 0.12 * i), {
+			FlxTween.tween(menuItem, {x: 100}, (0.5 + 0.06 * i), {
 			    ease: FlxEase.quadOut,
 			    type: ONESHOT,
 				onComplete: function(twn:FlxTween)
