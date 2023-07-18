@@ -207,7 +207,7 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "NF Engine v" + '1.0.0' + ' (PSYCH v0.6.3)', 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "NF Engine v" + '1.0.1' + ' (PSYCH v0.6.3)', 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		versionShit.antialiasing = ClientPrefs.globalAntialiasing;
@@ -419,7 +419,7 @@ class MainMenuState extends MusicBeatState
 		{
 			if (curSelected != spr.ID)
 			{
-				FlxTween.tween(spr, {x: -800}, 0.6 + 0.15 * Math.abs(curSelected - spr.ID), {
+				FlxTween.tween(spr, {x: -800}, 0.5 + 0.1 * Math.abs(curSelected - spr.ID), {
 					ease: FlxEase.backInOut,
 					onComplete: function(twn:FlxTween)
 					{
