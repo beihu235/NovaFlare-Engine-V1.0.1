@@ -2295,11 +2295,12 @@ class FunkinLua {
 			if (text4 == null) text4 = '';
 			if (text5 == null) text5 = '';
 			
-			if (text2 == '') luaTrace('date1:' + text1, true, false);
-			if (text3 == '') luaTrace('date1:' + text1 + 'date2:' + text2, true, false);
-			if (text4 == '') luaTrace('date1:' + text1 + 'date2:' + text2 + 'date3:' + text3, true, false);
-			if (text5 == '') luaTrace('date1:' + text1 + 'date2:' + text2 + 'date3:' + text3 + 'date4:' + text4, true, false);
-			if (text5 != '')  luaTrace('date1:' + text1 + 'date2:' + text2 + 'date3:' + text3 + 'date4:' + text4 +'date5:' + text5, true, false);
+			     if (text5 != '') luaTrace('date1:' + text1 + ' date2:' + text2 + ' date3:' + text3 + ' date4:' + text4 +' date5:' + text5, true, false);		
+			else if (text5 == '') luaTrace('date1:' + text1 + ' date2:' + text2 + ' date3:' + text3 + ' date4:' + text4, true, false);		
+			else if (text4 == '') luaTrace('date1:' + text1 + ' date2:' + text2 + ' date3:' + text3, true, false);
+			else if (text3 == '') luaTrace('date1:' + text1 + ' date2:' + text2, true, false);
+			else if (text2 == '') luaTrace('date1:' + text1, true, false);
+			else if (text1 == '') {   /* nothing happened */ }
 		});
 		
 		Lua_helper.add_callback(lua, "close", function() {
