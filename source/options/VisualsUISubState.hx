@@ -248,10 +248,10 @@ class VisualsUISubState extends BaseOptionsMenu
 		for (i in 0...ClientPrefs.arrowHSV.length) {
 				var notes:FlxSprite = new FlxSprite((i * 125), 100);
 				if (ClientPrefs.ChangeSkin)  {
-				notes.frames = Paths.getSparrowAtlas('NoteSkin/' + ClientPrefs.NoteSkinName);
+				notes.frames = Paths.image('NoteSkin/' + ClientPrefs.NoteSkinName);
 				}    
 				else{
-				    notes.frames = Paths.getSparrowAtlas('NOTE_assets');
+				    notes.frames = Paths.image('NOTE_assets');
 				}
 				var animations:Array<String> = ['purple0', 'blue0', 'green0', 'red0'];
 				notes.animation.addByPrefix('idle', animations[i]);
