@@ -41,7 +41,17 @@ typedef NoteSkinData =
 	Skin7:String,
 	Skin8:String,
 	Skin9:String,
-	Skin10:String
+	Skin10:String,
+	Skin11:String,
+	Skin12:String,
+	Skin13:String,
+	Skin14:String,
+	Skin15:String,
+	Skin16:String,
+	Skin17:String,
+	Skin18:String,
+	Skin19:String,
+	Skin20:String
 
 }
 
