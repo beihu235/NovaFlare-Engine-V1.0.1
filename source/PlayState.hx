@@ -2340,17 +2340,17 @@ class PlayState extends MusicBeatState
 		        + maxNPS
 		        + ")"
 		        + " | " // 	NPS
-		        + 'Score: ' + songScore
-		        + ' | Misses: ' + songMisses
-		        + ' | Accuracy: ' + Math.ceil(ratingPercent * 100) / 100
-		        + ' | '
+		        + "Score: " + songScore
+		        + " | Misses: " + songMisses
+		        + " | Accuracy: " + Math.ceil(ratingPercent * 100) / 100
+		        + " | "
 		        if (ratingName == 'N/A'){
-		            + 'N/A'
+		            + 'N/A';
 		        }
 		        else {
-		            + '(' + ratingFC + ') ' + ratingName
+		            + '(' + ratingFC + ') ' + ratingName;
 		        }
-		        + '';
+		       
         /*
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
 		{
@@ -3094,17 +3094,16 @@ class PlayState extends MusicBeatState
 		        + maxNPS
 		        + ")"
 		        + " | " // 	NPS
-		        + 'Score: ' + songScore
-		        + ' | Misses: ' + songMisses
-		        + ' | Accuracy: ' + Math.ceil(ratingPercent * 100) / 100
-		        + ' | '
+		        + "Score: " + songScore
+		        + " | Misses: " + songMisses
+		        + " | Accuracy: " + Math.ceil(ratingPercent * 100) / 100
+		        + " | "
 		        if (ratingName == 'N/A'){
-		            + 'N/A'
+		            + 'N/A';
 		        }
 		        else {
-		            + '(' + ratingFC + ') ' + ratingName
+		            + '(' + ratingFC + ') ' + ratingName;
 		        }
-		        + '';
 		        
 			}
 		
