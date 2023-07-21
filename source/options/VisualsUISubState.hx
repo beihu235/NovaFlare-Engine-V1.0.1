@@ -66,7 +66,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'NoteSkin',
 			'string',
 			'original',
-			['original', 'Skin1', 'Skin2', 'Skin3', 'Skin4', 'Skin5', 'Skin6', 'Skin7', 'Skin8', 'Skin9', 'Skin10']);
+			['original', 'Skin1', 'Skin2', 'Skin3', 'Skin4', 'Skin5', 'Skin6', 'Skin7', 'Skin8', 'Skin9', 'Skin10', 'Skin11', 'Skin12', 'Skin13', 'Skin14', 'Skin15', 'Skin16', 'Skin17', 'Skin18', 'Skin19', 'Skin20']);
 			
 		option.showNote = true;
 		addOption(option);
@@ -108,9 +108,9 @@ class VisualsUISubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
-		var option:Option = new Option('Score Text Zoom on Hit',
-			"If unchecked, disables the Score text zooming\neverytime you hit a note.",
-			'scoreZoom',
+		var option:Option = new Option('NPS Display',
+			"Show your current Note Per Second on the info bar.",
+			'NPSshowcase',
 			'bool',
 			true);
 		addOption(option);
@@ -230,7 +230,17 @@ class VisualsUISubState extends BaseOptionsMenu
 		     if (ClientPrefs.NoteSkin == 'Skin7') FlxG.save.data.NoteSkinName = Skin.Skin7;
 		     if (ClientPrefs.NoteSkin == 'Skin8') FlxG.save.data.NoteSkinName = Skin.Skin8;
 		     if (ClientPrefs.NoteSkin == 'Skin9') FlxG.save.data.NoteSkinName = Skin.Skin9;
-		     if (ClientPrefs.NoteSkin == 'Skin10') FlxG.save.data.NoteSkinName = Skin.Skin10;     		     
+		     if (ClientPrefs.NoteSkin == 'Skin10') FlxG.save.data.NoteSkinName = Skin.Skin10; 
+		     if (ClientPrefs.NoteSkin == 'Skin11') FlxG.save.data.NoteSkinName = Skin.Skin11;
+		     if (ClientPrefs.NoteSkin == 'Skin12') FlxG.save.data.NoteSkinName = Skin.Skin12;
+		     if (ClientPrefs.NoteSkin == 'Skin13') FlxG.save.data.NoteSkinName = Skin.Skin13;
+		     if (ClientPrefs.NoteSkin == 'Skin14') FlxG.save.data.NoteSkinName = Skin.Skin14;
+		     if (ClientPrefs.NoteSkin == 'Skin15') FlxG.save.data.NoteSkinName = Skin.Skin15;
+		     if (ClientPrefs.NoteSkin == 'Skin16') FlxG.save.data.NoteSkinName = Skin.Skin16;
+		     if (ClientPrefs.NoteSkin == 'Skin17') FlxG.save.data.NoteSkinName = Skin.Skin17;
+		     if (ClientPrefs.NoteSkin == 'Skin18') FlxG.save.data.NoteSkinName = Skin.Skin18;
+		     if (ClientPrefs.NoteSkin == 'Skin19') FlxG.save.data.NoteSkinName = Skin.Skin19;
+		     if (ClientPrefs.NoteSkin == 'Skin20') FlxG.save.data.NoteSkinName = Skin.Skin20;    		     
 		}
 		    
 		if (FlxG.save.data.NoteSkinName == "") FlxG.save.data.ChangeSkin = false;
