@@ -64,7 +64,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 			loadLeftTween = FlxTween.tween(loadLeft, {x: 0}, duration, {
 				onComplete: function(twn:FlxTween) {
 					if(finishCallback != null) {
-						finishCallback();
+						//finishCallback();
 					}
 				},
 			ease: FlxEase.quintInOut});
@@ -72,7 +72,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 			loadRightTween = FlxTween.tween(loadRight, {x: 0}, duration, {
 				onComplete: function(twn:FlxTween) {
 					if(finishCallback != null) {
-						finishCallback();
+						//finishCallback();
 					}
 				},
 			ease: FlxEase.quintInOut});
@@ -80,7 +80,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 			loadTextTween = FlxTween.tween(WaterMark, {x: 50}, duration, {
 				onComplete: function(twn:FlxTween) {
 					if(finishCallback != null) {
-						finishCallback();
+						//finishCallback();
 					}
 				},
 			ease: FlxEase.quintInOut});
@@ -88,7 +88,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 			EventTextTween = FlxTween.tween(EventText, {x: 50}, duration, {
 				onComplete: function(twn:FlxTween) {
 					if(finishCallback != null) {
-						finishCallback();
+						//finishCallback();
 					}
 				},
 			ease: FlxEase.quintInOut});
@@ -99,25 +99,25 @@ class CustomFadeTransition extends MusicBeatSubstate {
 			
 			loadLeftTween = FlxTween.tween(loadLeft, {x: -1280}, duration, {
 				onComplete: function(twn:FlxTween) {
-					close();
+					//close();
 				},
 			ease: FlxEase.quintInOut});
 			
 			loadRightTween = FlxTween.tween(loadRight, {x: 1280}, duration, {
 				onComplete: function(twn:FlxTween) {
-					close();
+					//close();
 				},
 			ease: FlxEase.quintInOut});
 			
 			loadTextTween = FlxTween.tween(WaterMark, {x: -1230}, duration, {
 				onComplete: function(twn:FlxTween) {
-					close();
+					//close();
 				},
 			ease: FlxEase.quintInOut});
 			
 			EventTextTween = FlxTween.tween(EventText, {x: -1230}, duration, {
 				onComplete: function(twn:FlxTween) {
-					close();
+					//close();
 				},
 			ease: FlxEase.quintInOut});
 			
@@ -135,7 +135,7 @@ class CustomFadeTransition extends MusicBeatSubstate {
 
 	override function destroy() {
 		if(leTween != null) {
-			finishCallback();
+			//finishCallback();
 			leTween.cancel();
 			loadLeftTween.cancel();
 			loadRightTween.cancel();
