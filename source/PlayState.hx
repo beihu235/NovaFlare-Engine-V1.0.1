@@ -2342,7 +2342,7 @@ class PlayState extends MusicBeatState
 		        + " | " // 	NPS
 		        + "Score: " + songScore
 		        + " | Misses: " + songMisses
-		        + " | Accuracy: " + Math.ceil(ratingPercent * 10000) / 100
+		        + " | Accuracy: " + Math.ceil(ratingPercent * 10000) / 100 + '%'
 		        + " | ";
 		        
 		        if (ratingName == 'N/A'){
@@ -3097,7 +3097,7 @@ class PlayState extends MusicBeatState
 		        + " | " // 	NPS
 		        + "Score: " + songScore
 		        + " | Misses: " + songMisses
-		        + " | Accuracy: " + Math.ceil(ratingPercent * 1000) / 10
+		        + " | Accuracy: " + Math.ceil(ratingPercent * 10000) / 100 + '%'
 		        + " | ";
 		        
 		        if (ratingName == 'N/A'){
