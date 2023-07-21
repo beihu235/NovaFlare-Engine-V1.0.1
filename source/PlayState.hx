@@ -3083,6 +3083,8 @@ class PlayState extends MusicBeatState
 			if (nps > maxNPS)
 				maxNPS = nps;
 				
+			setOnLuas('nps', nps);
+			setOnLuas('maxFPS', maxFPS);	
 				
 			if (npsCheck != nps) {
 			
