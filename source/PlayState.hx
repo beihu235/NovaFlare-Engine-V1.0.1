@@ -2343,14 +2343,15 @@ class PlayState extends MusicBeatState
 		        + "Score: " + songScore
 		        + " | Misses: " + songMisses
 		        + " | Accuracy: " + Math.ceil(ratingPercent * 100) / 100
-		        + " | "
+		        + " | ";
+		        /*
 		        if (ratingName == 'N/A'){
 		            + 'N/A';
 		        }
 		        else {
 		            + '(' + ratingFC + ') ' + ratingName;
 		        }
-		       
+		       */
         /*
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
 		{
@@ -3097,13 +3098,15 @@ class PlayState extends MusicBeatState
 		        + "Score: " + songScore
 		        + " | Misses: " + songMisses
 		        + " | Accuracy: " + Math.ceil(ratingPercent * 100) / 100
-		        + " | "
+		        + " | ";
+		        /*
 		        if (ratingName == 'N/A'){
 		            + 'N/A';
 		        }
 		        else {
 		            + '(' + ratingFC + ') ' + ratingName;
 		        }
+		       */
 		        
 			}
 		
