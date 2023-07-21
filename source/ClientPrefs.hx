@@ -113,6 +113,8 @@ class ClientPrefs {
 	public static var NoteSkin:String = 'original';
 	//public static var NoteSkinName:String = 'original';
 	
+	public static var LoadPath:String = 'NF Engine';
+	
 	// new extend
 	
 	public static var defaultKeys:Map<String, Array<FlxKey>> = null;
@@ -176,6 +178,7 @@ class ClientPrefs {
 	        // new extend
 	
 	    FlxG.save.data.NoteSkin = NoteSkin;
+	    FlxG.save.data.LoadPath = LoadPath;
 	    //FlxG.save.data.NoteSkinName = NoteSkinName;
 	    //FlxG.save.data.ChangeSkin = ChangeSkin;
 	    FlxG.save.data.filpChart = filpChart;
@@ -346,6 +349,9 @@ class ClientPrefs {
 		
 		if(FlxG.save.data.NoteSkin != null) {
 			NoteSkin = FlxG.save.data.NoteSkin;
+		}
+		if(FlxG.save.data.LoadPath != null) {
+			LoadPath = FlxG.save.data.LoadPath;
 		}
 		
 		/*if(FlxG.save.data.NoteSkinName != null) {
