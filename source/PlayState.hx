@@ -2344,14 +2344,14 @@ class PlayState extends MusicBeatState
 		        + " | Misses: " + songMisses
 		        + " | Accuracy: " + Math.ceil(ratingPercent * 100) / 100
 		        + " | ";
-		        /*
+		        
 		        if (ratingName == 'N/A'){
-		            + 'N/A';
+		            scoreTxt.text += 'N/A';
 		        }
 		        else {
-		            + '(' + ratingFC + ') ' + ratingName;
+		            scoreTxt.text += '(' + ratingFC + ') ' + ratingName;
 		        }
-		       */
+		       
         /*
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
 		{
@@ -3099,14 +3099,14 @@ class PlayState extends MusicBeatState
 		        + " | Misses: " + songMisses
 		        + " | Accuracy: " + Math.ceil(ratingPercent * 100) / 100
 		        + " | ";
-		        /*
+		        
 		        if (ratingName == 'N/A'){
-		            + 'N/A';
+		            scoreTxt.text += 'N/A';
 		        }
 		        else {
-		            + '(' + ratingFC + ') ' + ratingName;
+		            scoreTxt.text += '(' + ratingFC + ') ' + ratingName;
 		        }
-		       */
+		       
 		        
 			}
 		
