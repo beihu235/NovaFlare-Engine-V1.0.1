@@ -77,13 +77,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		option.onChange = onChangeFramerate;
 		#end
 		
-		var option:Option = new Option('LoadPath:',
-			"Change loading path folder!",
-			'LoadPath',
-			'string',
-			'NF Engine',
-			['NF Engine', 'PsychEngine']);
-		addOption(option);
+		
 
 		super();
 	}
