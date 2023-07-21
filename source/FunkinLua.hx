@@ -2293,11 +2293,11 @@ class FunkinLua {
 		    var showcase:Int = 6;
 		
 			
-			if (text5 == null) text5 = '' showcase = 5;			
-			if (text4 == null) text4 = '' showcase = 4;			
-			if (text3 == null) text3 = '' showcase = 3;            
-			if (text2 == null) text2 = '' showcase = 2;
-			if (text1 == null) text1 = '' showcase = 1;
+			if (text5 == null) {text5 = ''; showcase = 5;}			
+			if (text4 == null) {text4 = ''; showcase = 4;}			
+			if (text3 == null) {text3 = ''; showcase = 3;}            
+			if (text2 == null) {text2 = ''; showcase = 2;}
+			if (text1 == null) {text1 = ''; showcase = 1;}
 			
 			switch (showcase)   {								    
 								
