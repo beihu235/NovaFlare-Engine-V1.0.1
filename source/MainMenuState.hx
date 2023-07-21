@@ -288,7 +288,7 @@ class MainMenuState extends MusicBeatState
 		var lerpVal:Float = CoolUtil.boundTo(elapsed * 7.5, 0, 1);
 		camFollowPos.setPosition(FlxMath.lerp(camFollowPos.x, camFollow.x, lerpVal), FlxMath.lerp(camFollowPos.y, camFollow.y, lerpVal));
 
-		
+		if (FlxG.mouse.justPressed) usingMouse = true;
 		
 		menuItems.forEach(function(spr:FlxSprite)
 		{
@@ -300,11 +300,11 @@ class MainMenuState extends MusicBeatState
 			        //spr.offset.y = spr.offset.y * 0.8;
 			        spr.updateHitbox();
 			        
-			}
+			
 
 			if (FlxG.mouse.overlaps(spr))
 			{
-			    usingMouse = true;
+			    //usingMouse = true;
                 if (FlxG.mouse.justPressed && canClick && spr.animation.curAnim.name != 'idle')
 				{
 				    if (curSelected == spr.ID) {
@@ -333,9 +333,41 @@ class MainMenuState extends MusicBeatState
 			    
 			    
 			    }
+			    }
 			}
-		
 			
+		    if (controls.UI_UP_P)
+			{   
+			    usingMouse = false;
+				FlxG.sound.play(Paths.sound('scrollMenu'));				
+				curSelected--;
+			}
+
+			if (controls.UI_DOWN_P)
+			{
+			    usingMouse = false;
+				FlxG.sound.play(Paths.sound('scrollMenu'));
+				changeItem++;
+			}
+			
+			if (curSelected >= menuItems.length)
+			    curSelected = 0;
+		    if (curSelected < 0)
+			    curSelected = menuItems.length - 1;
+			
+			if (!usingMouse){
+			
+			    menuItems.forEach(function(spr:FlxSprite){
+			        spr.animation.play('idle');
+			        //spr.updateHitbox();
+
+			        if (spr.ID == curSelected)
+			        {
+			        	spr.animation.play('selected');
+			        	//spr.centerOffsets();
+			        }
+		        });
+			}
 		});
 		
 		if (!selectedSomethin)
@@ -419,7 +451,7 @@ class MainMenuState extends MusicBeatState
 		{
 			if (curSelected != spr.ID)
 			{
-				FlxTween.tween(spr, {x: -800}, 0.5 + 0.1 * Math.abs(curSelected - spr.ID), {
+				FlxTween.tween(spr, {x: -800}, 0.6 + 0.1 * Math.abs(curSelected - spr.ID), {
 					ease: FlxEase.backInOut,
 					onComplete: function(twn:FlxTween)
 					{
