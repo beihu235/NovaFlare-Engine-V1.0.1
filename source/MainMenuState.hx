@@ -347,7 +347,7 @@ class MainMenuState extends MusicBeatState
 			{
 			    usingMouse = false;
 				FlxG.sound.play(Paths.sound('scrollMenu'));
-				changeItem++;
+				curSelected++;
 			}
 			
 			if (curSelected >= menuItems.length)
