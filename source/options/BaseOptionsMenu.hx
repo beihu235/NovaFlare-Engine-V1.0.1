@@ -394,8 +394,8 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		{
 			for (i in 0...ClientPrefs.arrowHSV.length) {
 				var notes:FlxSprite = new FlxSprite((i * 125), 100);
-				if (ClientPrefs.ChangeSkin)  {
-				    notes.frames = Paths.getSparrowAtlas('NoteSkin/' + ClientPrefs.NoteSkinName);
+				if (ClientPrefs.NoteSkin != 'original')  {
+				notes.frames = Paths.getSparrowAtlas('NoteSkin/' + ClientPrefs.NoteSkin);
 				}    
 				else{
 				    notes.frames = Paths.getSparrowAtlas('NOTE_assets');
@@ -403,7 +403,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 				var animations:Array<String> = ['purple0', 'blue0', 'green0', 'red0'];
 				notes.animation.addByPrefix('idle', animations[i]);
 				notes.animation.play('idle');
-				//notes.visible = true;
+				//showNotes = notes.visible;
 				notes.scale.set(0.8, 0.8);
 				notes.x += 700;
 				notes.antialiasing = ClientPrefs.globalAntialiasing;
@@ -414,6 +414,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			    newShader.hue = ClientPrefs.arrowHSV[i][0] / 360;
 			    newShader.saturation = ClientPrefs.arrowHSV[i][1] / 100;
 			    newShader.brightness = ClientPrefs.arrowHSV[i][2] / 100;
+			    
 		}
 	}
 
