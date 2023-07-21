@@ -176,6 +176,7 @@ class PlayState extends MusicBeatState
     var notesHitArray:Array<Date> = [];
     var nps:Int = 0;
 	var maxNPS:Int = 0;
+	var npsCheck:Int = 0;
 	
 	public var camZooming:Bool = false;
 	public var camZoomingMult:Float = 1;
@@ -2333,16 +2334,17 @@ class PlayState extends MusicBeatState
 	public function updateScore(miss:Bool = false)
 	{
 		scoreTxt.text = 
-        "NPS: "
-		+ nps
-		+ " (Max: "
-		+ maxNPS
-		+ ")"
-		+ " | " // 	NPS
-		+ 'Score: ' + songScore
-		+ ' | Misses: ' + songMisses
-		+ ' | Rating: ' + ratingName
-		+ (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) - $ratingFC' : '');
+                "NPS: "
+		        + nps
+		        + " (Max: "
+		        + maxNPS
+		        + ")"
+		        + " | " // 	NPS
+		        + 'Score: ' + songScore
+		        + ' | Misses: ' + songMisses
+		        + ' | Accuracy: ' + Math.ceil(ratingPercent * 100) / 100
+		        + ' | '
+		        + (ratingName != 'N/A' ? { '(' + ratingFC + ') ' + ratingName});
         /*
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
 		{
@@ -3059,7 +3061,7 @@ class PlayState extends MusicBeatState
 		}
 		*/
 		
-		{
+		
 			var balls = notesHitArray.length - 1;
 			while (balls >= 0)
 			{
@@ -3073,7 +3075,26 @@ class PlayState extends MusicBeatState
 			nps = notesHitArray.length;
 			if (nps > maxNPS)
 				maxNPS = nps;
-		}
+				
+				
+			if (npsCheck != nps) {
+			
+			    npsCheck = nps;
+			
+			    scoreTxt.text = 
+                "NPS: "
+		        + nps
+		        + " (Max: "
+		        + maxNPS
+		        + ")"
+		        + " | " // 	NPS
+		        + 'Score: ' + songScore
+		        + ' | Misses: ' + songMisses
+		        + ' | Accuracy: ' + Math.ceil(ratingPercent * 100) / 100
+		        + ' | '
+		        + (ratingName != 'N/A' ? { '(' + ratingFC + ') ' + ratingName});
+			}
+		
 		
 		if(!inCutscene) {
 			var lerpVal:Float = CoolUtil.boundTo(elapsed * 2.4 * cameraSpeed * playbackRate, 0, 1);
