@@ -2299,7 +2299,14 @@ class FunkinLua {
 			if (text2 == null) {text2 = ''; showcase = 2;}
 			if (text1 == null) {text1 = ''; showcase = 1;}
 			
-			switch (showcase)   {								    
+			//if (text5 != '') luaTrace('date1:' + text1 + ' date2:' + text2 + ' date3:' + text3 + ' date4:' + text4 +' date5:' + text5, true, false);		
+			if (text5 == '') showcase = 5;
+			if (text4 == '') showcase = 4;
+			if (text3 == '') showcase = 2;
+			if (text2 == '') showcase = 2;
+			if (text1 == '') showcase = 1;
+			
+			switch (showcase)   {				    
 								
 				case 1 :
 					//nothing happened
