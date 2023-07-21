@@ -2289,18 +2289,32 @@ class FunkinLua {
 		});
 
 		Lua_helper.add_callback(lua, "debugPrint", function(text1:Dynamic = '', text2:Dynamic = '', text3:Dynamic = '', text4:Dynamic = '', text5:Dynamic = '') {
-			if (text1 == null) text1 = '';
-			if (text2 == null) text2 = '';
-			if (text3 == null) text3 = '';
-			if (text4 == null) text4 = '';
-			if (text5 == null) text5 = '';
+		
+		    var showcase:Int = 6;
+		
 			
-			     if (text5 != '') luaTrace('date1:' + text1 + ' date2:' + text2 + ' date3:' + text3 + ' date4:' + text4 +' date5:' + text5, true, false);		
-			else if (text5 == '') luaTrace('date1:' + text1 + ' date2:' + text2 + ' date3:' + text3 + ' date4:' + text4, true, false);		
-			else if (text4 == '') luaTrace('date1:' + text1 + ' date2:' + text2 + ' date3:' + text3, true, false);
-			else if (text3 == '') luaTrace('date1:' + text1 + ' date2:' + text2, true, false);
-			else if (text2 == '') luaTrace('date1:' + text1, true, false);
-			else if (text1 == '') {   /* nothing happened */ }
+			if (text5 == null) text5 = '' showcase = 5;			
+			if (text4 == null) text4 = '' showcase = 4;			
+			if (text3 == null) text3 = '' showcase = 3;            
+			if (text2 == null) text2 = '' showcase = 2;
+			if (text1 == null) text1 = '' showcase = 1;
+			
+			switch (showcase)   {								    
+								
+				case 1 :
+					//nothing happened
+				case 2 :
+					luaTrace('date1:' + text1, true, false);
+				case 3 :
+					luaTrace('date1:' + text1 + ' date2:' + text2, true, false);
+				case 4 :
+					luaTrace('date1:' + text1 + ' date2:' + text2 + ' date3:' + text3, true, false);
+				case 5 :
+					luaTrace('date1:' + text1 + ' date2:' + text2 + ' date3:' + text3 + ' date4:' + text4, true, false);
+				case 6 :
+					luaTrace('date1:' + text1 + ' date2:' + text2 + ' date3:' + text3 + ' date4:' + text4 +' date5:' + text5, true, false);	
+			}
+								
 		});
 		
 		Lua_helper.add_callback(lua, "close", function() {
