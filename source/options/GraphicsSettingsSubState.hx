@@ -26,7 +26,8 @@ import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
 import Controls;
 import openfl.Lib;
-
+import lime.app.Application;
+import lime.system.DisplayMode;
 using StringTools;
 
 class GraphicsSettingsSubState extends BaseOptionsMenu
@@ -71,7 +72,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		option.minValue = 60;
-		option.maxValue = 360;
+		option.maxValue = Application.current.window.displayMode.refreshRate;
 		option.displayFormat = '%v FPS';
 		option.onChange = onChangeFramerate;
 		#end
