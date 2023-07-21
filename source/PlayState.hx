@@ -2344,7 +2344,13 @@ class PlayState extends MusicBeatState
 		        + ' | Misses: ' + songMisses
 		        + ' | Accuracy: ' + Math.ceil(ratingPercent * 100) / 100
 		        + ' | '
-		        + (ratingName != 'N/A' ? { '(' + ratingFC + ') ' + ratingName};);
+		        if (ratingName == 'N/A'){
+		            + 'N/A'
+		        }
+		        else {
+		            + '(' + ratingFC + ') ' + ratingName
+		        }
+		        + '';
         /*
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
 		{
@@ -3092,7 +3098,14 @@ class PlayState extends MusicBeatState
 		        + ' | Misses: ' + songMisses
 		        + ' | Accuracy: ' + Math.ceil(ratingPercent * 100) / 100
 		        + ' | '
-		        + (ratingName != 'N/A' ? { '(' + ratingFC + ') ' + ratingName};);
+		        if (ratingName == 'N/A'){
+		            + 'N/A'
+		        }
+		        else {
+		            + '(' + ratingFC + ') ' + ratingName
+		        }
+		        + '';
+		        
 			}
 		
 		
