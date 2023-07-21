@@ -29,7 +29,7 @@ import Controls;
 
 using StringTools;
 
-
+/*
 typedef NoteSkinData =
 {
 	Skin1:String,
@@ -54,15 +54,20 @@ typedef NoteSkinData =
 	Skin20:String
 
 }
+*/
 
 
 class VisualsUISubState extends BaseOptionsMenu
 {
+
+    var noteSkinList:Array<String> = CoolUtil.coolTextFile(Paths.getTextFromFile('images/NoteSkin/DataSet/noteSkinList.txt'));
+        
 	public function new()
 	{
 		title = 'Visuals and UI';
 		rpcTitle = 'Visuals & UI Settings Menu'; //for Discord Rich Presence
-
+        noteSkinList.unshift('original');
+        
 		var option:Option = new Option('Note Splashes',
 			"If unchecked, hitting \"Sick!\" notes won't show particles.",
 			'noteSplashes',
@@ -76,7 +81,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'NoteSkin',
 			'string',
 			'original',
-			['original', 'Skin1', 'Skin2', 'Skin3', 'Skin4', 'Skin5', 'Skin6', 'Skin7', 'Skin8', 'Skin9', 'Skin10', 'Skin11', 'Skin12', 'Skin13', 'Skin14', 'Skin15', 'Skin16', 'Skin17', 'Skin18', 'Skin19', 'Skin20']);
+			noteSkinList);
 			
 		option.showNote = true;
 		addOption(option);
@@ -220,43 +225,13 @@ class VisualsUISubState extends BaseOptionsMenu
 			Main.fpsVar.visible = ClientPrefs.showFPS;
 	}
 	
-	var Skin:NoteSkinData;
+	//var Skin:NoteSkinData;
 	// private var grpNote:FlxTypedGroup<FlxSprite>;
 	
 	function onChangeNoteSkin()
 	{
-		Skin = Json.parse(Paths.getTextFromFile('images/NoteSkin/DataSet/SkinData.json'));
-		if (ClientPrefs.NoteSkin == 'original') {
-		    FlxG.save.data.ChangeSkin = false;
-		}
-		else {
-		     FlxG.save.data.ChangeSkin = true;
-		     if (ClientPrefs.NoteSkin == 'Skin1') FlxG.save.data.NoteSkinName = Skin.Skin1;
-		     if (ClientPrefs.NoteSkin == 'Skin2') FlxG.save.data.NoteSkinName = Skin.Skin2;
-		     if (ClientPrefs.NoteSkin == 'Skin3') FlxG.save.data.NoteSkinName = Skin.Skin3;
-		     if (ClientPrefs.NoteSkin == 'Skin4') FlxG.save.data.NoteSkinName = Skin.Skin4;
-		     if (ClientPrefs.NoteSkin == 'Skin5') FlxG.save.data.NoteSkinName = Skin.Skin5;
-		     if (ClientPrefs.NoteSkin == 'Skin6') FlxG.save.data.NoteSkinName = Skin.Skin6;
-		     if (ClientPrefs.NoteSkin == 'Skin7') FlxG.save.data.NoteSkinName = Skin.Skin7;
-		     if (ClientPrefs.NoteSkin == 'Skin8') FlxG.save.data.NoteSkinName = Skin.Skin8;
-		     if (ClientPrefs.NoteSkin == 'Skin9') FlxG.save.data.NoteSkinName = Skin.Skin9;
-		     if (ClientPrefs.NoteSkin == 'Skin10') FlxG.save.data.NoteSkinName = Skin.Skin10; 
-		     if (ClientPrefs.NoteSkin == 'Skin11') FlxG.save.data.NoteSkinName = Skin.Skin11;
-		     if (ClientPrefs.NoteSkin == 'Skin12') FlxG.save.data.NoteSkinName = Skin.Skin12;
-		     if (ClientPrefs.NoteSkin == 'Skin13') FlxG.save.data.NoteSkinName = Skin.Skin13;
-		     if (ClientPrefs.NoteSkin == 'Skin14') FlxG.save.data.NoteSkinName = Skin.Skin14;
-		     if (ClientPrefs.NoteSkin == 'Skin15') FlxG.save.data.NoteSkinName = Skin.Skin15;
-		     if (ClientPrefs.NoteSkin == 'Skin16') FlxG.save.data.NoteSkinName = Skin.Skin16;
-		     if (ClientPrefs.NoteSkin == 'Skin17') FlxG.save.data.NoteSkinName = Skin.Skin17;
-		     if (ClientPrefs.NoteSkin == 'Skin18') FlxG.save.data.NoteSkinName = Skin.Skin18;
-		     if (ClientPrefs.NoteSkin == 'Skin19') FlxG.save.data.NoteSkinName = Skin.Skin19;
-		     if (ClientPrefs.NoteSkin == 'Skin20') FlxG.save.data.NoteSkinName = Skin.Skin20;    		     
-		}
-		    
-		if (FlxG.save.data.NoteSkinName == "") FlxG.save.data.ChangeSkin = false;
-		    
-		ClientPrefs.ChangeSkin = FlxG.save.data.ChangeSkin;
-		ClientPrefs.NoteSkinName = FlxG.save.data.NoteSkinName;		
+		
+		ClientPrefs.NoteSkin = FlxG.save.data.NoteSkin;    
 		
         remove(grpNote);
 		
@@ -267,8 +242,8 @@ class VisualsUISubState extends BaseOptionsMenu
 		
 		for (i in 0...ClientPrefs.arrowHSV.length) {
 				var notes:FlxSprite = new FlxSprite((i * 125), 100);
-				if (ClientPrefs.ChangeSkin)  {
-				notes.frames = Paths.getSparrowAtlas('NoteSkin/' + ClientPrefs.NoteSkinName);
+				if (ClientPrefs.NoteSkin != 'original')  {
+				notes.frames = Paths.getSparrowAtlas('NoteSkin/' + ClientPrefs.NoteSkin);
 				}    
 				else{
 				    notes.frames = Paths.getSparrowAtlas('NOTE_assets');
