@@ -290,6 +290,25 @@ class MainMenuState extends MusicBeatState
 
 		if (FlxG.mouse.justPressed) usingMouse = true;
 		
+		if (controls.UI_UP_P)
+			{
+			    usingMouse = false;
+				FlxG.sound.play(Paths.sound('scrollMenu'));				
+				curSelected--;
+			}
+
+			if (controls.UI_DOWN_P)
+			{
+			    usingMouse = false;
+				FlxG.sound.play(Paths.sound('scrollMenu'));
+				curSelected++;
+			}
+			
+			if (curSelected >= menuItems.length)
+			    curSelected = 0;
+		    if (curSelected < 0)
+			    curSelected = menuItems.length - 1;
+		
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 			if (usingMouse)
@@ -335,29 +354,9 @@ class MainMenuState extends MusicBeatState
 			    }
 			    }
 			}
-			
-		    if (controls.UI_UP_P)
-			{   
-			    usingMouse = false;
-				FlxG.sound.play(Paths.sound('scrollMenu'));				
-				curSelected--;
-			}
-
-			if (controls.UI_DOWN_P)
-			{
-			    usingMouse = false;
-				FlxG.sound.play(Paths.sound('scrollMenu'));
-				curSelected++;
-			}
-			
-			if (curSelected >= menuItems.length)
-			    curSelected = 0;
-		    if (curSelected < 0)
-			    curSelected = menuItems.length - 1;
-			
-			if (!usingMouse){
-			
-			    menuItems.forEach(function(spr:FlxSprite){
+			else{
+	
+				    menuItems.forEach(function(spr:FlxSprite){
 			        spr.animation.play('idle');
 			        //spr.updateHitbox();
 
