@@ -2872,7 +2872,7 @@ class PlayState extends MusicBeatState
 			
 			#if android
 			//androidc.alpha = 1;
-			camcontrol.alpha = 0.000001;
+			camcontrol.alpha = 1;
 			//androidc.visible = true;
 			#end
 
