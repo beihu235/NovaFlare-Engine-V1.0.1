@@ -411,6 +411,13 @@ class PlayState extends MusicBeatState
 
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 		CustomFadeTransition.nextCamera = camOther;
+		
+		#if android
+		addAndroidControls();
+		androidc.visible = true;
+		androidc.alpha = 0.000001;
+		
+		#end
 
 		persistentUpdate = true;
 		persistentDraw = true;
@@ -1215,12 +1222,7 @@ class PlayState extends MusicBeatState
 		grpNoteSplashes.cameras = [camHUD];
 		notes.cameras = [camHUD];
 
-		#if android
-		addAndroidControls();
-		androidc.visible = true;
-		androidc.alpha = 0.000001;
 		
-		#end
 
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
@@ -2129,7 +2131,8 @@ class PlayState extends MusicBeatState
 			if (skipCountdown || startOnTime > 0) skipArrowStartTween = true;
 			#if android
 			androidc.visible = true;
-			androidc.alpha = 1;
+			if (checkHitbox == true) androidc.alpha = ClientPrefs.hitboxalpha;
+			else androidc.alpha = 1;
 			//
 			#end
 			generateStaticArrows(0);
@@ -2871,7 +2874,8 @@ class PlayState extends MusicBeatState
 			
 			#if android
 			androidc.visible = true;
-			androidc.alpha = 1;
+			if (checkHitbox == true) androidc.alpha = ClientPrefs.hitboxalpha;
+			else androidc.alpha = 1;
 		
 			#end
 

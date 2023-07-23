@@ -62,6 +62,8 @@ class MusicBeatState extends FlxUIState
 	}
 	#end
 
+    public static var checkHitbox:Bool = false;
+
 	#if android
 	public function addAndroidControls() {
 		androidc = new AndroidControls();
@@ -70,11 +72,13 @@ class MusicBeatState extends FlxUIState
 		{
 			case VIRTUALPAD_RIGHT | VIRTUALPAD_LEFT | VIRTUALPAD_CUSTOM:
 				controls.setVirtualPadNOTES(androidc.vpad, FULL, NONE);
+				checkHitbox = false;
 			case DUO:
 				controls.setVirtualPadNOTES(androidc.vpad, DUO, NONE);
+				checkHitbox = false;
 			case HITBOX:
 				controls.setNewHitBox(androidc.newhbox);
-				
+				checkHitbox = true;
 			default:
 		}
 
