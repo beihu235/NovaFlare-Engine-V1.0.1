@@ -1218,7 +1218,8 @@ class PlayState extends MusicBeatState
 		#if android
 		addAndroidControls();
 		androidc.visible = true;
-		androidc.alpha = 0.000001;
+		camcontrol.alpha = 0.000001;
+		//androidc.alpha = 0.000001;
 		
 		#end
 
@@ -2128,7 +2129,8 @@ class PlayState extends MusicBeatState
 		if(ret != FunkinLua.Function_Stop) {
 			if (skipCountdown || startOnTime > 0) skipArrowStartTween = true;
 			#if android
-			androidc.alpha = 1;
+			//androidc.alpha = 1;
+			camcontrol.alpha = 1;
 			//androidc.visible = true;
 			#end
 			generateStaticArrows(0);
@@ -2826,7 +2828,8 @@ class PlayState extends MusicBeatState
 			}
 		}
 		#if android
-			androidc.alpha = 0.00001;
+			//androidc.alpha = 0.00001;
+			camcontrol.alpha = 0.000001;
 			//androidc.visible = true;
 			#end
 
@@ -2868,7 +2871,8 @@ class PlayState extends MusicBeatState
 			callOnLuas('onResume', []);
 			
 			#if android
-			androidc.alpha = 1;
+			//androidc.alpha = 1;
+			camcontrol.alpha = 0.000001;
 			//androidc.visible = true;
 			#end
 
@@ -4046,7 +4050,8 @@ class PlayState extends MusicBeatState
 		}
 
 		#if android
-		androidc.alpha = 0.00001;
+		//androidc.alpha = 0.00001;
+		camcontrol.alpha = 0.000001;
 		#end
 		timeBarBG.visible = false;
 		timeBar.visible = false;
