@@ -1217,7 +1217,8 @@ class PlayState extends MusicBeatState
 
 		#if android
 		addAndroidControls();
-		androidc.visible = false;
+		androidc.alpha = 0.000001;
+		//androidc.visible = false;
 		#end
 
 		// if (SONG.song == 'South')
@@ -2126,7 +2127,8 @@ class PlayState extends MusicBeatState
 		if(ret != FunkinLua.Function_Stop) {
 			if (skipCountdown || startOnTime > 0) skipArrowStartTween = true;
 			#if android
-			androidc.visible = true;
+			androidc.alpha = 1;
+			//androidc.visible = true;
 			#end
 			generateStaticArrows(0);
 			generateStaticArrows(1);
@@ -2822,6 +2824,10 @@ class PlayState extends MusicBeatState
 				timer.active = false;
 			}
 		}
+		#if android
+			androidc.alpha = 0.00001;
+			//androidc.visible = true;
+			#end
 
 		super.openSubState(SubState);
 	}
@@ -2859,6 +2865,11 @@ class PlayState extends MusicBeatState
 			}
 			paused = false;
 			callOnLuas('onResume', []);
+			
+			#if android
+			androidc.alpha = 1;
+			//androidc.visible = true;
+			#end
 
 			#if desktop
 			if (startTimer != null && startTimer.finished)
