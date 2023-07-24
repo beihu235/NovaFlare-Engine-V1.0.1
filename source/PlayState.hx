@@ -2129,12 +2129,7 @@ class PlayState extends MusicBeatState
 		var ret:Dynamic = callOnLuas('onStartCountdown', [], false);
 		if(ret != FunkinLua.Function_Stop) {
 			if (skipCountdown || startOnTime > 0) skipArrowStartTween = true;
-			#if android
-			androidc.visible = true;
-			if (checkHitbox == true) androidc.alpha = ClientPrefs.hitboxalpha;
-			else androidc.alpha = 1;
-			//
-			#end
+			
 			generateStaticArrows(0);
 			generateStaticArrows(1);
 			for (i in 0...playerStrums.length) {
@@ -2206,6 +2201,12 @@ class PlayState extends MusicBeatState
 				{
 					case 0:
 						FlxG.sound.play(Paths.sound('intro3' + introSoundsSuffix), 0.6);
+						#if android
+			androidc.visible = true;
+			if (checkHitbox == true) androidc.alpha = ClientPrefs.hitboxalpha;
+			else androidc.alpha = 1;
+			//
+			#end
 					case 1:
 						countdownReady = new FlxSprite().loadGraphic(Paths.image(introAlts[0]));
 						countdownReady.cameras = [camHUD];
