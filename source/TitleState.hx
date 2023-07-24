@@ -92,12 +92,7 @@ class TitleState extends MusicBeatState
 	override public function create():Void
 	{
 	
-	if (ClientPrefs.framerate > Application.current.window.displayMode.refreshRate){
-	ClientPrefs.framerate = Application.current.window.displayMode.refreshRate;
-	FlxG.updateFramerate = Application.current.window.displayMode.refreshRate;
-	FlxG.drawFramerate = Application.current.window.displayMode.refreshRate;
-	ClientPrefs.saveSettings();
-	}
+	
 
 		#if android
 		FlxG.android.preventDefaultKeys = [BACK];
