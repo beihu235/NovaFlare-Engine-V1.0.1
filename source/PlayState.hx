@@ -2124,7 +2124,12 @@ class PlayState extends MusicBeatState
 			callOnLuas('onStartCountdown', []);
 			return;
 		}
-
+         #if android
+			androidc.visible = true;
+			if (checkHitbox != true) androidc.alpha = 1;
+			//
+		 #end
+        
 		inCutscene = false;
 		var ret:Dynamic = callOnLuas('onStartCountdown', [], false);
 		if(ret != FunkinLua.Function_Stop) {
@@ -2154,25 +2159,11 @@ class PlayState extends MusicBeatState
 			if (startOnTime > 0) {
 				clearNotesBefore(startOnTime);
 				setSongTime(startOnTime - 350);
-				 #if android
-			androidc.visible = true;
-			if (checkHitbox != true) androidc.alpha = 1;
-			//
-			#end
 				return;
 			}
-			
-			
 			else if (skipCountdown)
 			{
-			
 				setSongTime(0);
-				 #if android
-			androidc.visible = true;
-			if (checkHitbox != true) androidc.alpha = 1;
-			//
-			#end
-				
 				return;
 			}
 
@@ -2215,11 +2206,6 @@ class PlayState extends MusicBeatState
 				{
 					case 0:
 						FlxG.sound.play(Paths.sound('intro3' + introSoundsSuffix), 0.6);
-						#if android
-			            androidc.visible = true;
-			            if (checkHitbox != true) androidc.alpha = 1;
-			            //
-			            #end
 					case 1:
 						countdownReady = new FlxSprite().loadGraphic(Paths.image(introAlts[0]));
 						countdownReady.cameras = [camHUD];
@@ -2842,13 +2828,12 @@ class PlayState extends MusicBeatState
 			for (timer in modchartTimers) {
 				timer.active = false;
 			}
-		}
-		#if android
-		    androidc.visible = true;
-		    androidc.y = 720;
-			//androidc.alpha = 0.00001;
-			
+			#if android
+			androidc.y = 720;
+			//androidc.visible = true;
 			#end
+		}
+		
 
 		super.openSubState(SubState);
 	}
@@ -2888,10 +2873,8 @@ class PlayState extends MusicBeatState
 			callOnLuas('onResume', []);
 			
 			#if android
-			androidc.visible = true;
 			androidc.y = 0;
-		    //if (checkHitbox != true) androidc.alpha = 1;
-		
+			//androidc.visible = true;
 			#end
 
 			#if desktop
@@ -2904,6 +2887,8 @@ class PlayState extends MusicBeatState
 				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
 			}
 			#end
+			
+			
 		}
 
 		super.closeSubState();
