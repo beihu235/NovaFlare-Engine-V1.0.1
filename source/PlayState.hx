@@ -2156,9 +2156,19 @@ class PlayState extends MusicBeatState
 				setSongTime(startOnTime - 350);
 				return;
 			}
+			
+			if (skipCountdown){
+		    #if android
+			androidc.visible = true;
+			if (checkHitbox != true) androidc.alpha = 1;
+			//
+			#end
+			}
 			else if (skipCountdown)
 			{
+			
 				setSongTime(0);
+				
 				return;
 			}
 
@@ -2202,10 +2212,10 @@ class PlayState extends MusicBeatState
 					case 0:
 						FlxG.sound.play(Paths.sound('intro3' + introSoundsSuffix), 0.6);
 						#if android
-			androidc.visible = true;
-			if (checkHitbox != true) androidc.alpha = 1;
-			//
-			#end
+			            androidc.visible = true;
+			            if (checkHitbox != true) androidc.alpha = 1;
+			            //
+			            #end
 					case 1:
 						countdownReady = new FlxSprite().loadGraphic(Paths.image(introAlts[0]));
 						countdownReady.cameras = [camHUD];
@@ -2831,7 +2841,8 @@ class PlayState extends MusicBeatState
 		}
 		#if android
 		    androidc.visible = true;
-			androidc.alpha = 0.00001;
+		    androidc.y = 720;
+			//androidc.alpha = 0.00001;
 			
 			#end
 
@@ -2874,7 +2885,8 @@ class PlayState extends MusicBeatState
 			
 			#if android
 			androidc.visible = true;
-		    if (checkHitbox != true) androidc.alpha = 1;
+			androidc.y = 0;
+		    //if (checkHitbox != true) androidc.alpha = 1;
 		
 			#end
 
