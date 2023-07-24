@@ -2828,10 +2828,7 @@ class PlayState extends MusicBeatState
 			for (timer in modchartTimers) {
 				timer.active = false;
 			}
-			#if android
-			androidc.y = 720;
-			//androidc.visible = true;
-			#end
+			
 		}
 		
 
@@ -3472,6 +3469,10 @@ class PlayState extends MusicBeatState
 			FlxG.sound.music.pause();
 			vocals.pause();
 		}
+		#if android
+			androidc.y = 720;
+			//androidc.visible = true;
+			#end
 		openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 		//}
 
