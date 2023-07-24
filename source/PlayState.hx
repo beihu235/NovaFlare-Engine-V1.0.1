@@ -2148,6 +2148,14 @@ class PlayState extends MusicBeatState
 			callOnLuas('onCountdownStarted', []);
 
 			var swagCounter:Int = 0;
+			
+			if (skipCountdown){
+		    #if android
+			androidc.visible = true;
+			if (checkHitbox != true) androidc.alpha = 1;
+			//
+			#end
+			}
 
 			if(startOnTime < 0) startOnTime = 0;
 
@@ -2157,13 +2165,7 @@ class PlayState extends MusicBeatState
 				return;
 			}
 			
-			if (skipCountdown){
-		    #if android
-			androidc.visible = true;
-			if (checkHitbox != true) androidc.alpha = 1;
-			//
-			#end
-			}
+			
 			else if (skipCountdown)
 			{
 			
