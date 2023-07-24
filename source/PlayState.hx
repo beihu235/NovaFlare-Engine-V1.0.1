@@ -2203,8 +2203,7 @@ class PlayState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('intro3' + introSoundsSuffix), 0.6);
 						#if android
 			androidc.visible = true;
-			if (checkHitbox == true) androidc.alpha = ClientPrefs.hitboxalpha;
-			else androidc.alpha = 1;
+			if (checkHitbox != true) androidc.alpha = 1;
 			//
 			#end
 					case 1:
@@ -2875,8 +2874,7 @@ class PlayState extends MusicBeatState
 			
 			#if android
 			androidc.visible = true;
-			if (checkHitbox == true) androidc.alpha = ClientPrefs.hitboxalpha;
-			else androidc.alpha = 1;
+		    if (checkHitbox != true) androidc.alpha = 1;
 		
 			#end
 
